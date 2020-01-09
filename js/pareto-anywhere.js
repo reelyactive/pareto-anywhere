@@ -81,25 +81,5 @@ async function scanForAdvertisements() {
 }
 
 
-// Handle a scan event
-function handleScanEvent(event) {
-  let deviceId = base64toHex(event.device.id);
-}
-
-
-// Convert base64 to hexadecimal
-function base64toHex(encodedValue) {
-  let decodedValue = atob(encodedValue);
-  let hexString = '';
-
-  for(let cChar = 0; cChar < decodedValue.length; cChar++) {
-    let hex = '0'+ decodedValue.charCodeAt(cChar).toString(16);
-    hexString += hex.slice(-2);
-  }
-
-  return hexString;
-}
-
-
 // Handle scan button click
 scanButton.addEventListener('click', scanForAdvertisements);
