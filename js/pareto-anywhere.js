@@ -21,6 +21,9 @@ let raddecRate = document.querySelector('#raddecRate');
 let numTransmitters = document.querySelector('#numTransmitters');
 let serviceDataStatus = document.querySelector('#serviceDataStatus');
 let serviceDataDisplay = document.querySelector('#serviceDataDisplay');
+let uuidTotal = document.querySelector('#uuidTotal');
+let manufacturerDataTotal = document.querySelector('#manufacturerDataTotal');
+let serviceDataTotal = document.querySelector('#serviceDataTotal');
 
 
 // Non-disappearance events
@@ -55,6 +58,9 @@ async function scanForAdvertisements() {
     const scan = await navigator.bluetooth.requestLEScan(SCAN_OPTIONS);
     let statsInterval = setInterval(updateStats, STATS_INTERVAL_MILLISECONDS);
     let eventStatsCount = 0;
+    let uuidCount = 0;
+    let manufacturerDataCount = 0;
+    let serviceDataCount = 0;
     scanButton.textContent = 'Scanning...';
     scanButton.setAttribute('class', 'btn btn-outline-dark');
     scanButton.setAttribute('disabled', true);
@@ -65,6 +71,16 @@ async function scanForAdvertisements() {
     scanStats.removeAttribute('hidden');
 
     navigator.bluetooth.addEventListener('advertisementreceived', event => {
+      if(event.hasOwnProperty('uuids')) {
+        uuidTotal.textContent = ++uuidCount;
+      }
+      if(event.hasOwnProperty('manufacturerData')) {
+        manufacturerDataTotal.textContent = ++manufacturerDataCount;
+      }
+      if(event.hasOwnProperty('serviceData')) {
+        serviceDataTotal.textContent = ++serviceDataCount;
+      }
+
       beaver.handleWebBluetoothScanningEvent(event);
       eventStatsCount++;
     });
