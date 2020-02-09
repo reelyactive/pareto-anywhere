@@ -28,20 +28,29 @@ let serviceDataTotal = document.querySelector('#serviceDataTotal');
 
 // Non-disappearance events
 beaver.on([ 0, 1, 2, 3 ], function(raddec) {
-  if(raddec.hasOwnProperty('serviceData') && (raddec.serviceData.size > 0)) {
-    serviceDataStatus.textContent = 'Yes @ ' + raddec.rssi + 'dBm';
+  let hasServiceData = (raddec.hasOwnProperty('serviceData') &&
+                        (raddec.serviceData.size > 0));
+  if(hasServiceData) {
+    serviceDataStatus.textContent = 'Service Data @ ' + raddec.rssi + 'dBm';
     raddec.serviceData.forEach(function(data, uuid) {
       let isEddystone = (uuid.substring(0,8) === '0000feaa');
-      let dataArray = new Uint8Array(data.buffer);
       if(isEddystone) {
-        serviceDataDisplay.textContent = uuid + '\r\n' + dataArray;
+        let dataArray = new Uint8Array(data.buffer);
+        switch(dataArray[0]) {
+          case 0x00:
+            serviceDataDisplay.textContent = 'UID: ' + dataArray;
+            break;
+          case 0x10:
+            serviceDataDisplay.textContent = 'URL: ' + dataArray;
+            break;
+          case 0x20:
+            serviceDataDisplay.textContent = 'TLM: ' + dataArray;
+            break;
+          default:
+            serviceDataDisplay.textContent = 'Other: ' + dataArray;
+        }
       }
     });
-  }
-  else {
-    serviceDataStatus.textContent = 'No @ ' + raddec.rssiSignature[0].rssi +
-                                    'dBm, ' + raddec.timestamp + ' ' +
-                                    raddec.uuids.length;
   }
 });
 
