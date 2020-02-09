@@ -36,7 +36,9 @@ beaver.on([ 0, 1, 2, 3 ], function(raddec) {
     });
   }
   else {
-    serviceDataStatus.textContent = 'No @ ' + raddec.rssi + 'dBm';
+    serviceDataStatus.textContent = 'No @ ' + raddec.rssiSignature[0].rssi +
+                                    'dBm, ' + raddec.timestamp + ' ' +
+                                    raddec.hasOwnProperty('uuids');
   }
 });
 
