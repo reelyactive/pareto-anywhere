@@ -72,15 +72,14 @@ async function scanForAdvertisements() {
 
     navigator.bluetooth.addEventListener('advertisementreceived', event => {
       if(event.hasOwnProperty('uuids')) {
-        uuidTotal.textContent = ++uuidCount;
+        uuidCount++;
       }
-      if(event.hasOwnProperty('manufacturerData')) {
-        manufacturerDataTotal.textContent = ++manufacturerDataCount;
-      }
-      if(event.hasOwnProperty('serviceData')) {
-        serviceDataTotal.textContent = ++serviceDataCount;
-      }
-
+      event.manufacturerData.forEach(function() {
+        manufacturerDataCount++;
+      });
+      event.serviceData.forEach(function() {
+        serviceDataCount++;
+      });
       beaver.handleWebBluetoothScanningEvent(event);
       eventStatsCount++;
     });
@@ -90,6 +89,9 @@ async function scanForAdvertisements() {
                                           (STATS_INTERVAL_MILLISECONDS / 1000));
       numTransmitters.textContent = Object.keys(beaver.transmitters).length;
       eventStatsCount = 0;
+      uuidTotal.textContent = uuidCount;
+      manufacturerDataTotal.textContent = manufacturerDataCount;
+      serviceDataTotal.textContent = serviceDataCount;
     }
 
     function stopScan() {
