@@ -19,11 +19,25 @@ let scanStats = document.querySelector('#scanStats');
 let scanError = document.querySelector('#scanError');
 let raddecRate = document.querySelector('#raddecRate');
 let numTransmitters = document.querySelector('#numTransmitters');
+let serviceDataStatus = document.querySelector('#serviceDataStatus');
+let serviceDataDisplay = document.querySelector('#serviceDataDisplay');
 
 
 // Non-disappearance events
 beaver.on([ 0, 1, 2, 3 ], function(raddec) {
-
+  if(raddec.hasOwnProperty('serviceData')) {
+    serviceDataStatus.textContent = 'Yes @ ' + raddec.rssi + 'dBm';
+    raddec.serviceData.forEach(function(data, uuid) {
+      let isEddystone = (uuid.substring(0,8) === '0000feaa');
+      let dataArray = new Uint8Array(data.buffer);
+      if(isEddystone) {
+        serviceDataDisplay.textContent = uuid + '\r\n' + dataArray;
+      }
+    });
+  }
+  else {
+    serviceDataStatus.textContent = 'No @ ' + raddec.rssi + 'dBm';
+  }
 });
 
 
