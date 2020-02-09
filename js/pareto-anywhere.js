@@ -26,9 +26,18 @@ let manufacturerDataTotal = document.querySelector('#manufacturerDataTotal');
 let serviceDataTotal = document.querySelector('#serviceDataTotal');
 
 
+let uuidCount = 0;
+let manufacturerDataCount = 0;
+let serviceDataCount = 0;
+
+
 // Non-disappearance events
 beaver.on([ 0, 1, 2, 3 ], function(raddec) {
-  if(raddec.hasOwnProperty('serviceData')) {
+  uuidCount += raddec.uuids.length;
+  manufacturerDataCount += raddec.manufacturerData.size;
+  serviceDataCount += raddec.serviceData.size;
+
+  if(raddec.hasOwnProperty('serviceData') && (raddec.serviceData.size > 0)) {
     serviceDataStatus.textContent = 'Yes @ ' + raddec.rssi + 'dBm';
     raddec.serviceData.forEach(function(data, uuid) {
       let isEddystone = (uuid.substring(0,8) === '0000feaa');
@@ -41,7 +50,7 @@ beaver.on([ 0, 1, 2, 3 ], function(raddec) {
   else {
     serviceDataStatus.textContent = 'No @ ' + raddec.rssiSignature[0].rssi +
                                     'dBm, ' + raddec.timestamp + ' ' +
-                                    raddec.hasOwnProperty('uuids');
+                                    raddec.uuids.length;
   }
 });
 
@@ -58,9 +67,6 @@ async function scanForAdvertisements() {
     const scan = await navigator.bluetooth.requestLEScan(SCAN_OPTIONS);
     let statsInterval = setInterval(updateStats, STATS_INTERVAL_MILLISECONDS);
     let eventStatsCount = 0;
-    let uuidCount = 0;
-    let manufacturerDataCount = 0;
-    let serviceDataCount = 0;
     scanButton.textContent = 'Scanning...';
     scanButton.setAttribute('class', 'btn btn-outline-dark');
     scanButton.setAttribute('disabled', true);
@@ -71,16 +77,6 @@ async function scanForAdvertisements() {
     scanStats.removeAttribute('hidden');
 
     navigator.bluetooth.addEventListener('advertisementreceived', event => {
-      event.uuids.forEach(function(value, key) {
-        uuidCount++;
-        serviceDataStatus.textContent = 'value: ' + value + ', key:' + key;
-      });
-      event.manufacturerData.forEach(function() {
-        manufacturerDataCount++;
-      });
-      event.serviceData.forEach(function() {
-        serviceDataCount++;
-      });
       beaver.handleWebBluetoothScanningEvent(event);
       eventStatsCount++;
     });

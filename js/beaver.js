@@ -69,19 +69,21 @@ let beaver = (function() {
           rssi: event.rssi,
           numberOfDecodings: 1
         } ],
-        timestamp: Date.now()
+        timestamp: Date.now(),
+        uuids: [],                   // TODO: standardise
+        manufacturerData: new Map(), //       how these properties
+        serviceData: new Map()       //       are represented
     };
 
-    // TODO: standardise the representation of the following
-    if(event.hasOwnProperty('uuids')) {
-      raddec.uuids = event.uuids;
-    }
-    if(event.hasOwnProperty('manufacturerData')) {
-      raddec.manufacturerData = event.manufacturerData;
-    }
-    if(event.hasOwnProperty('serviceData')) {
-      raddec.serviceData = event.serviceData;
-    }
+    event.uuids.forEach(function(uuid) {
+      raddec.uuids.push(uuid);
+    });
+    event.manufacturerData.forEach(function(data, manufacturerId) {
+      raddec.manufacturerData.set(manufacturerId, data);
+    });
+    event.serviceData.forEach(function(data, uuid) {
+      raddec.serviceData.set(uuid, data);
+    });
 
     handleRaddec(raddec);
   }
