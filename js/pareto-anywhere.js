@@ -71,9 +71,10 @@ async function scanForAdvertisements() {
     scanStats.removeAttribute('hidden');
 
     navigator.bluetooth.addEventListener('advertisementreceived', event => {
-      if(event.hasOwnProperty('uuids')) {
+      event.uuids.forEach(function(value, key) {
         uuidCount++;
-      }
+        serviceDataStatus.textContent = 'value: ' + value + ', key:' + key;
+      });
       event.manufacturerData.forEach(function() {
         manufacturerDataCount++;
       });
