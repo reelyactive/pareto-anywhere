@@ -26,17 +26,8 @@ let manufacturerDataTotal = document.querySelector('#manufacturerDataTotal');
 let serviceDataTotal = document.querySelector('#serviceDataTotal');
 
 
-let uuidCount = 0;
-let manufacturerDataCount = 0;
-let serviceDataCount = 0;
-
-
 // Non-disappearance events
 beaver.on([ 0, 1, 2, 3 ], function(raddec) {
-  uuidCount += raddec.uuids.length;
-  manufacturerDataCount += raddec.manufacturerData.size;
-  serviceDataCount += raddec.serviceData.size;
-
   if(raddec.hasOwnProperty('serviceData') && (raddec.serviceData.size > 0)) {
     serviceDataStatus.textContent = 'Yes @ ' + raddec.rssi + 'dBm';
     raddec.serviceData.forEach(function(data, uuid) {
@@ -86,9 +77,6 @@ async function scanForAdvertisements() {
                                           (STATS_INTERVAL_MILLISECONDS / 1000));
       numTransmitters.textContent = Object.keys(beaver.transmitters).length;
       eventStatsCount = 0;
-      uuidTotal.textContent = uuidCount;
-      manufacturerDataTotal.textContent = manufacturerDataCount;
-      serviceDataTotal.textContent = serviceDataCount;
     }
 
     function stopScan() {
