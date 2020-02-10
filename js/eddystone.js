@@ -15,13 +15,13 @@ let eddystone = (function() {
   let parseServiceData = function(transmitterSignature, data, callback) {
     switch(data[0]) {
       case 0x00:
-        parseEddystoneUid(data, callback);
+        parseEddystoneUid(transmitterSignature, data, callback);
         break;
       case 0x10:
-        parseEddystoneUrl(data, callback);
+        parseEddystoneUrl(transmitterSignature, data, callback);
         break;
       case 0x20:
-        parseEddystoneTlm(data, callback);
+        parseEddystoneTlm(transmitterSignature, data, callback);
         break;
       default:
         return callback(transmitterSignature, null, null);
