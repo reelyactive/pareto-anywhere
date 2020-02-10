@@ -92,6 +92,21 @@ function handleParsedData(transmitterSignature, url, documentFragment) {
     }
     card.appendChild(documentFragment);
   }
+  else {
+    if(card) {
+      card.innerHTML = '';
+    }
+    else {
+      card = document.createElement('div');
+      card.setAttribute('id', transmitterSignature);
+      card.setAttribute('class', 'card my-4');
+      proximityCards.append(card);
+    }
+    let body = document.createElement('div');
+    body.setAttribute('class', 'card-body');
+    body.textContent = 'Something went wrong';
+    card.appendChild(body);
+  }
   // TODO: handle the case of both url and documentFragment
 }
 
