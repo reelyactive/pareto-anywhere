@@ -10,6 +10,7 @@ const SCAN_OPTIONS = {
     keepRepeatedDevices: true
 };
 const STATS_INTERVAL_MILLISECONDS = 1000;
+const SIGNATURE_SEPARATOR = '/';
 
 
 // DOM elements
@@ -19,6 +20,7 @@ let scanStats = document.querySelector('#scanStats');
 let scanError = document.querySelector('#scanError');
 let raddecRate = document.querySelector('#raddecRate');
 let numTransmitters = document.querySelector('#numTransmitters');
+let proximityCards = document.querySelector('#proximityCards');
 let serviceDataStatus = document.querySelector('#serviceDataStatus');
 let serviceDataDisplay = document.querySelector('#serviceDataDisplay');
 let uuidTotal = document.querySelector('#uuidTotal');
@@ -28,27 +30,20 @@ let serviceDataTotal = document.querySelector('#serviceDataTotal');
 
 // Non-disappearance events
 beaver.on([ 0, 1, 2, 3 ], function(raddec) {
+  let transmitterSignature = raddec.transmitterId +
+                             SIGNATURE_SEPARATOR +
+                             raddec.transmitterIdType;
   let hasServiceData = (raddec.hasOwnProperty('serviceData') &&
                         (raddec.serviceData.size > 0));
+
   if(hasServiceData) {
     serviceDataStatus.textContent = 'Service Data @ ' + raddec.rssi + 'dBm';
     raddec.serviceData.forEach(function(data, uuid) {
       let isEddystone = (uuid.substring(0,8) === '0000feaa');
       if(isEddystone) {
-        let dataArray = new Uint8Array(data.buffer);
-        switch(dataArray[0]) {
-          case 0x00:
-            serviceDataDisplay.textContent = 'UID: ' + dataArray;
-            break;
-          case 0x10:
-            serviceDataDisplay.textContent = 'URL: ' + dataArray;
-            break;
-          case 0x20:
-            serviceDataDisplay.textContent = 'TLM: ' + dataArray;
-            break;
-          default:
-            serviceDataDisplay.textContent = 'Other: ' + dataArray;
-        }
+        eddystone.parseServiceData(transmitterSignature,
+                                   new Uint8Array(data.buffer),
+                                   handleParsedData);
       }
     });
   }
@@ -59,6 +54,29 @@ beaver.on([ 0, 1, 2, 3 ], function(raddec) {
 beaver.on([ 4 ], function(raddec) {
 
 });
+
+
+// Handle any parsed data
+function handleParsedData(transmitterSignature, url, documentFragment) {
+  let card = document.getElementById(transmitterSignature);
+
+  if(url) {
+    // TODO: fetch and render with cormorant and cuttlefish
+  }
+  else if(documentFragment) {
+    if(card) {
+      card.innerHTML = '';
+    }
+    else {
+      card = document.createElement('div');
+      card.setAttribute('id', transmitterSignature);
+      card.setAttribute('class', 'card my-4');
+      proximityCards.append(card);
+    }
+    card.appendChild(documentFragment);
+  }
+  // TODO: handle the case of both url and documentFragment
+}
 
 
 // Attempt to run the experimental requestLEScan function
