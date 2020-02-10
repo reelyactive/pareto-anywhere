@@ -46,6 +46,9 @@ beaver.on([ 0, 1, 2, 3 ], function(raddec) {
         serviceDataStatus.textContent = 'Service Data @ ' +
                                         raddec.rssiSignature[0].rssi + 'dBm';
       }
+      else {
+        serviceDataStatus.textContent = 'Service UUID: ' + uuid;
+      }
     });
   }
 });
