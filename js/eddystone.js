@@ -40,12 +40,17 @@ let eddystone = (function() {
 
   // Parse the given Eddystone-URL data
   function parseEddystoneUrl(transmitterSignature, data, callback) {
-    let documentFragment = document.createDocumentFragment();
-    let body = document.createElement('div');
-    body.setAttribute('class', 'card-body');
-    body.textContent = 'URL: ' + data;
-    documentFragment.appendChild(body);
-    return callback(transmitterSignature, null, documentFragment);
+    let url = parseUrlSchemeByte(data[2]);
+
+    if(!url) {
+      return callback(transmitterSignature, null, null);
+    }
+
+    for(let cChar = 3; cChar < data.length; cChar++) {
+      url += parseUrlCharByte(data[cChar]);
+    }
+
+    return callback(transmitterSignature, url, null);
   }
 
   // Parse the given Eddystone-TLM data
@@ -56,6 +61,58 @@ let eddystone = (function() {
     body.textContent = 'TLM: ' + data;
     documentFragment.appendChild(body);
     return callback(transmitterSignature, null, documentFragment);
+  }
+
+  // Parse the given URL scheme byte
+  function parseUrlSchemeByte(byte) {
+    switch(byte) {
+      case 0x00:
+        return 'http://www.';
+      case 0x01:
+        return 'https://www.';
+      case 0x02:
+        return 'http://';
+      case 0x03:
+        return 'https://';
+      default:
+        return null;
+    }
+  }
+
+  // Parse the given URL character byte
+  function parseUrlCharByte(byte) {
+    switch(byte) {
+      case 0x00:
+        return '.com/';
+      case 0x01:
+        return '.org/';
+      case 0x02:
+        return '.edu/';
+      case 0x03:
+        return '.net/';
+      case 0x04:
+        return '.info/';
+      case 0x05:
+        return '.biz/';
+      case 0x06:
+        return '.gov/';
+      case 0x07:
+        return '.com';
+      case 0x08:
+        return '.org';
+      case 0x09:
+        return '.edu';
+      case 0x0a:
+        return '.net';
+      case 0x0b:
+        return '.info';
+      case 0x0c:
+        return '.biz';
+      case 0x0d:
+        return '.gov';
+      default:
+        return String.fromCharCode(charCode);
+    }
   }
 
   // Expose the following functions and variables

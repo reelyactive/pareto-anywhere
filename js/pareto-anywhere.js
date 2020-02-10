@@ -66,6 +66,19 @@ function handleParsedData(transmitterSignature, url, documentFragment) {
 
   if(url) {
     // TODO: fetch and render with cormorant and cuttlefish
+    if(card) {
+      card.innerHTML = '';
+    }
+    else {
+      card = document.createElement('div');
+      card.setAttribute('id', transmitterSignature);
+      card.setAttribute('class', 'card my-4');
+      proximityCards.append(card);
+    }
+    let body = document.createElement('div');
+    body.setAttribute('class', 'card-body');
+    body.textContent = 'URL: ' + url;
+    card.appendChild(body);
   }
   else if(documentFragment) {
     if(card) {
