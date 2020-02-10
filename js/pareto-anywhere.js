@@ -40,11 +40,11 @@ beaver.on([ 0, 1, 2, 3 ], function(raddec) {
     raddec.serviceData.forEach(function(data, uuid) {
       let isEddystone = (uuid.substring(0,8) === '0000feaa');
       if(isEddystone) {
+        serviceDataStatus.textContent = 'Service Data @ ' +
+                                        raddec.rssiSignature[0].rssi + 'dBm';
         eddystone.parseServiceData(transmitterSignature,
                                    new Uint8Array(data.buffer),
                                    handleParsedData);
-        serviceDataStatus.textContent = 'Service Data @ ' +
-                                        raddec.rssiSignature[0].rssi + 'dBm';
       }
       else {
         serviceDataStatus.textContent = 'Service UUID: ' + uuid;
