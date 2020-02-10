@@ -72,6 +72,8 @@ let eddystone = (function() {
     for(cByte = startIndex; cByte <= stopIndex; cByte++) {
       id += ('00' + bytes[cByte].toString(16)).substr(-2);
     }
+
+    return id;
   }
 
   // Parse the given URL scheme byte
