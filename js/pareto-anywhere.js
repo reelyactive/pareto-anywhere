@@ -72,12 +72,14 @@ function handleParsedData(transmitterSignature, url, documentFragment) {
         card.setAttribute('class', 'card my-4');
         proximityCards.append(card);
       }
-      cuttlefish.render(story, card);
-
-      // TODO: move the following into a separate tab or hide
-      let jsonStory = document.createElement('pre');
-      jsonStory.textContent = JSON.stringify(story, null, 2);
-      card.appendChild(jsonStory);
+      try {
+        cuttlefish.render(story, card);
+      }
+      catch(error) {
+        let jsonStory = document.createElement('pre');
+        jsonStory.textContent = JSON.stringify(story, null, 2);
+        card.appendChild(jsonStory);
+      }
     });
   }
   else if(documentFragment) {
