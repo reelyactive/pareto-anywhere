@@ -63,13 +63,9 @@ beaver.on([ 4 ], function(raddec) {
 // Handle any parsed data
 function handleParsedData(transmitterSignature, url, documentFragment) {
   let card = document.getElementById(transmitterSignature);
-  let id = document.createTextNode(transmitterSignature + ' ');
-
-  serviceDataDisplay.textContent = 'Eddystone: ' + url + ' ' + documentFragment;
 
   if(url) {
     // TODO: fetch and render with cormorant and cuttlefish
-    card.appendChild(id);
   }
   else if(documentFragment) {
     if(card) {
@@ -81,13 +77,7 @@ function handleParsedData(transmitterSignature, url, documentFragment) {
       card.setAttribute('class', 'card my-4');
       proximityCards.append(card);
     }
-    card.appendChild(id);
     card.appendChild(documentFragment);
-  }
-  else {
-    id = document.createTextNode(transmitterSignature +
-                                 ' no documentFragment ');
-    card.appendChild(id);
   }
   // TODO: handle the case of both url and documentFragment
 }
