@@ -111,7 +111,7 @@ let eddystone = (function() {
       case 0x0d:
         return '.gov';
       default:
-        return String.fromCharCode(charCode);
+        return String.fromCharCode(byte);
     }
   }
 
