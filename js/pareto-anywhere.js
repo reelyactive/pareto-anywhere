@@ -37,13 +37,14 @@ beaver.on([ 0, 1, 2, 3 ], function(raddec) {
                         (raddec.serviceData.size > 0));
 
   if(hasServiceData) {
-    serviceDataStatus.textContent = 'Service Data @ ' + raddec.rssi + 'dBm';
     raddec.serviceData.forEach(function(data, uuid) {
       let isEddystone = (uuid.substring(0,8) === '0000feaa');
       if(isEddystone) {
         eddystone.parseServiceData(transmitterSignature,
                                    new Uint8Array(data.buffer),
                                    handleParsedData);
+        serviceDataStatus.textContent = 'Service Data @ ' +
+                                        raddec.rssiSignature[0].rssi + 'dBm';
       }
     });
   }
@@ -60,6 +61,8 @@ beaver.on([ 4 ], function(raddec) {
 function handleParsedData(transmitterSignature, url, documentFragment) {
   let card = document.getElementById(transmitterSignature);
   let id = document.createTextNode(transmitterSignature + ' ');
+
+  serviceDataDisplay.textContent = 'Eddystone: ' + url + ' ' + documentFragment;
 
   if(url) {
     // TODO: fetch and render with cormorant and cuttlefish
