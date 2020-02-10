@@ -30,10 +30,12 @@ let eddystone = (function() {
 
   // Parse the given Eddystone-UID data
   function parseEddystoneUid(transmitterSignature, data, callback) {
+    let namespace = parseId(data, 2, 11);
+    let instance = parseId(data, 12, 17);
     let documentFragment = document.createDocumentFragment();
     let body = document.createElement('div');
     body.setAttribute('class', 'card-body');
-    body.textContent = 'UID: ' + data;
+    body.textContent = 'UID namespace: ' + namespace + ' instance: ' + instance;
     documentFragment.appendChild(body);
     return callback(transmitterSignature, null, documentFragment);
   }
@@ -61,6 +63,15 @@ let eddystone = (function() {
     body.textContent = 'TLM: ' + data;
     documentFragment.appendChild(body);
     return callback(transmitterSignature, null, documentFragment);
+  }
+
+  // Parse the id from the given data byte range
+  function parseId(bytes, startIndex, stopIndex) {
+    let id = '';
+
+    for(cByte = startIndex; cByte <= stopIndex; cByte++) {
+      id += ('00' + bytes[cByte].toString(16)).substr(-2);
+    }
   }
 
   // Parse the given URL scheme byte
