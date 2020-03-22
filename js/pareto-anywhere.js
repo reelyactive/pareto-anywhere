@@ -11,6 +11,8 @@ const SCAN_OPTIONS = {
 };
 const STATS_INTERVAL_MILLISECONDS = 1000;
 const SIGNATURE_SEPARATOR = '/';
+const DEFAULT_RSSI_THRESHOLD = -72;
+const UNKNOWN_RSSI_VALUE = -127;
 
 
 // DOM elements
@@ -21,46 +23,106 @@ let scanError = document.querySelector('#scanError');
 let raddecRate = document.querySelector('#raddecRate');
 let numTransmitters = document.querySelector('#numTransmitters');
 let proximityCards = document.querySelector('#proximityCards');
-let serviceDataStatus = document.querySelector('#serviceDataStatus');
-let serviceDataDisplay = document.querySelector('#serviceDataDisplay');
-let uuidTotal = document.querySelector('#uuidTotal');
-let manufacturerDataTotal = document.querySelector('#manufacturerDataTotal');
-let serviceDataTotal = document.querySelector('#serviceDataTotal');
+let debugMessage = document.querySelector('#debugMessage');
+
+
+// Other variables
+let devices = {};
+let rssiThreshold = DEFAULT_RSSI_THRESHOLD;
 
 
 // Non-disappearance events
 beaver.on([ 0, 1, 2, 3 ], function(raddec) {
-  let transmitterSignature = raddec.transmitterId +
-                             SIGNATURE_SEPARATOR +
-                             raddec.transmitterIdType;
-  let hasServiceData = (raddec.hasOwnProperty('serviceData') &&
-                        (raddec.serviceData.size > 0));
-
-  if(hasServiceData) {
-    raddec.serviceData.forEach(function(data, uuid) {
-      let isEddystone = (uuid.substring(0,8) === '0000feaa');
-      if(isEddystone) {
-        serviceDataStatus.textContent = 'Service Data @ ' +
-                                        raddec.rssiSignature[0].rssi + 'dBm';
-        eddystone.parseServiceData(transmitterSignature,
-                                   new Uint8Array(data.buffer),
-                                   handleParsedData);
-      }
-      else {
-        serviceDataStatus.textContent = 'Service UUID: ' + uuid;
-      }
-    });
-  }
+  updateDevice(raddec);
 });
 
 
 // Disappearance events
 beaver.on([ 4 ], function(raddec) {
-
+  removeDevice(raddec);
 });
 
 
-// Handle any parsed data
+// Update the device associated with the given raddec
+function updateDevice(raddec) {
+  let transmitterSignature = raddec.transmitterId + SIGNATURE_SEPARATOR +
+                             raddec.transmitterIdType;
+  let rssi = raddec.rssiSignature[0].rssi || UNKNOWN_RSSI_VALUE;
+  let isTrackedDevice = devices.hasOwnProperty(transmitterSignature);
+  let isUpdateRequired = isTrackedDevice || (rssi >= rssiThreshold);
+  let card = document.getElementById(transmitterSignature);
+
+  if(!isUpdateRequired) {
+    return;
+  }
+
+  if(!isTrackedDevice) {
+    devices[transmitterSignature] = { raddecs: [ raddec ],
+                                      stories: [],
+                                      data: [],
+                                      associations: {},
+                                      rssi: rssi };
+    card = document.createElement('div');
+    card.setAttribute('id', transmitterSignature);
+    card.setAttribute('class', 'card my-4');
+    proximityCards.append(card);
+  }
+  else {
+    devices[transmitterSignature].raddecs.unshift(raddec);
+    devices[transmitterSignature].rssi = rssi;
+  }
+
+  let device = devices[transmitterSignature];
+  parseRaddecPayload(raddec, device.data);
+
+  cuttlefish.renderAsTabs(card, device.stories, device.data,
+                          device.associations, device.raddecs);
+
+  // Debug
+  debugMessage.textContent = JSON.stringify(device, null, 2);
+}
+
+
+// Remove the device associated with the given raddec
+function removeDevice(raddec) {
+  let transmitterSignature = raddec.transmitterId + SIGNATURE_SEPARATOR +
+                             raddec.transmitterIdType;
+
+  let card = document.getElementById(transmitterSignature);
+  proximityCards.removeChild(card);
+  delete devices[transmitterSignature];
+}
+
+
+// Parse the given raddec's payload for structured data
+function parseRaddecPayload(raddec, deviceData) {
+  let hasServiceData = (raddec.hasOwnProperty('serviceData') &&
+                        (raddec.serviceData.size > 0));
+
+  if(hasServiceData) {
+    parseServiceData(transmitterSignature, raddec.serviceData, deviceData);
+  }
+}
+
+
+// Parse the given service data
+function parseServiceData(transmitterSignature, serviceData, deviceData) {
+  serviceData.forEach(function(data, uuid) {
+    let isEddystone = (uuid.substring(0,8) === '0000feaa');
+    if(isEddystone) {
+      eddystone.parseServiceData(transmitterSignature,
+                                 new Uint8Array(data.buffer), deviceData);
+    }
+    else {
+      let data = {};
+      data[uuid] = data.buffer; // TODO: convert to hex string?
+      deviceData.push(data);
+    }
+  });
+}
+
+
+// Handle any parsed data TODO: remove
 function handleParsedData(transmitterSignature, url, documentFragment) {
   let card = document.getElementById(transmitterSignature);
 

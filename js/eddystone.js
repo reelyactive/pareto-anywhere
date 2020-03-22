@@ -12,57 +12,52 @@ let eddystone = (function() {
   // Internal variables
 
   // Parse the given service data
-  let parseServiceData = function(transmitterSignature, data, callback) {
-    switch(data[0]) {
+  let parseServiceData = function(transmitterSignature, serviceData,
+                                  deviceData) {
+    switch(serviceData[0]) {
       case 0x00:
-        parseEddystoneUid(transmitterSignature, data, callback);
+        parseEddystoneUid(transmitterSignature, serviceData, deviceData);
         break;
       case 0x10:
-        parseEddystoneUrl(transmitterSignature, data, callback);
+        parseEddystoneUrl(transmitterSignature, serviceData, deviceData);
         break;
       case 0x20:
-        parseEddystoneTlm(transmitterSignature, data, callback);
+        parseEddystoneTlm(transmitterSignature, serviceData, deviceData);
         break;
       default:
-        return callback(transmitterSignature, null, null);
+        return;
     }
   }
 
   // Parse the given Eddystone-UID data
-  function parseEddystoneUid(transmitterSignature, data, callback) {
-    let namespace = parseId(data, 2, 11);
-    let instance = parseId(data, 12, 17);
-    let documentFragment = document.createDocumentFragment();
-    let body = document.createElement('div');
-    body.setAttribute('class', 'card-body');
-    body.textContent = 'UID namespace: ' + namespace + ' instance: ' + instance;
-    documentFragment.appendChild(body);
-    return callback(transmitterSignature, null, documentFragment);
+  function parseEddystoneUid(transmitterSignature, serviceData, deviceData) {
+    let namespace = parseId(serviceData, 2, 11);
+    let instance = parseId(serviceData, 12, 17);
+    let data = { namespace: namespace, instance: instance };
+    deviceData.push(data);
   }
 
   // Parse the given Eddystone-URL data
-  function parseEddystoneUrl(transmitterSignature, data, callback) {
-    let url = parseUrlSchemeByte(data[2]);
+  function parseEddystoneUrl(transmitterSignature, serviceData, deviceData) {
+    let url = parseUrlSchemeByte(serviceData[2]);
 
     if(!url) {
-      return callback(transmitterSignature, null, null);
+      return;
     }
 
-    for(let cChar = 3; cChar < data.length; cChar++) {
-      url += parseUrlCharByte(data[cChar]);
+    for(let cChar = 3; cChar < serviceData.length; cChar++) {
+      url += parseUrlCharByte(serviceData[cChar]);
     }
 
-    return callback(transmitterSignature, url, null);
+    let data = { url: url };
+    deviceData.push(data);
+    // TODO: call cormorant to fetch story?
   }
 
   // Parse the given Eddystone-TLM data
-  function parseEddystoneTlm(transmitterSignature, data, callback) {
-    let documentFragment = document.createDocumentFragment();
-    let body = document.createElement('div');
-    body.setAttribute('class', 'card-body');
-    body.textContent = 'TLM: ' + data;
-    documentFragment.appendChild(body);
-    return callback(transmitterSignature, null, documentFragment);
+  function parseEddystoneTlm(transmitterSignature, serviceData, deviceData) {
+    let data = { tlm: serviceData };
+    deviceData.push(data);
   }
 
   // Parse the id from the given data byte range
