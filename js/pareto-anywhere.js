@@ -111,12 +111,17 @@ function parseRaddecPayload(transmitterSignature, raddec, deviceData) {
 function parseServiceData(transmitterSignature, serviceData, deviceData) {
   serviceData.forEach(function(data, uuid) {
     let isEddystone = (uuid.substring(0,8) === '0000feaa');
+    let isMinew = (uuid.substring(0,8) === '0000ffe1');
     if(isEddystone) {
       eddystone.parseServiceData(transmitterSignature,
                                  new Uint8Array(data.buffer), deviceData);
+    }
+    else if(isMinew) {
+      minew.parseServiceData(transmitterSignature, new Uint8Array(data.buffer),
+                             deviceData);
 
       // Debug
-      debugMessage.textContent = 'Eddystone' +
+      debugMessage.textContent = 'Minew ' +
                                  JSON.stringify(deviceData, null, 2);
     }
     else {
