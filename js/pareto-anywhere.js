@@ -10,7 +10,8 @@ const SCAN_OPTIONS = {
     keepRepeatedDevices: true
 };
 const STATS_INTERVAL_MILLISECONDS = 1000;
-const SIGNATURE_SEPARATOR = '-'; //'/';
+const SIGNATURE_SEPARATOR = '/';
+const CARD_ID_PREFIX = 'device-';
 const DEFAULT_RSSI_THRESHOLD = -72;
 const UNKNOWN_RSSI_VALUE = -127;
 
@@ -47,10 +48,11 @@ beaver.on([ 4 ], function(raddec) {
 function updateDevice(raddec) {
   let transmitterSignature = raddec.transmitterId + SIGNATURE_SEPARATOR +
                              raddec.transmitterIdType;
+  let cardId = CARD_ID_PREFIX + transmitterSignature;
   let rssi = raddec.rssiSignature[0].rssi || UNKNOWN_RSSI_VALUE;
   let isTrackedDevice = devices.hasOwnProperty(transmitterSignature);
   let isUpdateRequired = isTrackedDevice || (rssi >= rssiThreshold);
-  let card = document.getElementById(transmitterSignature);
+  let card = document.getElementById(cardId);
 
   if(!isUpdateRequired) {
     return;
@@ -63,7 +65,7 @@ function updateDevice(raddec) {
                                       associations: {},
                                       rssi: rssi };
     card = document.createElement('div');
-    card.setAttribute('id', transmitterSignature);
+    card.setAttribute('id', cardId);
     card.setAttribute('class', 'card my-4');
     proximityCards.append(card);
   }
