@@ -129,11 +129,9 @@ function parseServiceData(transmitterSignature, serviceData, deviceData) {
                                deviceData);
       }
       else {
-        let data = { eddystone: eddystone.SERVICE_UUID,
-                     minew: minew.SERVICE_UUID,
-                     uuid: uuid.substring(4,8) };
-        data[uuid] = new Uint8Array(data.buffer); // TODO: convert to hex?
-        deviceData.unshift(data);
+        let unprocessedData = { uuid: uuid.substring(4,8),
+                                data: new Uint8Array(data.buffer) };
+        deviceData.unshift(unprocessedData);
       }
     }
   });
