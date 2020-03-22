@@ -98,7 +98,7 @@ let minew = (function() {
   function toMacAddress(bytes, startIndex) {
     let macAddress = '';
 
-    for(let cByte = 5; cByte >=; cByte--) {
+    for(let cByte = 5; cByte >= 0; cByte--) {
       macAddress += ('0' + bytes[startIndex + cByte].toString(16)).substr(-2);
     }
 
