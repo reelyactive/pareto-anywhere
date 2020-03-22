@@ -255,26 +255,27 @@ function sortFunction(card1, card2) {
 // Update the proximity cards
 function updateProximityCards() {
   let updatedFragment = document.createDocumentFragment();
-  let deviceArray = [];
+  let sortedArray = [];
 
-  for(device in devices) {
-    deviceArray.push(device);
+  for(transmitterSignature in devices) {
+    let device = devices[transmitterSignature];
+    sortedArray.push({ device: device,
+                       transmitterSignature: transmitterSignature });
   }
 
-  debugMessage.textContent = 'updateProximityCards with device count' +
-                             deviceArray.length;
+  sortedArray.sort(proximitySortFunction);
 
-  deviceArray.sort(proximitySortFunction);
-
-  deviceArray.forEach(function(device, index) {
+  sortedArray.forEach(function(item, index) {
     if(index < numberOfDevicesToDisplay) {
-      let cardId = (CARD_ID_PREFIX + transmitterSignature).substring(0,12);
+      let cardId = (CARD_ID_PREFIX + item.transmitterSignature).substring(0,12);
       let card = document.createElement('div');
       card.setAttribute('id', cardId);
       card.setAttribute('class', 'card my-4');
-      cuttlefish.renderAsTabs(card, device.stories, device.data,
-                              device.associations, device.raddecs);
       updatedFragment.appendChild(card);
+      cuttlefish.renderAsTabs(card, item.device.stories, item.device.data,
+                              item.device.associations, item.device.raddecs);
+
+      debugMessage.textContent = 'card ' + index + ' id ' + cardId;
     }
   });
 
@@ -283,8 +284,8 @@ function updateProximityCards() {
 }
 
 // Sort by decreasing RSSI
-function proximitySortFunction(device1, device2) {
-  if(device1.rssi > device2.rssi) {
+function proximitySortFunction(item1, item2) {
+  if(item1.device.rssi > item2.device.rssi) {
     return -1;
   };
   return 1;
