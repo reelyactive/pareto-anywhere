@@ -74,14 +74,12 @@ function updateDevice(raddec) {
   }
   else {
     devices[transmitterSignature].raddecs.unshift(raddec);
-    if(devices[transmitterSignature].raddecs.length > 3) {
-      devices[transmitterSignature].raddecs.pop();
-    }
     devices[transmitterSignature].rssi = rssi;
   }
 
   let device = devices[transmitterSignature];
   parseRaddecPayload(transmitterSignature, raddec, device.data);
+  trimStaleDeviceData(device);
 
   cuttlefish.renderAsTabs(card, device.stories, device.data,
                           device.associations, device.raddecs);
@@ -158,6 +156,17 @@ function parseManufacturerData(transmitterSignature, manufacturerData,
                             data: new Uint8Array(data.buffer) };
     deviceData.unshift(unprocessedData);
   });
+}
+
+
+// Trim any stale data from the given device
+function trimStaleDeviceData(device) {
+  if(device.raddecs.length > 3) { // TODO: trim based on timestamp
+    device.raddecs.pop();
+  }
+  if(device.data.length > 3) {    // TODO: trim based on timestamp
+    device.data.pop();
+  }
 }
 
 
