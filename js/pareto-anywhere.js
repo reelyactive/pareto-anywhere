@@ -69,6 +69,9 @@ function updateDevice(raddec) {
   }
   else {
     devices[transmitterSignature].raddecs.unshift(raddec);
+    if(devices[transmitterSignature].raddecs.length > 3) {
+      devices[transmitterSignature].raddecs.pop();
+    }
     devices[transmitterSignature].rssi = rssi;
   }
 
