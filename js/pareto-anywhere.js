@@ -237,7 +237,8 @@ function sortCards() {
 
 // Sort by decreasing RSSI
 function sortFunction(card1, card2) {
-  if(parseInt(card1.rssi) > parseInt(card2.rssi)) {
+  if(parseInt(card1.getAttribute('rssi')) >
+     parseInt(card2.getAttribute('rssi'))) {
     return -1;
   };
   return 1;
