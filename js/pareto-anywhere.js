@@ -110,20 +110,25 @@ function parseRaddecPayload(transmitterSignature, raddec, deviceData) {
 // Parse the given service data
 function parseServiceData(transmitterSignature, serviceData, deviceData) {
   serviceData.forEach(function(data, uuid) {
-    let isEddystone = (uuid.substring(0,8) === '0000feaa');
-    let isMinew = (uuid.substring(0,8) === '0000ffe1');
-    if(isEddystone) {
-      eddystone.parseServiceData(transmitterSignature,
-                                 new Uint8Array(data.buffer), deviceData);
-    }
-    else if(isMinew) {
-      minew.parseServiceData(transmitterSignature, new Uint8Array(data.buffer),
-                             deviceData);
-    }
-    else {
-      let data = {};
-      data[uuid] = new Uint8Array(data.buffer); // TODO: convert to hex string?
-      deviceData.push(data);
+    let isUuid16 = (uuid.substring(0,8) === '0000');
+
+    if(isUuid16) {
+      let isEddystone = (uuid.substring(4,4) === eddystone.SERVICE_UUID);
+      let isMinew = (uuid.substring(4,4) === minew.SERVICE_UUID);
+      if(isEddystone) {
+        eddystone.parseServiceData(transmitterSignature,
+                                   new Uint8Array(data.buffer), deviceData);
+      }
+      else if(isMinew) {
+        minew.parseServiceData(transmitterSignature,
+                               new Uint8Array(data.buffer),
+                               deviceData);
+      }
+      else {
+        let data = {};
+        data[uuid] = new Uint8Array(data.buffer); // TODO: convert to hex?
+        deviceData.push(data);
+      }
     }
   });
 }
