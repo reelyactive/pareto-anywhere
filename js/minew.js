@@ -46,7 +46,7 @@ let minew = (function() {
                  humidityPercentage: humidityPercentage,
                  batteryPercentage: batteryPercentage,
                  macAddress: macAddress };
-    deviceData.push(data);
+    deviceData.unshift(data);
   }
 
   // Parse the given visible light data
@@ -57,7 +57,7 @@ let minew = (function() {
     let data = { visibleLight: visibleLight,
                  batteryPercentage: batteryPercentage,
                  macAddress: macAddress };
-    deviceData.push(data);
+    deviceData.unshift(data);
   }
 
   // Parse the given accelerometer data
@@ -70,7 +70,7 @@ let minew = (function() {
     let data = { acceleration: acceleration,
                  batteryPercentage: batteryPercentage,
                  macAddress: macAddress };
-    deviceData.push(data);
+    deviceData.unshift(data);
   }
 
   // Parse the given info data
@@ -80,7 +80,7 @@ let minew = (function() {
     let name = 'PLUS';  // TODO: make dynamic
     let data = { name: name, batteryPercentage: batteryPercentage,
                  macAddress: macAddress };
-    deviceData.push(data);
+    deviceData.unshift(data);
   }
 
   // Convert the given signed 8.8 fixed-point bytes to decimal.

@@ -34,7 +34,7 @@ let eddystone = (function() {
     let namespace = parseId(serviceData, 2, 11);
     let instance = parseId(serviceData, 12, 17);
     let data = { namespace: namespace, instance: instance };
-    deviceData.push(data);
+    deviceData.unshift(data);
   }
 
   // Parse the given Eddystone-URL data
@@ -50,14 +50,14 @@ let eddystone = (function() {
     }
 
     let data = { url: url };
-    deviceData.push(data);
+    deviceData.unshift(data);
     // TODO: call cormorant to fetch story?
   }
 
   // Parse the given Eddystone-TLM data
   function parseEddystoneTlm(transmitterSignature, serviceData, deviceData) {
     let data = { tlm: serviceData };
-    deviceData.push(data);
+    deviceData.unshift(data);
   }
 
   // Parse the id from the given data byte range
