@@ -12,6 +12,7 @@ const SCAN_OPTIONS = {
 const STATS_INTERVAL_MILLISECONDS = 1000;
 const SIGNATURE_SEPARATOR = '/';
 const CARD_ID_PREFIX = 'device-';
+const DEFAULT_NUMBER_OF_DEVICES_TO_DISPLAY = 3;
 const DEFAULT_RSSI_THRESHOLD = -72;
 const UNKNOWN_RSSI_VALUE = -127;
 
@@ -30,6 +31,7 @@ let debugMessage = document.querySelector('#debugMessage');
 // Other variables
 let devices = {};
 let rssiThreshold = DEFAULT_RSSI_THRESHOLD;
+let numberOfDevicesToDisplay = DEFAULT_NUMBER_OF_DEVICES_TO_DISPLAY;
 
 
 // Non-disappearance events
@@ -67,6 +69,7 @@ function updateDevice(raddec) {
     card = document.createElement('div');
     card.setAttribute('id', cardId);
     card.setAttribute('class', 'card my-4');
+    card.hidden = true;
     proximityCards.append(card);
   }
   else {
@@ -213,7 +216,13 @@ function sortCards() {
 
   cards.sort(sortFunction);
 
-  cards.forEach(function(card) {
+  cards.forEach(function(card, index) {
+    if(index < numberOfDevicesToDisplay) {
+      card.hidden = false;
+    }
+    else {
+      card.hidden = true;
+    }
     sortedFragment.appendChild(card);
   });
 
