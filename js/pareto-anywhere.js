@@ -10,7 +10,7 @@ const SCAN_OPTIONS = {
     keepRepeatedDevices: true
 };
 const STATS_INTERVAL_MILLISECONDS = 1000;
-const SIGNATURE_SEPARATOR = '/';
+const SIGNATURE_SEPARATOR = '-'; //'/';
 const DEFAULT_RSSI_THRESHOLD = -72;
 const UNKNOWN_RSSI_VALUE = -127;
 
