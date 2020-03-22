@@ -133,44 +133,6 @@ function parseServiceData(transmitterSignature, serviceData, deviceData) {
 }
 
 
-// Handle any parsed data TODO: remove
-function handleParsedData(transmitterSignature, url, documentFragment) {
-  let card = document.getElementById(transmitterSignature);
-
-  if(url) {
-    cormorant.retrieveStory(url, function(story) {
-      if(!card) {
-        card = document.createElement('div');
-        card.setAttribute('id', transmitterSignature);
-        card.setAttribute('class', 'card my-4');
-        proximityCards.append(card);
-      }
-      try {
-        cuttlefish.render(story, card);
-      }
-      catch(error) {
-        let jsonStory = document.createElement('pre');
-        jsonStory.textContent = JSON.stringify(story, null, 2);
-        card.appendChild(jsonStory);
-      }
-    });
-  }
-  else if(documentFragment) {
-    if(card) {
-      card.innerHTML = '';
-    }
-    else {
-      card = document.createElement('div');
-      card.setAttribute('id', transmitterSignature);
-      card.setAttribute('class', 'card my-4');
-      proximityCards.append(card);
-    }
-    card.appendChild(documentFragment);
-  }
-  // TODO: handle the case of both url and documentFragment
-}
-
-
 // Attempt to run the experimental requestLEScan function
 async function scanForAdvertisements() {
   try {
