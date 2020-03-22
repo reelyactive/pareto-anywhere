@@ -255,7 +255,12 @@ function sortFunction(card1, card2) {
 // Update the proximity cards
 function updateProximityCards() {
   let updatedFragment = document.createDocumentFragment();
-  let deviceArray = Array.from(devices);
+  let deviceArray = [];
+
+  for(device in devices) {
+    deviceArray.push(device);
+  }
+
   deviceArray.sort(proximitySortFunction);
 
   deviceArray.forEach(function(device, index) {
