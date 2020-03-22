@@ -122,7 +122,7 @@ function parseServiceData(transmitterSignature, serviceData, deviceData) {
     }
     else {
       let data = {};
-      data[uuid] = data.buffer; // TODO: convert to hex string?
+      data[uuid] = new Uint8Array(data.buffer); // TODO: convert to hex string?
       deviceData.push(data);
     }
   });
