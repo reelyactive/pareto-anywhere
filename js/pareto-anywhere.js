@@ -50,7 +50,7 @@ beaver.on([ 4 ], function(raddec) {
 function updateDevice(raddec) {
   let transmitterSignature = raddec.transmitterId + SIGNATURE_SEPARATOR +
                              raddec.transmitterIdType;
-  let cardId = CARD_ID_PREFIX + transmitterSignature;
+  let cardId = (CARD_ID_PREFIX + transmitterSignature).substring(0,12);
   let rssi = raddec.rssiSignature[0].rssi || UNKNOWN_RSSI_VALUE;
   let isTrackedDevice = devices.hasOwnProperty(transmitterSignature);
   let isUpdateRequired = isTrackedDevice || (rssi >= rssiThreshold);
