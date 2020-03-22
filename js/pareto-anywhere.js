@@ -113,8 +113,8 @@ function parseServiceData(transmitterSignature, serviceData, deviceData) {
     let isUuid16 = (uuid.substring(0,4) === '0000');
 
     if(isUuid16) {
-      let isEddystone = (uuid.substring(4,4) === eddystone.SERVICE_UUID);
-      let isMinew = (uuid.substring(4,4) === minew.SERVICE_UUID);
+      let isEddystone = (uuid.substring(4,8) === eddystone.SERVICE_UUID);
+      let isMinew = (uuid.substring(4,8) === minew.SERVICE_UUID);
       if(isEddystone) {
         eddystone.parseServiceData(transmitterSignature,
                                    new Uint8Array(data.buffer), deviceData);
