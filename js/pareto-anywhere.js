@@ -76,13 +76,10 @@ function updateDevice(raddec) {
   }
 
   let device = devices[transmitterSignature];
-  parseRaddecPayload(raddec, device.data);
+  parseRaddecPayload(transmitterSignature, raddec, device.data);
 
   cuttlefish.renderAsTabs(card, device.stories, device.data,
                           device.associations, device.raddecs);
-
-  // Debug
-  debugMessage.textContent = JSON.stringify(device, null, 2);
 }
 
 
@@ -98,7 +95,7 @@ function removeDevice(raddec) {
 
 
 // Parse the given raddec's payload for structured data
-function parseRaddecPayload(raddec, deviceData) {
+function parseRaddecPayload(transmitterSignature, raddec, deviceData) {
   let hasServiceData = (raddec.hasOwnProperty('serviceData') &&
                         (raddec.serviceData.size > 0));
 
@@ -115,6 +112,10 @@ function parseServiceData(transmitterSignature, serviceData, deviceData) {
     if(isEddystone) {
       eddystone.parseServiceData(transmitterSignature,
                                  new Uint8Array(data.buffer), deviceData);
+
+      // Debug
+      debugMessage.textContent = 'Eddystone' +
+                                 JSON.stringify(deviceData, null, 2);
     }
     else {
       let data = {};
