@@ -80,6 +80,8 @@ function updateDevice(raddec) {
 
   cuttlefish.renderAsTabs(card, device.stories, device.data,
                           device.associations, device.raddecs);
+  card.setAttribute('rssi', rssi);
+  sortCards();
 }
 
 
@@ -209,6 +211,31 @@ async function scanForAdvertisements() {
   catch(error)  {
     scanError.removeAttribute('hidden');
   }
+}
+
+
+// Sort the proximity cards
+function sortCards() {
+  let cards = Array.from(proximityCards.children);
+  let sortedFragment = document.createDocumentFragment();
+
+  cards.sort(sortFunction);
+
+  cards.forEach(function(card) {
+    sortedFragment.appendChild(card);
+  });
+
+  proximityCards.innerHTML = '';
+  proximityCards.appendChild(sortedFragment);
+}
+
+
+// Sort by decreasing RSSI
+function sortFunction(card1, card2) {
+  if(card1.rssi < card2.rssi) {
+    return -1;
+  };
+  return 1;
 }
 
 
