@@ -98,9 +98,13 @@ function removeDevice(raddec) {
 
 // Parse the given raddec's payload for structured data
 function parseRaddecPayload(transmitterSignature, raddec, deviceData) {
+  let hasUuids = (raddec.hasOwnProperty('uuids') && raddec.uuids.length);
   let hasServiceData = (raddec.hasOwnProperty('serviceData') &&
                         (raddec.serviceData.size > 0));
 
+  if(hasUuids) {
+    devices[transmitterSignature].data.unshift({ uuids: raddec.uuids });
+  }
   if(hasServiceData) {
     parseServiceData(transmitterSignature, raddec.serviceData, deviceData);
   }
