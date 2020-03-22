@@ -101,12 +101,18 @@ function parseRaddecPayload(transmitterSignature, raddec, deviceData) {
   let hasUuids = (raddec.hasOwnProperty('uuids') && raddec.uuids.length);
   let hasServiceData = (raddec.hasOwnProperty('serviceData') &&
                         (raddec.serviceData.size > 0));
+  let hasManufacturerData = (raddec.hasOwnProperty('manufacturerData') &&
+                             (raddec.manufacturerData.size > 0));
 
   if(hasUuids) {
     devices[transmitterSignature].data.unshift({ uuids: raddec.uuids });
   }
   if(hasServiceData) {
     parseServiceData(transmitterSignature, raddec.serviceData, deviceData);
+  }
+  if(hasManufacturerData) {
+    parseManufacturerData(transmitterSignature, raddec.manufacturerData,
+                          deviceData);
   }
 }
 
@@ -134,6 +140,17 @@ function parseServiceData(transmitterSignature, serviceData, deviceData) {
         deviceData.unshift(unprocessedData);
       }
     }
+  });
+}
+
+
+// Parse the given manufacturer data
+function parseManufacturerData(transmitterSignature, manufacturerData,
+                               deviceData) {
+  manufacturerData.forEach(function(data, manufacturer) {
+    let unprocessedData = { manufacturer: manufacturer,
+                            data: new Uint8Array(data.buffer) };
+    deviceData.unshift(unprocessedData);
   });
 }
 
