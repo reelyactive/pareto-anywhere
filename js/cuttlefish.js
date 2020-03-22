@@ -43,6 +43,7 @@ let cuttlefish = (function() {
   // Render all the given data as tabs in a card
   function renderAsTabs(node, stories, data, associations, raddecs, options) {
     let id = node.getAttribute('id');
+    removeAllChildren(node);
 
     let footerTitle = DEFAULT_TITLE;
     let footerClass = ' ';
