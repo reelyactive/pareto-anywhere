@@ -11,7 +11,7 @@ const SCAN_OPTIONS = {
 };
 const STATS_INTERVAL_MILLISECONDS = 1000;
 const SIGNATURE_SEPARATOR = '/';
-const CARD_ID_PREFIX = 'device-';
+const CARD_ID_PREFIX = 'dev-';
 const DEFAULT_NUMBER_OF_DEVICES_TO_DISPLAY = 3;
 const DEFAULT_RSSI_THRESHOLD = -72;
 const UNKNOWN_RSSI_VALUE = -127;
@@ -50,7 +50,7 @@ beaver.on([ 4 ], function(raddec) {
 function updateDevice(raddec) {
   let transmitterSignature = raddec.transmitterId + SIGNATURE_SEPARATOR +
                              raddec.transmitterIdType;
-  let cardId = transmitterSignature.substring(12);
+  let cardId = (CARD_ID_PREFIX + transmitterSignature).substring(0,12);
   let rssi = raddec.rssiSignature[0].rssi || UNKNOWN_RSSI_VALUE;
   let isTrackedDevice = devices.hasOwnProperty(transmitterSignature);
   let isUpdateRequired = isTrackedDevice || (rssi >= rssiThreshold);
