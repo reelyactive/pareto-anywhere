@@ -110,7 +110,7 @@ function parseRaddecPayload(transmitterSignature, raddec, deviceData) {
 // Parse the given service data
 function parseServiceData(transmitterSignature, serviceData, deviceData) {
   serviceData.forEach(function(data, uuid) {
-    let isUuid16 = (uuid.substring(0,8) === '0000');
+    let isUuid16 = (uuid.substring(0,4) === '0000');
 
     if(isUuid16) {
       let isEddystone = (uuid.substring(4,4) === eddystone.SERVICE_UUID);
