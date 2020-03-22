@@ -119,10 +119,6 @@ function parseServiceData(transmitterSignature, serviceData, deviceData) {
     else if(isMinew) {
       minew.parseServiceData(transmitterSignature, new Uint8Array(data.buffer),
                              deviceData);
-
-      // Debug
-      debugMessage.textContent = 'Minew ' +
-                                 JSON.stringify(deviceData, null, 2);
     }
     else {
       let data = {};
