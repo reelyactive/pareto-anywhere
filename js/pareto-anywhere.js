@@ -261,6 +261,9 @@ function updateProximityCards() {
     deviceArray.push(device);
   }
 
+  debugMessage.textContent = 'updateProximityCards with device count' +
+                             deviceArray.length;
+
   deviceArray.sort(proximitySortFunction);
 
   deviceArray.forEach(function(device, index) {
