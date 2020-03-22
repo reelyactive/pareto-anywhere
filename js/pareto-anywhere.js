@@ -148,7 +148,8 @@ function parseServiceData(transmitterSignature, serviceData, deviceData) {
 function parseManufacturerData(transmitterSignature, manufacturerData,
                                deviceData) {
   manufacturerData.forEach(function(data, manufacturer) {
-    let unprocessedData = { manufacturer: manufacturer,
+    let manufacturerHex = ('000' + manufacturer.toString(16)).substr(-4);
+    let unprocessedData = { manufacturer: manufacturerHex,
                             data: new Uint8Array(data.buffer) };
     deviceData.unshift(unprocessedData);
   });
