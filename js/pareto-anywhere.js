@@ -16,6 +16,7 @@ const CARD_ID_PREFIX = 'dev-';
 const DEFAULT_NUMBER_OF_DEVICES_TO_DISPLAY = 3;
 const DEFAULT_RSSI_THRESHOLD = -72;
 const UNKNOWN_RSSI_VALUE = -127;
+const SNIFFYPEDIA_BASE_URL = 'https://sniffypedia.org/';
 
 
 // DOM elements
@@ -158,6 +159,22 @@ function parseManufacturerData(manufacturerData, device, timestamp) {
                             data: new Uint8Array(data.buffer),
                             timestamp: timestamp };
     device.data.unshift(unprocessedData);
+
+    if(sniffypedia.ble.companyIdentifiers.hasOwnProperty(manufacturerHex)) {
+      let url = SNIFFYPEDIA_BASE_URL +
+                sniffypedia.ble.companyIdentifiers[manufacturerHex];
+      let isNewUrl = (device.urls.indexOf(url) < 0);
+
+      if(isNewUrl) {
+        device.urls.push(url);
+        cormorant.retrieveStory(url, function(story) {
+          device.stories.push(story);
+
+          // Debug only
+          debugMessage.textContent = JSON.stringify(story, null, 2);
+        });
+      }
+    }
   });
 }
 
