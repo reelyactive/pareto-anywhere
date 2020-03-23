@@ -138,6 +138,9 @@ function parseServiceData(serviceData, device, timestamp) {
 
       if(hasNewUrl) {
         device.urls.push(parsedData.url);
+        cormorant.retrieveStory(parsedData.url, function(story)) {
+          device.stories.push(story);
+        });
       }
 
       parsedData.timestamp = timestamp;
