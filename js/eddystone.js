@@ -12,32 +12,29 @@ let eddystone = (function() {
   // Internal variables
 
   // Parse the given service data
-  let parseServiceData = function(serviceData, data, urls) {
+  let parseServiceData = function(serviceData) {
     switch(serviceData[0]) {
       case 0x00:
-        parseEddystoneUid(serviceData, data, urls);
-        break;
+        return parseEddystoneUid(serviceData);
       case 0x10:
-        parseEddystoneUrl(serviceData, data, urls);
-        break;
+        return parseEddystoneUrl(serviceData);
       case 0x20:
-        parseEddystoneTlm(serviceData, data, urls);
-        break;
+        return parseEddystoneTlm(serviceData);
       default:
-        return;
+        return null;
     }
   }
 
   // Parse the given Eddystone-UID data
-  function parseEddystoneUid(serviceData, data, urls) {
+  function parseEddystoneUid(serviceData) {
     let namespace = parseId(serviceData, 2, 11);
     let instance = parseId(serviceData, 12, 17);
-    let uidData = { namespace: namespace, instance: instance };
-    data.unshift(uidData);
+
+    return { namespace: namespace, instance: instance };
   }
 
   // Parse the given Eddystone-URL data
-  function parseEddystoneUrl(serviceData, data, urls) {
+  function parseEddystoneUrl(serviceData) {
     let url = parseUrlSchemeByte(serviceData[2]);
 
     if(!url) {
@@ -48,16 +45,12 @@ let eddystone = (function() {
       url += parseUrlCharByte(serviceData[cChar]);
     }
 
-    let isNewUrl = (urls.indexOf(url) < 0);
-    if(isNewUrl) {
-      urls.push(url);
-    }
+    return { url: url };
   }
 
   // Parse the given Eddystone-TLM data
-  function parseEddystoneTlm(serviceData, data, urls) {
-    let tlmData = { tlm: serviceData };
-    data.unshift(tlmData);
+  function parseEddystoneTlm(serviceData) {
+    return { tlm: serviceData }; // TODO: parse TLM
   }
 
   // Parse the id from the given data byte range

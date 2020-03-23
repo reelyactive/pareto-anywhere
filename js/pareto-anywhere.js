@@ -103,46 +103,57 @@ function parseRaddecPayload(raddec, device) {
     device.data.unshift({ uuids: raddec.uuids });
   }
   if(hasServiceData) {
-    parseServiceData(raddec.serviceData, device);
+    parseServiceData(raddec.serviceData, device, raddec.timestamp);
   }
   if(hasManufacturerData) {
-    parseManufacturerData(raddec.manufacturerData, device);
+    parseManufacturerData(raddec.manufacturerData, device, raddec.timestamp);
   }
 }
 
 
 // Parse the given service data
-function parseServiceData(serviceData, device) {
+function parseServiceData(serviceData, device, timestamp) {
   serviceData.forEach(function(data, uuid) {
+    let parsedData = null;
     let isUuid16 = (uuid.substring(0,4) === '0000');
 
     if(isUuid16) {
       let isEddystone = (uuid.substring(4,8) === eddystone.SERVICE_UUID);
       let isMinew = (uuid.substring(4,8) === minew.SERVICE_UUID);
       if(isEddystone) {
-        eddystone.parseServiceData(new Uint8Array(data.buffer), device.data,
-                                   device.urls);
+        parsedData = eddystone.parseServiceData(new Uint8Array(data.buffer));
       }
       else if(isMinew) {
-        minew.parseServiceData(new Uint8Array(data.buffer), device.data,
-                               device.urls);
+        parsedData = minew.parseServiceData(new Uint8Array(data.buffer));
       }
       else {
-        let unprocessedData = { uuid: uuid.substring(4,8),
-                                data: new Uint8Array(data.buffer) };
-        device.data.unshift(unprocessedData);
+        parsedData = { uuid: uuid.substring(4,8),
+                       data: new Uint8Array(data.buffer) };
       }
+    }
+
+    if(parsedData) {
+      let hasNewUrl = parsedData.hasOwnProperty('url') &&
+                      (device.urls.indexOf(parsedData.url) < 0);
+
+      if(hasNewUrl) {
+        device.urls.push(parsedData.url);
+      }
+
+      parsedData.timestamp = timestamp;
+      device.data.unshift(parsedData);
     }
   });
 }
 
 
 // Parse the given manufacturer data
-function parseManufacturerData(manufacturerData, device) {
+function parseManufacturerData(manufacturerData, device, timestamp) {
   manufacturerData.forEach(function(data, manufacturer) {
     let manufacturerHex = ('000' + manufacturer.toString(16)).substr(-4);
     let unprocessedData = { manufacturer: manufacturerHex,
-                            data: new Uint8Array(data.buffer) };
+                            data: new Uint8Array(data.buffer),
+                            timestamp: timestamp };
     device.data.unshift(unprocessedData);
   });
 }
