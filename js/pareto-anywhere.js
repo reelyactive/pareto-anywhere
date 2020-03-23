@@ -220,7 +220,9 @@ function updateProximityCards() {
   for(transmitterSignature in devices) {
     sortedArray.push(devices[transmitterSignature]);
   }
-  sortedArray.sort(proximitySortFunction);
+  sortedArray.sort(function(device1, device2) {
+    return device2.rssi - device1.rssi; // Decreasing RSSI
+  });
 
   sortedArray.forEach(function(device, index) {
     if(index < numberOfDevicesToDisplay) {
@@ -235,15 +237,6 @@ function updateProximityCards() {
 
   proximityCards.innerHTML = '';
   proximityCards.appendChild(updatedFragment);
-}
-
-
-// Sort by decreasing RSSI
-function proximitySortFunction(item1, item2) {
-  if(item1.rssi > item2.rssi) {
-    return -1;
-  };
-  return 1;
 }
 
 
