@@ -12,17 +12,16 @@ let eddystone = (function() {
   // Internal variables
 
   // Parse the given service data
-  let parseServiceData = function(transmitterSignature, serviceData,
-                                  deviceData) {
+  let parseServiceData = function(serviceData, data, urls) {
     switch(serviceData[0]) {
       case 0x00:
-        parseEddystoneUid(transmitterSignature, serviceData, deviceData);
+        parseEddystoneUid(serviceData, data, urls);
         break;
       case 0x10:
-        parseEddystoneUrl(transmitterSignature, serviceData, deviceData);
+        parseEddystoneUrl(serviceData, data, urls);
         break;
       case 0x20:
-        parseEddystoneTlm(transmitterSignature, serviceData, deviceData);
+        parseEddystoneTlm(serviceData, data, urls);
         break;
       default:
         return;
@@ -30,15 +29,15 @@ let eddystone = (function() {
   }
 
   // Parse the given Eddystone-UID data
-  function parseEddystoneUid(transmitterSignature, serviceData, deviceData) {
+  function parseEddystoneUid(serviceData, data, urls) {
     let namespace = parseId(serviceData, 2, 11);
     let instance = parseId(serviceData, 12, 17);
-    let data = { namespace: namespace, instance: instance };
-    deviceData.unshift(data);
+    let uidData = { namespace: namespace, instance: instance };
+    data.unshift(uidData);
   }
 
   // Parse the given Eddystone-URL data
-  function parseEddystoneUrl(transmitterSignature, serviceData, deviceData) {
+  function parseEddystoneUrl(serviceData, data, urls) {
     let url = parseUrlSchemeByte(serviceData[2]);
 
     if(!url) {
@@ -49,15 +48,16 @@ let eddystone = (function() {
       url += parseUrlCharByte(serviceData[cChar]);
     }
 
-    let data = { url: url };
-    deviceData.unshift(data);
-    // TODO: call cormorant to fetch story?
+    let isNewUrl = (urls.indexOf(url) < 0);
+    if(isNewUrl) {
+      urls.push(url);
+    }
   }
 
   // Parse the given Eddystone-TLM data
-  function parseEddystoneTlm(transmitterSignature, serviceData, deviceData) {
-    let data = { tlm: serviceData };
-    deviceData.unshift(data);
+  function parseEddystoneTlm(serviceData, data, urls) {
+    let tlmData = { tlm: serviceData };
+    data.unshift(tlmData);
   }
 
   // Parse the id from the given data byte range

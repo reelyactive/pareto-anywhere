@@ -12,22 +12,20 @@ let minew = (function() {
   // Internal variables
 
   // Parse the given service data
-  let parseServiceData = function(transmitterSignature, serviceData,
-                                  deviceData) {
+  let parseServiceData = function(serviceData, data, urls) {
     if(serviceData[0] === 0xa1) {
       switch(serviceData[1]) {
         case 0x01:
-          parseTemperatureHumidity(transmitterSignature, serviceData,
-                                   deviceData);
+          parseTemperatureHumidity(serviceData, data, urls);
           break;
         case 0x02:
-          parseVisibleLight(transmitterSignature, serviceData, deviceData);
+          parseVisibleLight(serviceData, data, urls);
           break;
         case 0x03:
-          parseAccelerometer(transmitterSignature, serviceData, deviceData);
+          parseAccelerometer(serviceData, data, urls);
           break;
         case 0x08:
-          parseInfo(transmitterSignature, serviceData, deviceData);
+          parseInfo(serviceData, data, urls);
           break;
         default:
           return;
@@ -36,51 +34,50 @@ let minew = (function() {
   }
 
   // Parse the given temperature and humidity data
-  function parseTemperatureHumidity(transmitterSignature, serviceData,
-                                    deviceData) {
+  function parseTemperatureHumidity(serviceData, data, urls) {
     let batteryPercentage = serviceData[2];
     let temperature = toDecimal(serviceData[3], serviceData[4]);
     let humidityPercentage = toDecimal(serviceData[5], serviceData[6]);
     let macAddress = toMacAddress(serviceData, 7);
-    let data = { temperature: temperature,
-                 humidityPercentage: humidityPercentage,
-                 batteryPercentage: batteryPercentage,
-                 macAddress: macAddress };
-    deviceData.unshift(data);
+    let sensorData = { temperature: temperature,
+                       humidityPercentage: humidityPercentage,
+                       batteryPercentage: batteryPercentage,
+                       macAddress: macAddress };
+    data.unshift(sensorData);
   }
 
   // Parse the given visible light data
-  function parseVisibleLight(transmitterSignature, serviceData, deviceData) {
+  function parseVisibleLight(serviceData, data, urls) {
     let batteryPercentage = serviceData[2];
     let visibleLight = (serviceData[3] > 0);
     let macAddress = toMacAddress(serviceData, 4);
-    let data = { visibleLight: visibleLight,
-                 batteryPercentage: batteryPercentage,
-                 macAddress: macAddress };
-    deviceData.unshift(data);
+    let sensorData = { visibleLight: visibleLight,
+                       batteryPercentage: batteryPercentage,
+                       macAddress: macAddress };
+    data.unshift(sensorData);
   }
 
   // Parse the given accelerometer data
-  function parseAccelerometer(transmitterSignature, serviceData, deviceData) {
+  function parseAccelerometer(serviceData, data, urls) {
     let batteryPercentage = serviceData[2];
     let acceleration = [ toDecimal(serviceData[3], serviceData[4]),
                          toDecimal(serviceData[5], serviceData[6]),
                          toDecimal(serviceData[7], serviceData[8]) ];
     let macAddress = toMacAddress(serviceData, 9);
-    let data = { acceleration: acceleration,
-                 batteryPercentage: batteryPercentage,
-                 macAddress: macAddress };
-    deviceData.unshift(data);
+    let sensorData = { acceleration: acceleration,
+                       batteryPercentage: batteryPercentage,
+                       macAddress: macAddress };
+    data.unshift(sensorData);
   }
 
   // Parse the given info data
-  function parseInfo(transmitterSignature, serviceData, deviceData) {
+  function parseInfo(serviceData, data, urls) {
     let batteryPercentage = serviceData[2];
     let macAddress = toMacAddress(serviceData, 3);
     let name = 'PLUS';  // TODO: make dynamic
-    let data = { name: name, batteryPercentage: batteryPercentage,
-                 macAddress: macAddress };
-    deviceData.unshift(data);
+    let infoData = { name: name, batteryPercentage: batteryPercentage,
+                     macAddress: macAddress };
+    data.unshift(infoData);
   }
 
   // Convert the given signed 8.8 fixed-point bytes to decimal.

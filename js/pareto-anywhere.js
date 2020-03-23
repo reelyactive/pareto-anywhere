@@ -65,6 +65,7 @@ function updateDevice(raddec) {
                                       stories: [],
                                       data: [],
                                       associations: {},
+                                      urls: [],
                                       rssi: rssi,
                                       id: id };
   }
@@ -74,7 +75,7 @@ function updateDevice(raddec) {
   }
 
   let device = devices[transmitterSignature];
-  parseRaddecPayload(transmitterSignature, raddec, device.data);
+  parseRaddecPayload(raddec, device);
   trimStaleDeviceData(device);
 }
 
@@ -91,7 +92,7 @@ function removeDevice(raddec) {
 
 
 // Parse the given raddec's payload for structured data
-function parseRaddecPayload(transmitterSignature, raddec, deviceData) {
+function parseRaddecPayload(raddec, device) {
   let hasUuids = (raddec.hasOwnProperty('uuids') && raddec.uuids.length);
   let hasServiceData = (raddec.hasOwnProperty('serviceData') &&
                         (raddec.serviceData.size > 0));
@@ -99,20 +100,19 @@ function parseRaddecPayload(transmitterSignature, raddec, deviceData) {
                              (raddec.manufacturerData.size > 0));
 
   if(hasUuids) {
-    devices[transmitterSignature].data.unshift({ uuids: raddec.uuids });
+    device.data.unshift({ uuids: raddec.uuids });
   }
   if(hasServiceData) {
-    parseServiceData(transmitterSignature, raddec.serviceData, deviceData);
+    parseServiceData(raddec.serviceData, device);
   }
   if(hasManufacturerData) {
-    parseManufacturerData(transmitterSignature, raddec.manufacturerData,
-                          deviceData);
+    parseManufacturerData(raddec.manufacturerData, device);
   }
 }
 
 
 // Parse the given service data
-function parseServiceData(transmitterSignature, serviceData, deviceData) {
+function parseServiceData(serviceData, device) {
   serviceData.forEach(function(data, uuid) {
     let isUuid16 = (uuid.substring(0,4) === '0000');
 
@@ -120,18 +120,17 @@ function parseServiceData(transmitterSignature, serviceData, deviceData) {
       let isEddystone = (uuid.substring(4,8) === eddystone.SERVICE_UUID);
       let isMinew = (uuid.substring(4,8) === minew.SERVICE_UUID);
       if(isEddystone) {
-        eddystone.parseServiceData(transmitterSignature,
-                                   new Uint8Array(data.buffer), deviceData);
+        eddystone.parseServiceData(new Uint8Array(data.buffer), device.data,
+                                   device.urls);
       }
       else if(isMinew) {
-        minew.parseServiceData(transmitterSignature,
-                               new Uint8Array(data.buffer),
-                               deviceData);
+        minew.parseServiceData(new Uint8Array(data.buffer), device.data,
+                               device.urls);
       }
       else {
         let unprocessedData = { uuid: uuid.substring(4,8),
                                 data: new Uint8Array(data.buffer) };
-        deviceData.unshift(unprocessedData);
+        device.data.unshift(unprocessedData);
       }
     }
   });
@@ -139,13 +138,12 @@ function parseServiceData(transmitterSignature, serviceData, deviceData) {
 
 
 // Parse the given manufacturer data
-function parseManufacturerData(transmitterSignature, manufacturerData,
-                               deviceData) {
+function parseManufacturerData(manufacturerData, device) {
   manufacturerData.forEach(function(data, manufacturer) {
     let manufacturerHex = ('000' + manufacturer.toString(16)).substr(-4);
     let unprocessedData = { manufacturer: manufacturerHex,
                             data: new Uint8Array(data.buffer) };
-    deviceData.unshift(unprocessedData);
+    device.data.unshift(unprocessedData);
   });
 }
 
