@@ -119,8 +119,9 @@ function parseServiceData(serviceData, device, timestamp) {
     let isUuid16 = (uuid.substring(0,4) === '0000');
 
     if(isUuid16) {
-      let isEddystone = (uuid.substring(4,8) === eddystone.SERVICE_UUID);
-      let isMinew = (uuid.substring(4,8) === minew.SERVICE_UUID);
+      let uuid16 = uuid.substring(4,8);
+      let isEddystone = (uuid16 === eddystone.SERVICE_UUID);
+      let isMinew = (uuid16 === minew.SERVICE_UUID);
       if(isEddystone) {
         parsedData = eddystone.parseServiceData(new Uint8Array(data.buffer));
       }
@@ -128,8 +129,19 @@ function parseServiceData(serviceData, device, timestamp) {
         parsedData = minew.parseServiceData(new Uint8Array(data.buffer));
       }
       else {
-        parsedData = { uuid: uuid.substring(4,8),
-                       data: new Uint8Array(data.buffer) };
+        parsedData = { uuid: uuid16, data: new Uint8Array(data.buffer) };
+      }
+
+      if(sniffypedia.ble.uuid16.hasOwnProperty(uuid16)) {
+        let url = SNIFFYPEDIA_BASE_URL + sniffypedia.ble.uuid16[uuid16];
+        let isNewUrl = (device.urls.indexOf(url) < 0);
+
+        if(isNewUrl) {
+          device.urls.push(url);
+          cormorant.retrieveStory(url, function(story) {
+            device.stories.push(story);
+          });
+        }
       }
     }
 
