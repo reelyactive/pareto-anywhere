@@ -50,7 +50,32 @@ let eddystone = (function() {
 
   // Parse the given Eddystone-TLM data
   function parseEddystoneTlm(serviceData) {
-    return { tlm: serviceData }; // TODO: parse TLM
+    let version = serviceData[1];
+
+    if(version === 0x00) {
+      let batteryVoltage = ((serviceData[2] * 256) + serviceData[3]) / 1000;
+      let temperature = toDecimal(serviceData[4], serviceData[5]);
+      let advertisingCount = (serviceData[6] << 24) + (serviceData[7] << 16) +
+                             (serviceData[8] << 8) + serviceData[9];
+      let uptime = ((serviceData[10] << 24) + (serviceData[11] << 16) +
+                    (serviceData[12] << 8) + serviceData[13]) * 1000;
+
+      return { batteryVoltage: batteryVoltage,
+               temperature: temperature,
+               advertisingCount: advertisingCount,
+               uptime: uptime };
+    }
+    else if(version === 0x01) {
+      let encryptedTlm = parseId(serviceData, 2, 13);
+      let salt = parseId(serviceData, 14, 15);
+      let mic = parseId(serviceData, 16, 17);
+
+      return { encryptedTlm: encryptedTlm,
+               salt: salt,
+               mic: mic };
+    }
+
+    return null;
   }
 
   // Parse the id from the given data byte range
@@ -114,6 +139,17 @@ let eddystone = (function() {
       default:
         return String.fromCharCode(byte);
     }
+  }
+
+  // Convert the given signed 8.8 fixed-point bytes to decimal.
+  function toDecimal(integerByte, decimalByte) {
+    let integer = integerByte;
+    let decimal = decimalByte / 256;
+
+    if(integer > 127) {
+      return (integer - 256) + decimal;
+    }
+    return integer + decimal;
   }
 
   // Expose the following functions and variables
