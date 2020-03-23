@@ -12,6 +12,7 @@ let sniffypedia = (function() {
   // Bluetooth Low Energy 16-bit UUIDs
   // See: https://www.bluetooth.com/specifications/assigned-numbers/16-bit-uuids-for-members
   let ble_uuid16 = {
+    "ffe1": "Organization/Shenzhen_Minew_Technologies_Co_Ltd/",
     "fefd": "Organization/Gimbal_Inc/",
     "fefc": "Organization/Gimbal_Inc/",
     "fefa": "Organization/PayPal_Inc/",
