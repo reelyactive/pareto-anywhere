@@ -27,14 +27,16 @@ let eddystone = (function() {
 
   // Parse the given Eddystone-UID data
   function parseEddystoneUid(serviceData) {
+    let txPower = toTxPower(serviceData[1]);
     let namespace = parseId(serviceData, 2, 11);
     let instance = parseId(serviceData, 12, 17);
 
-    return { namespace: namespace, instance: instance };
+    return { txPower: txPower, namespace: namespace, instance: instance };
   }
 
   // Parse the given Eddystone-URL data
   function parseEddystoneUrl(serviceData) {
+    let txPower = toTxPower(serviceData[1]);
     let url = parseUrlSchemeByte(serviceData[2]);
 
     if(!url) {
@@ -45,7 +47,7 @@ let eddystone = (function() {
       url += parseUrlCharByte(serviceData[cChar]);
     }
 
-    return { url: url };
+    return { txPower: txPower, url: url };
   }
 
   // Parse the given Eddystone-TLM data
@@ -141,7 +143,7 @@ let eddystone = (function() {
     }
   }
 
-  // Convert the given signed 8.8 fixed-point bytes to decimal.
+  // Convert the given signed 8.8 fixed-point bytes to decimal
   function toDecimal(integerByte, decimalByte) {
     let integer = integerByte;
     let decimal = decimalByte / 256;
@@ -150,6 +152,14 @@ let eddystone = (function() {
       return (integer - 256) + decimal;
     }
     return integer + decimal;
+  }
+
+  // Convert the given byte to txPower in dBm
+  function toTxPower(byte) {
+    if(byte > 127) {
+      return byte - 256;
+    }
+    return byte;
   }
 
   // Expose the following functions and variables
