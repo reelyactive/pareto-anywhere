@@ -169,9 +169,6 @@ function parseManufacturerData(manufacturerData, device, timestamp) {
         device.urls.push(url);
         cormorant.retrieveStory(url, function(story) {
           device.stories.push(story);
-
-          // Debug only
-          debugMessage.textContent = JSON.stringify(story, null, 2);
         });
       }
     }
