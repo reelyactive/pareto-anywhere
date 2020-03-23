@@ -10,6 +10,7 @@ const SCAN_OPTIONS = {
     keepRepeatedDevices: true
 };
 const STATS_INTERVAL_MILLISECONDS = 1000;
+const PROXIMITY_INTERVAL_MILLISECONDS = 1000;
 const SIGNATURE_SEPARATOR = '/';
 const CARD_ID_PREFIX = 'dev-';
 const DEFAULT_NUMBER_OF_DEVICES_TO_DISPLAY = 3;
@@ -50,11 +51,10 @@ beaver.on([ 4 ], function(raddec) {
 function updateDevice(raddec) {
   let transmitterSignature = raddec.transmitterId + SIGNATURE_SEPARATOR +
                              raddec.transmitterIdType;
-  let cardId = (CARD_ID_PREFIX + transmitterSignature).substring(0,12);
+  let id = (CARD_ID_PREFIX + transmitterSignature).substring(0,12);
   let rssi = raddec.rssiSignature[0].rssi || UNKNOWN_RSSI_VALUE;
   let isTrackedDevice = devices.hasOwnProperty(transmitterSignature);
   let isUpdateRequired = isTrackedDevice || (rssi >= rssiThreshold);
-  let card = document.getElementById(cardId);
 
   if(!isUpdateRequired) {
     return;
@@ -65,12 +65,8 @@ function updateDevice(raddec) {
                                       stories: [],
                                       data: [],
                                       associations: {},
-                                      rssi: rssi };
-    //card = document.createElement('div');
-    //card.setAttribute('id', cardId);
-    //card.setAttribute('class', 'card my-4');
-    //card.hidden = true;
-    //proximityCards.append(card);
+                                      rssi: rssi,
+                                      id: id };
   }
   else {
     devices[transmitterSignature].raddecs.unshift(raddec);
@@ -80,11 +76,6 @@ function updateDevice(raddec) {
   let device = devices[transmitterSignature];
   parseRaddecPayload(transmitterSignature, raddec, device.data);
   trimStaleDeviceData(device);
-
-  //cuttlefish.renderAsTabs(card, device.stories, device.data,
-  //                        device.associations, device.raddecs);
-  //card.setAttribute('rssi', rssi);
-  //sortCards();
 }
 
 
@@ -175,7 +166,8 @@ async function scanForAdvertisements() {
   try {
     const scan = await navigator.bluetooth.requestLEScan(SCAN_OPTIONS);
     let statsInterval = setInterval(updateStats, STATS_INTERVAL_MILLISECONDS);
-    let proximityInterval = setInterval(updateProximityCards, 1000);
+    let proximityInterval = setInterval(updateProximityCards,
+                                        PROXIMITY_INTERVAL_MILLISECONDS);
     let eventStatsCount = 0;
     scanButton.textContent = 'Scanning...';
     scanButton.setAttribute('class', 'btn btn-outline-dark');
@@ -220,62 +212,24 @@ async function scanForAdvertisements() {
 }
 
 
-// Sort the proximity cards
-function sortCards() {
-  let cards = Array.from(proximityCards.children);
-  let sortedFragment = document.createDocumentFragment();
-
-  cards.sort(sortFunction);
-
-  cards.forEach(function(card, index) {
-    if(index < numberOfDevicesToDisplay) {
-      card.hidden = false;
-    }
-    else {
-      card.hidden = true;
-    }
-    sortedFragment.appendChild(card);
-  });
-
-  proximityCards.innerHTML = '';
-  proximityCards.appendChild(sortedFragment);
-}
-
-
-// Sort by decreasing RSSI
-function sortFunction(card1, card2) {
-  if(parseInt(card1.getAttribute('rssi')) >
-     parseInt(card2.getAttribute('rssi'))) {
-    return -1;
-  };
-  return 1;
-}
-
-
 // Update the proximity cards
 function updateProximityCards() {
   let updatedFragment = document.createDocumentFragment();
   let sortedArray = [];
 
   for(transmitterSignature in devices) {
-    let device = devices[transmitterSignature];
-    sortedArray.push({ device: device,
-                       transmitterSignature: transmitterSignature });
+    sortedArray.push(devices[transmitterSignature]);
   }
-
   sortedArray.sort(proximitySortFunction);
 
-  sortedArray.forEach(function(item, index) {
+  sortedArray.forEach(function(device, index) {
     if(index < numberOfDevicesToDisplay) {
-      let cardId = (CARD_ID_PREFIX + item.transmitterSignature).substring(0,12);
       let card = document.createElement('div');
-      card.setAttribute('id', cardId);
+      card.setAttribute('id', device.id);
       card.setAttribute('class', 'card my-4');
       updatedFragment.appendChild(card);
-      cuttlefish.renderAsTabs(card, item.device.stories, item.device.data,
-                              item.device.associations, item.device.raddecs);
-
-      debugMessage.textContent = 'card ' + index + ' id ' + cardId;
+      cuttlefish.renderAsTabs(card, device.stories, device.data,
+                              device.associations, device.raddecs);
     }
   });
 
@@ -283,9 +237,10 @@ function updateProximityCards() {
   proximityCards.appendChild(updatedFragment);
 }
 
+
 // Sort by decreasing RSSI
 function proximitySortFunction(item1, item2) {
-  if(item1.device.rssi > item2.device.rssi) {
+  if(item1.rssi > item2.rssi) {
     return -1;
   };
   return 1;
