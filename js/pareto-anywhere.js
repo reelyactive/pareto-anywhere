@@ -218,7 +218,6 @@ async function scanForAdvertisements() {
     raddecRate.textContent = 0;
     numTransmitters.textContent = 0;
     scanStats.removeAttribute('hidden');
-    nearestTitle.removeAttribute('hidden');
 
     navigator.bluetooth.addEventListener('advertisementreceived', event => {
       beaver.handleWebBluetoothScanningEvent(event);
@@ -284,6 +283,7 @@ function updateProximityCards() {
   }
   else {
     nearestCount.textContent = 'Nearest ' + numberOfDisplayedCards;
+    nearestTitle.removeAttribute('hidden');
   }
 
   proximityCards.innerHTML = '';
