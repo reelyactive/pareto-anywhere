@@ -17,6 +17,7 @@ const DEFAULT_NUMBER_OF_DEVICES_TO_DISPLAY = 3;
 const DEFAULT_RSSI_THRESHOLD = -72;
 const UNKNOWN_RSSI_VALUE = -127;
 const SNIFFYPEDIA_BASE_URL = 'https://sniffypedia.org/';
+const NO_DEVICES_IN_PROXIMITY_MESSAGE = 'Nothing nearby';
 
 
 // DOM elements
@@ -26,6 +27,8 @@ let scanStats = document.querySelector('#scanStats');
 let scanError = document.querySelector('#scanError');
 let raddecRate = document.querySelector('#raddecRate');
 let numTransmitters = document.querySelector('#numTransmitters');
+let nearestTitle = document.querySelector('#nearestTitle');
+let nearestCount = document.querySelector('#nearestCount');
 let proximityCards = document.querySelector('#proximityCards');
 let debugMessage = document.querySelector('#debugMessage');
 
@@ -215,6 +218,7 @@ async function scanForAdvertisements() {
     raddecRate.textContent = 0;
     numTransmitters.textContent = 0;
     scanStats.removeAttribute('hidden');
+    nearestTitle.removeAttribute('hidden');
 
     navigator.bluetooth.addEventListener('advertisementreceived', event => {
       beaver.handleWebBluetoothScanningEvent(event);
@@ -254,6 +258,7 @@ async function scanForAdvertisements() {
 function updateProximityCards() {
   let updatedFragment = document.createDocumentFragment();
   let sortedArray = [];
+  let numberOfDisplayedCards = 0;
 
   for(transmitterSignature in devices) {
     sortedArray.push(devices[transmitterSignature]);
@@ -268,10 +273,18 @@ function updateProximityCards() {
       card.setAttribute('id', device.id);
       card.setAttribute('class', 'card my-4');
       updatedFragment.appendChild(card);
+      numberOfDisplayedCards++;
       cuttlefish.renderAsTabs(card, device.stories, device.data,
                               device.associations, device.raddecs);
     }
   });
+
+  if(numberOfDisplayedCards === 0) {
+    nearestCount.textContent = NO_DEVICES_IN_PROXIMITY_MESSAGE;
+  }
+  else {
+    nearestCount.textContent = 'Nearest ' + numberOfDisplayedCards;
+  }
 
   proximityCards.innerHTML = '';
   proximityCards.appendChild(updatedFragment);
