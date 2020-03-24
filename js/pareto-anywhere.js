@@ -180,7 +180,7 @@ function parseManufacturerData(manufacturerData, device, timestamp) {
   manufacturerData.forEach(function(data, manufacturer) {
     let manufacturerHex = ('000' + manufacturer.toString(16)).substr(-4);
     let unprocessedData = { manufacturer: manufacturerHex,
-                            data: bufferToHex(data.buffer), //new Uint8Array(data.buffer),
+                            data: bufferToHex(data.buffer),
                             timestamp: timestamp };
     device.data.unshift(unprocessedData);
 
@@ -315,9 +315,9 @@ function bufferToHex(buffer) {
   let bytes = new Uint8Array(buffer);
   let hexString = '';
 
-  bytes.forEach(byte) {
+  bytes.forEach(function(byte) {
     hexString += ('0' + byte.toString(16)).substr(-2);
-  }
+  });
 
   return hexString;
 }
