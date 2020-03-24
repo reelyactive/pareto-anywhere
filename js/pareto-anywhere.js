@@ -23,6 +23,10 @@ const NO_DEVICES_IN_PROXIMITY_MESSAGE = 'Nothing nearby';
 // DOM elements
 let scanButton = document.querySelector('#scanButton');
 let stopButton = document.querySelector('#stopButton');
+let nearestLimitInput = document.querySelector('#nearestLimitInput');
+let nearestLimitDisplay = document.querySelector('#nearestLimitDisplay');
+let rssiThresholdInput = document.querySelector('#rssiThresholdInput');
+let rssiThresholdDisplay = document.querySelector('#rssiThresholdDisplay');
 let scanStats = document.querySelector('#scanStats');
 let scanError = document.querySelector('#scanError');
 let raddecRate = document.querySelector('#raddecRate');
@@ -37,6 +41,11 @@ let debugMessage = document.querySelector('#debugMessage');
 let devices = {};
 let rssiThreshold = DEFAULT_RSSI_THRESHOLD;
 let numberOfDevicesToDisplay = DEFAULT_NUMBER_OF_DEVICES_TO_DISPLAY;
+
+
+// Set default settings values
+rssiThresholdInput.value = rssiThreshold;
+nearestLimitInput.value = numberOfDevicesToDisplay;
 
 
 // Non-disappearance events
@@ -237,9 +246,9 @@ async function scanForAdvertisements() {
       clearInterval(statsInterval);
       clearInterval(proximityInterval);
       scanButton.textContent = 'Scan';
-      scanButton.setAttribute('class', 'btn btn-primary mb-2');
+      scanButton.setAttribute('class', 'btn btn-primary');
       scanButton.removeAttribute('disabled');
-      stopButton.setAttribute('class', 'btn btn-outline-dark mb-2');
+      stopButton.setAttribute('class', 'btn btn-outline-dark');
       stopButton.setAttribute('disabled', true);
       stopButton.removeEventListener('click', stopScan);
       scanStats.setAttribute('hidden', true);
@@ -291,5 +300,18 @@ function updateProximityCards() {
 }
 
 
-// Handle scan button click
+// Update the nearest limit and rssi threshold settings
+function updateSettings() {
+  numberOfDevicesToDisplay = nearestLimitInput.value;
+  nearestLimitDisplay.textContent = numberOfDevicesToDisplay;
+
+  rssiThreshold = rssiThresholdInput.value;
+  rssiThresholdDisplay.textContent = rssiThreshold + ' dBm';
+
+}
+
+
+// Handle scan button click and settings change
 scanButton.addEventListener('click', scanForAdvertisements);
+nearestLimitInput.addEventListener('change', updateSettings);
+rssiThresholdInput.addEventListener('change', updateSettings);

@@ -171,7 +171,45 @@
                     id="scanButton"> Scan </button>
             <button type="button" class="btn btn-outline-dark"
                     id="stopButton" disabled> Stop </button>
+            <button type="button" class="btn btn-outline-dark"
+                    data-toggle="collapse" data-target="#collapseSettings"
+                    aria-expanded="false" aria-controls="collapseSettings"
+                    id="settingsButton">
+              <i class="fas fa-sliders-h"></i>
+            </button>
           </p>
+          <div id="collapseSettings" class="collapse mb-4">
+            <div class="card">
+              <div class="card-body">
+                <form>
+                  <div class="form-group">
+                    <label for="nearestLimitInput">
+                      <i class="fas fa-list-ol"></i> Display nearest &nbsp;
+                      <b id="nearestLimitDisplay">3</b>
+                    </label>
+                    <input type="range" class="custom-range" min="1" max="12"
+                           id="nearestLimitInput">
+                  </div>
+                  <div class="form-group">
+                    <label for="rssiThresholdInput">
+                      <i class="fas fa-signal"></i> RSSI threshold &nbsp;
+                      <b id="rssiThresholdDisplay">-72 dBm</b>
+                    </label>
+                    <input type="range" class="custom-range"
+                           min="-100" max="-40" id="rssiThresholdInput">
+                  </div>
+                </form>
+              </div>
+              <div class="card-footer text-center">
+                <span class="small text-muted">
+                  <i class="fas fa-angle-left"></i>
+                  &nbsp; -100 dBm is farthest &nbsp; |
+                  &nbsp; -40dBm is nearest &nbsp;
+                  <i class="fas fa-angle-right"></i>
+                </span>
+              </div>
+            </div>
+          </div>
           <div id="scanStats" class="row mb-4" hidden>
             <div class="col-sm-6">
               <div class="card">
