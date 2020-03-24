@@ -298,7 +298,7 @@ let cuttlefish = (function() {
     }
 
     navs.appendChild(nav);
-    panes.anameppendChild(pane);
+    panes.appendChild(pane);
 
     return isActive;
   }
