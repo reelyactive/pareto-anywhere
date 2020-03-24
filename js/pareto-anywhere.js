@@ -179,8 +179,9 @@ function parseServiceData(serviceData, device, timestamp) {
 function parseManufacturerData(manufacturerData, device, timestamp) {
   manufacturerData.forEach(function(data, manufacturer) {
     let manufacturerHex = ('000' + manufacturer.toString(16)).substr(-4);
+    let dataHex = String.fromCharCode.apply(null, new Uint8Array(data.buffer));
     let unprocessedData = { manufacturer: manufacturerHex,
-                            data: data.buffer.toString('hex'), //new Uint8Array(data.buffer),
+                            data: dataHex, //new Uint8Array(data.buffer),
                             timestamp: timestamp };
     device.data.unshift(unprocessedData);
 
