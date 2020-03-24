@@ -24,6 +24,29 @@ let cuttlefish = (function() {
   const LIST_GROUP_ITEM_CLASS = 'list-group-item text-truncate';
   const SIGNATURE_SEPARATOR = '/';
 
+  // Standard data properties (property: {icon, suffix}) in alphabetical order
+  const STANDARD_DATA_PROPERTIES = {
+      acceleration: { icon: "fas fa-rocket", suffix: "g",
+                      transform: "xyzArray" },
+      batteryPercentage: { icon: "fas fa-battery-half", suffix: " %",
+                           transform: "toFixed(0)" },
+      batteryVoltage: { icon: "fas fa-battery-half", suffix: " V",
+                        transform: "toFixed(2)" },
+      humidityPercentage: { icon: "fas fa-water", suffix: " %",
+                            transform: "toFixed(2)" },
+      macAddress: { icon: "fas fa-barcode", suffix: "" },
+      magneticField: { icon: "fas fa-magnet", suffix: "G",
+                       transform: "xyzArray" },
+      name: { icon: "fas fa-info", suffix: "" },
+      temperature: { icon: "fas fa-thermometer-half", suffix: " \u2103",
+                     transform: "toFixed(2)" },
+      timestamp: { icon: "fas fa-clock", suffix: "", transform: "timeOfDay" },
+      txPower: { icon: "fas fa-broadcast-tower", suffix: " dBm" },
+      uptime: { icon: "fas fa-stopwatch", suffix: " ms" },
+      url: { icon: "fas fa-link", suffix: "", transform: "hyperlink" },
+      visibleLight: { icon: "fas fa-lightbulb", suffix: "" }
+  };
+
   // Render the given story in the given node
   function render(story, node, options) {
     let graph = story["@graph"];
@@ -275,7 +298,7 @@ let cuttlefish = (function() {
     }
 
     navs.appendChild(nav);
-    panes.appendChild(pane);
+    panes.anameppendChild(pane);
 
     return isActive;
   }
@@ -342,7 +365,7 @@ let cuttlefish = (function() {
 
     return isActive;
   }
-
+name
   // Create a data table
   function createDataTable(data) {
     let table = createElement('table', 'table table-hover');
@@ -350,7 +373,7 @@ let cuttlefish = (function() {
 
     for(property in data) {
       let value = data[property];
-      tbody.appendChild(createTableRow(null, property, value));
+      tbody.appendChild(createDataTableRow(property, value));
     }
 
     table.appendChild(tbody);
@@ -412,6 +435,67 @@ let cuttlefish = (function() {
     }
     if(headerText) {
       th.appendChild(document.createTextNode(headerText));
+    }
+
+    tr.appendChild(th);
+    tr.appendChild(td);
+
+    return tr;
+  }
+
+  // Create a data table row
+  function createDataTableRow(property, value) {
+    let tr = createElement('tr');
+    let th = createElement('th');
+    let td = createElement('td', 'monospace');
+
+    if(STANDARD_DATA_PROPERTIES.hasOwnProperty(property)) {
+      let dataRender = STANDARD_DATA_PROPERTIES[property];
+      let valueElement;
+
+      switch(dataRender.transform) {
+        case 'toFixed(0)':
+          valueElement = document.createTextNode(value.toFixed(0));
+          break;
+        case 'toFixed(2)':
+          valueElement = document.createTextNode(value.toFixed(2));
+          break;
+        case 'timeOfDay':
+          let timeOfDay = new Date(value).toLocaleTimeString();
+          valueElement = document.createTextNode(timeOfDay);
+          break;
+        case 'hyperlink':
+          valueElement = createElement('a', null, value);
+          valueElement.setAttribute('href', value);
+          valueElement.setAttribute('target', '_blank');
+          break;
+        case 'xyzArray':
+          let magnitude = Math.sqrt((value[0] * value[0]) +
+                                    (value[1] * value[1]) +
+                                    (value[2] * value[2])).toFixed(2) +
+                          dataRender.suffix;
+          let axes = createElement('span', 'small text-muted',
+                                   value[0] + dataRender.suffix + '\u21d2 | ' + 
+                                   value[1] + dataRender.suffix + '\u21d7 | ' + 
+                                   value[2] + dataRender.suffix + '\u21d1');
+          valueElement = createElement('span');
+          valueElement.appendChild(document.createTextNode(magnitude));
+          valueElement.appendChild(createElement('br'));
+          valueElement.appendChild(axes);
+          break;
+        default:
+          valueElement = document.createTextNode(value);
+      }
+
+      th.appendChild(createElement('i', dataRender.icon));
+      td.appendChild(valueElement);
+      if(dataRender.transform !== 'xyzArray') {
+        td.appendChild(document.createTextNode(dataRender.suffix));
+      }
+    }
+    else {
+      th.textContent = property;
+      td.textContent = value;
     }
 
     tr.appendChild(th);
