@@ -179,9 +179,8 @@ function parseServiceData(serviceData, device, timestamp) {
 function parseManufacturerData(manufacturerData, device, timestamp) {
   manufacturerData.forEach(function(data, manufacturer) {
     let manufacturerHex = ('000' + manufacturer.toString(16)).substr(-4);
-    let dataHex = String.fromCharCode.apply(null, new Uint8Array(data.buffer));
     let unprocessedData = { manufacturer: manufacturerHex,
-                            data: dataHex, //new Uint8Array(data.buffer),
+                            data: bufferToHex(data.buffer), //new Uint8Array(data.buffer),
                             timestamp: timestamp };
     device.data.unshift(unprocessedData);
 
@@ -308,7 +307,19 @@ function updateSettings() {
 
   rssiThreshold = rssiThresholdInput.value;
   rssiThresholdDisplay.textContent = rssiThreshold + ' dBm';
+}
 
+
+// Convert the given buffer to a hexadecimal string
+function bufferToHex(buffer) {
+  let bytes = new Uint8Array(buffer);
+  let hexString = '';
+
+  bytes.forEach(byte) {
+    hexString += ('0' + byte.toString(16)).substr(-2);
+  }
+
+  return hexString;
 }
 
 
