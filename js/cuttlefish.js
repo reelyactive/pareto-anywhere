@@ -365,7 +365,7 @@ let cuttlefish = (function() {
 
     return isActive;
   }
-name
+
   // Create a data table
   function createDataTable(data) {
     let table = createElement('table', 'table table-hover');
