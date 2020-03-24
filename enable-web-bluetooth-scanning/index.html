@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description"
+          content="How to enable the experimental Web Bluetooth Scanning feature in your web browser, if supported.">
+    <link rel="stylesheet" href="../style/bootstrap.min.css">
+    <link rel="stylesheet" href="../style/reelyactive.css">
+    <title> Enable Web Bluetooth Scanning </title>
+    <!----- Structured, linked metadata (JSON-LD & Schema.org) ----->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org", 
+      "@type": "TechArticle",
+      "headline": "Enable Web Bluetooth Scanning",
+      "description": "How to enable the experimental Web Bluetooth Scanning feature in your web browser, if supported.",
+      "proficiencyLevel": "Beginner",
+      "genre": "tutorial",
+      "image": "https://reelyactive.github.io/pareto-anywhere/enable-web-bluetooth-scanning/images/header.jpg",
+      "author": {
+        "@type": "Organization",
+        "url": "https://www.reelyactive.com"
+      }
+    }
+    </script>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-reelyactive bg-reelyactive">
+      <a class="navbar-brand" href="https://www.reelyactive.com/">
+        <img src="../images/reelyactive-logo-nav.png" width="165" height="30"
+             alt="reelyActive">
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse"
+              data-target="#navbarItems" aria-controls="navbarItems"
+              aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarItems">
+        <!-- Left-aligned navigation items -->
+        <ul class="navbar-nav mr-auto"></ul>
+        <!-- Right-aligned navigation items -->
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <!-- Link to home -->
+            <a class="nav-link"
+               href="https://reelyactive.github.io/pareto-anywhere/">
+              <i class="fas fa-home"></i>
+            </a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarDropdown"
+               role="button" data-toggle="dropdown" aria-haspopup="true"
+               aria-expanded="false">
+              <i class="fas fa-question-circle"></i>
+            </a>
+            <!-- Info about tracking and open source software/licenses -->
+            <div class="dropdown-menu dropdown-menu-right"
+                 aria-labelledby="navbarDropdown">
+              <a class="dropdown-item"
+                 href="https://www.reelyactive.com/how-we-observe/#digital">
+                <i class="fas fa-mouse-pointer"></i>
+                Behaviour tracking free &nbsp;
+                <span class="badge badge-success">
+                  <i class="fas fa-user-shield"></i>
+                </span>
+              </a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" target="_blank"
+                 href="https://getbootstrap.com" >
+                <i class="fab fa-bootstrap"></i>
+                Bootstrap 4 &nbsp;
+                <span class="badge badge-light">
+                  <i class="fab fa-osi"></i> MIT
+                </span>
+              </a>
+              <a class="dropdown-item" target="_blank"
+                 href="https://fontawesome.com" >
+                <i class="fab fa-font-awesome"></i>
+                Font Awesome (Free) &nbsp;
+                <span class="badge badge-light">
+                  <i class="fab fa-creative-commons"></i>
+                  <i class="fab fa-osi"></i> MIT
+                </span>
+              </a>
+              <a class="dropdown-item" target="_blank"
+                 href="https://jquery.com" >
+                <i class="fab fa-js"></i>
+                JQuery &nbsp;
+                <span class="badge badge-light">
+                  <i class="fab fa-osi"></i> MIT
+                </span>
+              </a>
+              <a class="dropdown-item" target="_blank"
+                 href="https://github.com/reelyactive/web-style-guide/" >
+                <i class="fas fa-code"></i>
+                Web Style Guide &nbsp;
+                <span class="badge badge-light">
+                  <i class="fab fa-osi"></i> MIT
+                </span>
+              </a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" target="_blank"
+                 href="https://www.reelyactive.com/made-in-montreal/" >
+                <i class="fab fa-canadian-maple-leaf"></i>
+                Made in Montr&eacute;al &nbsp;
+                <i class="fas fa-city"></i>
+              </a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <!-- Content -->
+    <div class="container-fluid">
+      <div class="row justify-content-center">
+        <div class="col-sm-12 col-md-10 col-lg-8 col-xl-6">
+          <h1 class="mt-4"> Enable Web Bluetooth Scanning </h1>
+          <p class="lead"> Our step-by-step guide to enable this <em>experimental</em> feature in your web browser, <em>if supported</em>. </p>
+          <img src="images/header.jpg" class="img-fluid"
+               alt="Enable Web Bluetooth Scanning">
+          <!-- The TL;DR -->
+          <div class="card my-4">
+            <div class="card-body">
+              <h2>
+                The TL;DR
+                <small class="text-muted"> (Too Long; Didn't Read) </small>
+              </h2>
+              <p class="lead"> Learn how to enable Web Bluetooth Scanning in your browser. </p>
+              <hr>
+              <dl class="row">
+                <dt class="col-sm-3">What's this?</dt>
+                <dd class="col-sm-9">Web Bluetooth Scanning is an <em>experimental</em> feature initially supported by the <i class="fab fa-chrome"></i> Chrome browser as of November 2019.</dd>
+                <dt class="col-sm-3">What does it do?</dt>
+                <dd class="col-sm-9">This feature allows your device to detect and respond to relevant <i class="fab fa-bluetooth"></i> Bluetooth devices in proximity, simply via a web page.</dd>
+                <dt class="col-sm-3">What uses this?</dt>
+                <dd class="col-sm-9">Any web page could take advantage of this.  Our open source <a href="../">Pareto Anywhere web app</a> demonstrates the potential.</dd>
+              </dl>
+            </div>
+          </div>
+          <!-- Chrome -->
+          <div class="row my-4">
+            <div class="col-lg-6">
+              <h2> <i class="fab fa-chrome"></i> Chrome Browser </h2>
+              <p class="lead"> On <i class="fab fa-android"></i> Android and <i class="fas fa-laptop"></i> Desktop </p>
+              <p> Enable Web Bluetooth Scanning in two steps: </p>
+              <ol>
+                <li> browse to <a href="chrome://flags/#enable-experimental-web-platform-features" target="_blank">chrome://flags/#enable-experimental-web-platform-features</a> </li>
+                <li> select <b>Enabled</b> </li>
+              </ol>
+              <div class="card bg-light">
+                <div class="card-body">
+                  <p class="card-text"> <u>Note</u>: requires Chrome version 79 or higher.  Verify by browsing to <a href="chrome://version" target="_blank">chrome://version</a> </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <img src="images/web-bluetooth-scanning-chrome-android.jpg"
+                   class="img-fluid mx-auto d-block">
+            </div>
+          </div>
+          <!-- Other Browsers -->
+          <h2 class="mt-4"> Other Browsers </h2>
+          <p class="lead"> Unfortunately, few browsers are supported at the time of writing </p>
+          <p> <i class="fab fa-chrome"></i> Chrome/Chromium is the only browser successfully tested to date (March 2020). See the <a href="https://github.com/WebBluetoothCG/web-bluetooth/blob/master/implementation-status.md#scanning-api" target="_blank">Scanning API implementation status</a> for updates. </p>
+          <!-- What's next? -->
+          <div class="jumbotron my-4">
+            <h1 class="display-4"> What's next? </h1>
+            <p class="lead"> With Web Bluetooth Scanning Enabled... </p>
+            <div class="card-deck my-4">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title"> Experiment with it! </h5>
+                  <p class="card-text"> The Pareto Anywhere web app demonstrates the potential of a web page to respond to devices in proximity </p>
+                  <a href="../" target="_blank"
+                     class="btn btn-primary"> Try the web app </a>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title"> Develop with it! </h5>
+                  <p class="card-text"> Pareto Anywhere is open source software which anyone is free to use for their own applications </p>
+                  <a href="https://github.com/reelyactive/pareto-anywhere/tree/gh-pages" target="_blank" class="btn btn-secondary"> Browse the source </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <footer class="footer">
+      <a href="https://github.com/reelyactive/pareto-anywhere"> pareto-anywhere </a>
+      &nbsp; | &nbsp;
+      <a href="https://www.reelyactive.com"> &copy; reelyActive 2020 </a>
+    </footer>
+    <script defer src="../js/solid.min.js"></script>
+    <script defer src="../js/brands.min.js"></script>
+    <script defer src="../js/fontawesome.min.js"></script>
+    <script src="../js/jquery-3.4.0.min.js"></script>
+    <script src="../js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
