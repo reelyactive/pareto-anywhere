@@ -277,9 +277,13 @@ function updateProximityCards() {
 
   sortedArray.forEach(function(device, index) {
     if(index < numberOfDevicesToDisplay) {
-      let card = document.createElement('div');
-      card.setAttribute('id', device.id);
-      card.setAttribute('class', 'card my-4');
+      let card = document.querySelector('#' + device.id);
+
+      if(!card) {
+        card = document.createElement('div');
+        card.setAttribute('id', device.id);
+        card.setAttribute('class', 'card my-4');
+      }
       updatedFragment.appendChild(card);
       numberOfDisplayedCards++;
       cuttlefish.renderAsTabs(card, device.stories, device.data,
