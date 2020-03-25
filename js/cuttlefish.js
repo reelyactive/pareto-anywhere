@@ -112,7 +112,7 @@ let cuttlefish = (function() {
 
     // TODO: observe selectedTab
 
-    renderStoryTabPaneContent(dataPane, stories);
+    renderStoryTabPaneContent(storyPane, stories);
     renderDataTabPaneContent(dataPane, data);
     renderAssociationsTabPaneContent(associationsPane, associations);
     renderRaddecTabPaneContent(raddecPane, raddecs);
