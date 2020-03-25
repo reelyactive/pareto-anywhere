@@ -541,9 +541,11 @@ let cuttlefish = (function() {
                                     (value[2] * value[2])).toFixed(2) +
                           dataRender.suffix;
           let axes = createElement('span', 'small text-muted',
-                                   value[0] + dataRender.suffix + '\u21d2 | ' + 
-                                   value[1] + dataRender.suffix + '\u21d7 | ' + 
-                                   value[2] + dataRender.suffix + '\u21d1');
+                                   value[0].toFixed(2) + dataRender.suffix +
+                                   '\u21d2 | ' +  value[1].toFixed(2) +
+                                   dataRender.suffix + '\u21d7 | ' + 
+                                   value[2].toFixed(2) + dataRender.suffix +
+                                   '\u21d1');
           valueElement = createElement('span');
           valueElement.appendChild(document.createTextNode(magnitude));
           valueElement.appendChild(createElement('br'));
