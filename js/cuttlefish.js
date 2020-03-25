@@ -17,6 +17,7 @@ let cuttlefish = (function() {
   const DATA_PANE_SUFFIX = '-data';
   const RADDECS_PANE_SUFFIX = '-raddecs';
   const ASSOCIATIONS_PANE_SUFFIX = '-associations';
+  const FOOTER_SUFFIX = '-footer';
   const SAME_AS_CLASS = 'btn-group dropup';
   const DEFAULT_TITLE = 'Unknown';
   const DEFAULT_SUBTITLE = '\u2665 structured data';
@@ -66,24 +67,23 @@ let cuttlefish = (function() {
   // Render all the given data as tabs in a card
   function renderAsTabs(node, stories, data, associations, raddecs, options) {
     let id = node.getAttribute('id');
-    removeAllChildren(node);
+    let isExistingRender = (node.getAttribute('selectedTab') !== null);
 
-    let footerTitle = DEFAULT_TITLE;
-    let footerClass = ' ';
-    if(Array.isArray(stories) && stories.length) {
-      footerTitle = determineStoryTitle(stories[0]);
+    if(isExistingRender) {
+      let footer = document.querySelector('#' + id + FOOTER_SUFFIX);
+      updateFooterTitle(footer, stories, raddecs);
+      return updatePanes(node, stories, data, associations, raddecs, options);
     }
-    else if(Array.isArray(raddecs) && raddecs.length) {
-      footerTitle = raddecs[0].transmitterId + SIGNATURE_SEPARATOR +
-                    raddecs[0].transmitterIdType;
-      footerClass += 'monospace';
-    }
+
+    removeAllChildren(node);
 
     let header = createElement('div', HEADER_CLASS);
     let navs = createElement('ul', 'nav nav-tabs card-header-tabs');
     let body = createElement('div', BODY_CLASS);
     let panes = createElement('div', 'tab-content overflow-auto');
-    let footer = createElement('div', FOOTER_CLASS + footerClass, footerTitle);
+    let footer = createElement('div');
+    footer.setAttribute('id', id + FOOTER_SUFFIX);
+    updateFooterTitle(footer, stories, raddecs);
 
     let hasActiveTab = false;
     hasActiveTab |= renderStoryTab(navs, panes, stories, hasActiveTab, id);
@@ -92,11 +92,48 @@ let cuttlefish = (function() {
                                           hasActiveTab, id);
     hasActiveTab |= renderRaddecTab(navs, panes, raddecs, hasActiveTab, id);
 
+    node.setAttribute('selectedTab', 'none');
     node.appendChild(header);
     header.appendChild(navs);
     node.appendChild(body);
     body.appendChild(panes);
     node.appendChild(footer);
+  }
+
+  // Update only the panes of an existing render as tabs
+  function updatePanes(node, stories, data, associations, raddecs, options) {
+    let id = node.getAttribute('id');
+    let selectedTab = node.getAttribute('selectedTab');
+    let storyPane = document.querySelector('#' + id + STORIES_PANE_SUFFIX);
+    let dataPane = document.querySelector('#' + id + DATA_PANE_SUFFIX);
+    let associationsPane = document.querySelector('#' + id +
+                                                  ASSOCIATIONS_PANE_SUFFIX);
+    let raddecPane = document.querySelector('#' + id + RADDECS_PANE_SUFFIX);
+
+    // TODO: observe selectedTab
+
+    renderStoryTabPaneContent(dataPane, stories);
+    renderDataTabPaneContent(dataPane, data);
+    renderAssociationsTabPaneContent(associationsPane, associations);
+    renderRaddecTabPaneContent(raddecPane, raddecs);
+  }
+
+  // Update the footer title with the story name or transmitterId
+  function updateFooterTitle(footer, stories, raddecs) {
+    let footerTitle = DEFAULT_TITLE;
+    let additionalFooterClasses = ' ';
+
+    if(Array.isArray(stories) && stories.length) {
+      footerTitle = determineStoryTitle(stories[0]);
+    }
+    else if(Array.isArray(raddecs) && raddecs.length) {
+      footerTitle = raddecs[0].transmitterId + SIGNATURE_SEPARATOR +
+                    raddecs[0].transmitterIdType;
+      additionalFooterClasses += 'monospace';
+    }
+
+    footer.textContent = footerTitle;
+    footer.setAttribute('class', FOOTER_CLASS + additionalFooterClasses);
   }
 
   // Remove all children of the given node
@@ -289,6 +326,19 @@ let cuttlefish = (function() {
     let nav = createNavTab(i, '#' + paneId, isActive, isEmpty);
     let pane = createNavPane(paneId, isActive);
 
+    renderStoryTabPaneContent(pane, stories);
+    navs.appendChild(nav);
+    panes.appendChild(pane);
+
+    return isActive;
+  }
+
+  // Render the story tab's pane content
+  function renderStoryTabPaneContent(pane, stories) {
+    let isEmpty = !(Array.isArray(stories) && stories.length);
+
+    removeAllChildren(pane);
+
     if(!isEmpty) {
       let imageUrl = determineStoryImageUrl(stories[0]);
       let img = createElement('img', 'img-fluid');
@@ -296,11 +346,6 @@ let cuttlefish = (function() {
       pane.appendChild(img);
       // TODO: additional stories
     }
-
-    navs.appendChild(nav);
-    panes.appendChild(pane);
-
-    return isActive;
   }
 
   // Render the data nav tab and tab pane
@@ -313,15 +358,22 @@ let cuttlefish = (function() {
     let nav = createNavTab(i, '#' + paneId, isActive, isEmpty);
     let pane = createNavPane(paneId, isActive);
 
-    if(!isEmpty) {
-      let table = createDataTable(data[0]); // TODO: additional data
-      pane.appendChild(table);
-    }
-
+    renderDataTabPaneContent(pane, data);
     navs.appendChild(nav);
     panes.appendChild(pane);
 
     return isActive;
+  }
+
+  // Render the data tab's pane content
+  function renderDataTabPaneContent(pane, data) {
+    let isEmpty = !(Array.isArray(data) && data.length);
+
+    removeAllChildren(pane);
+
+    if(!isEmpty) {
+      pane.appendChild(createDataTable(data[0])); // TODO: additional data
+    }
   }
 
   // Render the associations nav tab and tab pane
@@ -334,15 +386,22 @@ let cuttlefish = (function() {
     let nav = createNavTab(i, '#' + paneId, isActive, isEmpty);
     let pane = createNavPane(paneId, isActive);
 
-    if(!isEmpty) {
-      let table = createAssociationsTable(associations);
-      pane.appendChild(table);
-    }
-
+    renderAssociationsTabPaneContent(pane, associations);
     navs.appendChild(nav);
     panes.appendChild(pane);
 
     return isActive;
+  }
+
+  // Render the association tab's pane content
+  function renderAssociationsTabPaneContent(pane, associations) {
+    let isEmpty = !(associations && Object.keys(associations).length);
+
+    removeAllChildren(pane);
+
+    if(!isEmpty) {
+      pane.appendChild(createAssociationsTable(associations));
+    }
   }
 
   // Render the raddec nav tab and tab pane
@@ -355,15 +414,22 @@ let cuttlefish = (function() {
     let nav = createNavTab(i, '#' + paneId, isActive, isEmpty);
     let pane = createNavPane(paneId, isActive);
 
-    if(!isEmpty) {
-      let table = createRaddecTable(raddecs[0]); // TODO: additional raddecs
-      pane.appendChild(table);
-    }
-
+    renderRaddecTabPaneContent(pane, raddecs);
     navs.appendChild(nav);
     panes.appendChild(pane);
 
     return isActive;
+  }
+
+  // Render the raddec tab's pane content
+  function renderRaddecTabPaneContent(pane, raddecs) {
+    let isEmpty = !(Array.isArray(raddecs) && raddecs.length);
+
+    removeAllChildren(pane);
+
+    if(!isEmpty) {
+      pane.appendChild(createRaddecTable(raddecs[0])); // TODO: additional
+    }
   }
 
   // Create a data table
