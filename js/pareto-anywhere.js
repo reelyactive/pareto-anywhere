@@ -171,7 +171,7 @@ function handleParsedUrls(parsedData, device) {
   let url = parsedData.hasOwnProperty('url');
   let hasImplicitUrl = parsedData.hasOwnProperty('namespace') &&
                        parsedData.hasOwnProperty('instance') &&
-                       (parsedData.namespace === '7265656c65205555554944');
+                       (parsedData.namespace === '7265656c652055554944');
                        // TODO: look this up from config file
 
   if(hasImplicitUrl) {
