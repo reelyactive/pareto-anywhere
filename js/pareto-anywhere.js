@@ -171,14 +171,11 @@ function handleParsedUrls(parsedData, device) {
   let url = parsedData.hasOwnProperty('url');
   let hasImplicitUrl = parsedData.hasOwnProperty('namespace') &&
                        parsedData.hasOwnProperty('instance') &&
-                       (parsedData.namespace === '7265656c652055554944');
-                       // TODO: look this up from config file
+                       knownNamespaces &&
+                       knownNamespaces.hasOwnProperty(parsedData.namespace);
 
   if(hasImplicitUrl) {
-    url = 'https://www.reelyactive.com/stories/' + parsedData.instance + '/';
-    // TODO: look this up from config file
-    debugMessage.textContent = url + ' from ' + parsedData.namespace + ' and ' +
-                               parsedData.instance;
+    url = knownNamespaces[parsedData.namespace] + parsedData.instance + '/';
   }
 
   let isNewUrl = url && (device.urls.indexOf(url) < 0);
