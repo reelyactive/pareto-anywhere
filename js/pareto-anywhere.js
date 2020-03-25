@@ -158,20 +158,35 @@ function parseServiceData(serviceData, device, timestamp) {
     }
 
     if(parsedData) {
-      let hasNewUrl = parsedData.hasOwnProperty('url') &&
-                      (device.urls.indexOf(parsedData.url) < 0);
-
-      if(hasNewUrl) {
-        device.urls.push(parsedData.url);
-        cormorant.retrieveStory(parsedData.url, function(story) {
-          device.stories.push(story);
-        });
-      }
-
+      handleParsedUrls(parsedData, device);
       parsedData.timestamp = timestamp;
       device.data.unshift(parsedData);
     }
   });
+}
+
+
+// Handle any URL in the given parsed data
+function handleParsedUrls(parsedData, device) {
+  let url = parsedData.hasOwnProperty('url');
+  let hasImplicitUrl = parsedData.hasOwnProperty('namespace') &&
+                       parsedData.hasOwnProperty('instance') &&
+                       (parsedData.namespace === '7265656c65205555554944');
+                       // TODO: look this up from config file
+
+  if(hasImplicitUrl) {
+    url = 'https://www.reelyactive.com/stories/' + parsedData.instance;
+    // TODO: look this up from config file
+  }
+
+  let isNewUrl = url && (device.urls.indexOf(url) < 0);
+
+  if(isNewUrl) {
+    device.urls.unshift(url);
+    cormorant.retrieveStory(url, function(story) {
+      device.stories.unshift(story);
+    });
+  }
 }
 
 
