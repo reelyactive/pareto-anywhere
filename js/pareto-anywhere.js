@@ -175,8 +175,10 @@ function handleParsedUrls(parsedData, device) {
                        // TODO: look this up from config file
 
   if(hasImplicitUrl) {
-    url = 'https://www.reelyactive.com/stories/' + parsedData.instance;
+    url = 'https://www.reelyactive.com/stories/' + parsedData.instance + '/';
     // TODO: look this up from config file
+    debugMessage.textContent = url + ' from ' + parsedData.namespace + ' and ' +
+                               parsedData.instance;
   }
 
   let isNewUrl = url && (device.urls.indexOf(url) < 0);
