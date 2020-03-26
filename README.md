@@ -1,9 +1,19 @@
 Pareto Anywhere
 ===============
 
+This repository is a placeholder for Pareto Anywhere, which is the collection of various open source software modules by [reelyActive](https://www.reelyactive.com) which are hosted in their own individual repositories ([learn more](https://reelyactive.github.io/diy/oss-packages/)).  The _experimental_ web app version of Pareto Anywhere is maintained in the gh-pages branch of this repository.
+
+
+Getting started
+---------------
+
 Visit [getpareto.com](https://getpareto.com) for an introduction and [getpareto.com/start](https://getpareto.com/start/) to get started.
 
-For the experimental _web app_ version of Pareto Anywhere, visit [reelyactive.github.io/pareto-anywhere/](https://reelyactive.github.io/pareto-anywhere/) in a browser that supports Web Bluetooth Scanning.
+
+Pareto Anywhere Web App
+-----------------------
+
+The _experimental_ Web Bluetooth Scanning feature, introduced to the Chrome browser in late 2019, enables an _experimental_ web app version of Pareto Anywhere hosted [here](https://reelyactive.github.io/pareto-anywhere/), with code in the [gh-pages branch](https://github.com/reelyactive/pareto-anywhere/tree/gh-pages).
 
 
 License
