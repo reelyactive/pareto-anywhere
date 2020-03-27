@@ -10,6 +10,7 @@ let cuttlefish = (function() {
   const IMG_CLASS = 'card-img-top';
   const HEADER_CLASS = 'card-header';
   const BODY_CLASS = 'card-body';
+  const TAB_BODY_CLASS = 'card-body bg-white';
   const FOOTER_CLASS = 'card-footer lead text-truncate';
   const TITLE_CLASS = 'card-title text-truncate';
   const SUBTITLE_CLASS = 'card-subtitle text-muted text-truncate';
@@ -79,7 +80,7 @@ let cuttlefish = (function() {
 
     let header = createElement('div', HEADER_CLASS);
     let navs = createElement('ul', 'nav nav-tabs card-header-tabs');
-    let body = createElement('div', BODY_CLASS);
+    let body = createElement('div', TAB_BODY_CLASS);
     let panes = createElement('div', 'tab-content overflow-auto');
     let footer = createElement('div');
     footer.setAttribute('id', id + FOOTER_SUFFIX);
@@ -341,7 +342,7 @@ let cuttlefish = (function() {
 
     if(!isEmpty) {
       let imageUrl = determineStoryImageUrl(stories[0]);
-      let img = createElement('img', 'img-fluid');
+      let img = createElement('img', 'img-fluid mx-auto d-block');
       img.setAttribute('src', imageUrl);
       pane.appendChild(img);
       // TODO: additional stories
