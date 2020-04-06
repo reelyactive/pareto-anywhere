@@ -134,11 +134,15 @@ function parseServiceData(serviceData, device, timestamp) {
       let uuid16 = uuid.substring(4,8);
       let isEddystone = (uuid16 === eddystone.SERVICE_UUID);
       let isMinew = (uuid16 === minew.SERVICE_UUID);
+      let isSystemId = (uuid16 === '2a23');
       if(isEddystone) {
         parsedData = eddystone.parseServiceData(new Uint8Array(data.buffer));
       }
       else if(isMinew) {
         parsedData = minew.parseServiceData(new Uint8Array(data.buffer));
+      }
+      else if(isSystemId) {
+        parsedData = { systemId: bufferToHex(data.buffer, true) };
       }
       else {
         parsedData = { uuid: uuid16, data: bufferToHex(data.buffer) };
@@ -333,12 +337,18 @@ function updateSettings() {
 
 
 // Convert the given buffer to a hexadecimal string
-function bufferToHex(buffer) {
+function bufferToHex(buffer, isReversed) {
   let bytes = new Uint8Array(buffer);
   let hexString = '';
 
   bytes.forEach(function(byte) {
-    hexString += ('0' + byte.toString(16)).substr(-2);
+    let hexByte = ('0' + byte.toString(16)).substr(-2);
+    if(isReversed) {
+      hexString = hexByte + hexString;
+    }
+    else {
+      hexString += hexByte;
+    }
   });
 
   return hexString;
