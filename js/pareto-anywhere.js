@@ -187,7 +187,8 @@ function handleParsedUrls(parsedData, device) {
     for(oui in knownOUIs) {
       if(parsedData.systemId.indexOf(oui) === 0) {
         parsedData.oui = oui;
-        parsedData.manufacturerId = parsedData.systemId.substring(oui.length);
+        parsedData.instance = parsedData.systemId.substring(oui.length);
+        url = knownOUIs[oui] + parsedData.instance + '/';
       }
     }
   }
