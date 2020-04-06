@@ -10,3 +10,11 @@
 const knownNamespaces = {
     "7265656c652055554944": "https://www.reelyactive.com/stories/"
 };
+
+
+// Each Organizationally Unique Identifier (OUI) is either 36 or 24-bits
+//   and is associated with a base URL to which will be added the remaining
+//   bits as a hex string
+const knownOUIs = {
+    "001bc5094": "https://www.reelyactive.com/stories/"
+}

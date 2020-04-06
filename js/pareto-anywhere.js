@@ -177,9 +177,19 @@ function handleParsedUrls(parsedData, device) {
                        parsedData.hasOwnProperty('instance') &&
                        knownNamespaces &&
                        knownNamespaces.hasOwnProperty(parsedData.namespace);
+  let isSystemId = parsedData.hasOwnProperty('systemId');
 
   if(hasImplicitUrl) {
     url = knownNamespaces[parsedData.namespace] + parsedData.instance + '/';
+  }
+
+  if(isSystemId) {
+    knownOUIs.forEach(function(oui) {
+      if(parsedData.systemId.indexOf(oui) === 0) {
+        parsedData.oui = oui;
+        parsedData.manufacturerId = parsedData.systemId.substring(oui.length);
+      }
+    });
   }
 
   let isNewUrl = url && (device.urls.indexOf(url) < 0);
