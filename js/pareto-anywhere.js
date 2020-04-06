@@ -141,7 +141,7 @@ function parseServiceData(serviceData, device, timestamp) {
         parsedData = minew.parseServiceData(new Uint8Array(data.buffer));
       }
       else {
-        parsedData = { uuid: uuid16, data: new Uint8Array(data.buffer) };
+        parsedData = { uuid: uuid16, data: bufferToHex(data.buffer) };
       }
 
       if(sniffypedia.ble.uuid16.hasOwnProperty(uuid16)) {
