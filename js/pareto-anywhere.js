@@ -184,12 +184,12 @@ function handleParsedUrls(parsedData, device) {
   }
 
   if(isSystemId) {
-    knownOUIs.forEach(function(oui) {
+    for(oui in knownOUIs) {
       if(parsedData.systemId.indexOf(oui) === 0) {
         parsedData.oui = oui;
         parsedData.manufacturerId = parsedData.systemId.substring(oui.length);
       }
-    });
+    }
   }
 
   let isNewUrl = url && (device.urls.indexOf(url) < 0);
