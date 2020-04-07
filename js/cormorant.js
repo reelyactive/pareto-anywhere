@@ -1,5 +1,5 @@
 /**
- * Copyright reelyActive 2016-2019
+ * Copyright reelyActive 2016-2020
  * We believe in an open Internet of Things
  */
 
@@ -68,6 +68,8 @@ let cormorant = (function() {
     let url = serverUrl + '/associations/' + deviceId;
     retrieve(url, 'application/json', function(status, responseText) {
       let deviceAssociations = null;
+      let isStoryBeingRetrieved = false;
+
       if(status === STATUS_OK) {
         let response = JSON.parse(responseText);
         let returnedDeviceId = null;
@@ -81,15 +83,33 @@ let cormorant = (function() {
         }
         associations[deviceId] = deviceAssociations;
         associations[returnedDeviceId] = deviceAssociations;
+
+        if(isStoryToBeRetrieved && deviceAssociations.url) {
+          isStoryBeingRetrieved = true;
+          retrieveStory(deviceAssociations.url, function(story) {
+            return callback(deviceAssociations, story);
+          });
+        }
       }
-      return callback(deviceAssociations);
+
+      if(!isStoryBeingRetrieved) {
+        return callback(deviceAssociations);
+      }
     });
   }
 
-  // Get the associations for the given device identifier
+  // Get the story for the given URL
   function retrieveStory(storyUrl, callback) {
+    if(stories.hasOwnProperty(storyUrl)) {
+      return callback(stories[storyUrl]);
+    }
+
     retrieve(storyUrl, 'application/json, text/plain',
              function(status, responseText, contentType) {
+      if(status !== STATUS_OK) {
+        return callback(null);
+      }
+
       let isJson = (contentType.indexOf('application/json') === 0);
       let story;
       if(isJson) {
