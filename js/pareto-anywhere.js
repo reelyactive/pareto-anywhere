@@ -13,6 +13,7 @@ const STATS_INTERVAL_MILLISECONDS = 1000;
 const PROXIMITY_INTERVAL_MILLISECONDS = 1000;
 const SIGNATURE_SEPARATOR = '/';
 const CARD_ID_PREFIX = 'dev-';
+const DEFAULT_DISPLAY_ONLY_DIGITAL_TWINS = false;
 const DEFAULT_NUMBER_OF_DEVICES_TO_DISPLAY = 3;
 const DEFAULT_RSSI_THRESHOLD = -72;
 const UNKNOWN_RSSI_VALUE = -127;
@@ -23,6 +24,7 @@ const NO_DEVICES_IN_PROXIMITY_MESSAGE = 'Nothing nearby';
 // DOM elements
 let scanButton = document.querySelector('#scanButton');
 let stopButton = document.querySelector('#stopButton');
+let digitalTwinsInput = document.querySelector('#digitalTwinsInput');
 let nearestLimitInput = document.querySelector('#nearestLimitInput');
 let nearestLimitDisplay = document.querySelector('#nearestLimitDisplay');
 let rssiThresholdInput = document.querySelector('#rssiThresholdInput');
@@ -39,6 +41,7 @@ let debugMessage = document.querySelector('#debugMessage');
 
 // Other variables
 let devices = {};
+let displayOnlyDigitalTwins = DEFAULT_DISPLAY_ONLY_DIGITAL_TWINS;
 let rssiThreshold = DEFAULT_RSSI_THRESHOLD;
 let numberOfDevicesToDisplay = DEFAULT_NUMBER_OF_DEVICES_TO_DISPLAY;
 
@@ -203,7 +206,6 @@ function handleParsedUrls(parsedData, device) {
         device.stories.unshift(story);
         if(hasImplicitUrl || isSystemId) {
           device.hasDigitalTwin = true;
-          debugMessage.textContent += '\r\nDigital Twin for ' + url;
         }
       }
     });
@@ -312,7 +314,9 @@ function updateProximityCards() {
   });
 
   sortedArray.forEach(function(device, index) {
-    if(index < numberOfDevicesToDisplay) {
+    let toDisplay = (index < numberOfDevicesToDisplay) &&
+                    !(displayOnlyDigitalTwins && !device.hasDigitalTwin);
+    if(toDisplay) {
       let existingCard = document.querySelector('#' + device.id);
       let card;
 
@@ -346,6 +350,8 @@ function updateProximityCards() {
 
 // Update the nearest limit and rssi threshold settings
 function updateSettings() {
+  displayOnlyDigitalTwins = digitalTwinsInput.checked;
+
   numberOfDevicesToDisplay = nearestLimitInput.value;
   nearestLimitDisplay.textContent = numberOfDevicesToDisplay;
 
@@ -375,5 +381,6 @@ function bufferToHex(buffer, isReversed) {
 
 // Handle scan button click and settings change
 scanButton.addEventListener('click', scanForAdvertisements);
+digitalTwinsInput.addEventListener('change', updateSettings);
 nearestLimitInput.addEventListener('change', updateSettings);
 rssiThresholdInput.addEventListener('change', updateSettings);
