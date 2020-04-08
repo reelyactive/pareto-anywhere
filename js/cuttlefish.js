@@ -142,7 +142,7 @@ let cuttlefish = (function() {
 
     if(isVirginFooter || isNewTitle) {
       let element = {};
-      let titleClass = 'ml-4 text-truncate' + additionalFooterClasses;
+      let titleClass = 'ml-4 text-wrap' + additionalFooterClasses;
       let titleSpan = createElement('span', titleClass, footerTitle);
       if((stories.length > 0) && stories[0].hasOwnProperty("@graph") &&
          stories[0]["@graph"][0]) {
