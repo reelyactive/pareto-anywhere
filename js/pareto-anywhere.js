@@ -80,7 +80,8 @@ function updateDevice(raddec) {
                                       associations: {},
                                       urls: [],
                                       rssi: rssi,
-                                      id: id };
+                                      id: id,
+                                      hasDigitalTwin: false };
   }
   else {
     devices[transmitterSignature].raddecs.unshift(raddec);
@@ -198,7 +199,13 @@ function handleParsedUrls(parsedData, device) {
   if(isNewUrl) {
     device.urls.unshift(url);
     cormorant.retrieveStory(url, function(story) {
-      device.stories.unshift(story);
+      if(story) {
+        device.stories.unshift(story);
+        if(hasImplicitUrl || isSystemId) {
+          device.hasDigitalTwin = true;
+          debugMessage.textContent += '\r\nDigital Twin for ' + url;
+        }
+      }
     });
   }
 }
