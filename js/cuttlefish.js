@@ -11,7 +11,7 @@ let cuttlefish = (function() {
   const HEADER_CLASS = 'card-header';
   const BODY_CLASS = 'card-body';
   const TAB_BODY_CLASS = 'card-body bg-white';
-  const FOOTER_CLASS = 'card-footer lead text-truncate';
+  const FOOTER_CLASS = 'card-footer lead';
   const TITLE_CLASS = 'card-title text-truncate';
   const SUBTITLE_CLASS = 'card-subtitle text-muted text-truncate';
   const STORIES_PANE_SUFFIX = '-stories';
@@ -123,6 +123,8 @@ let cuttlefish = (function() {
   function updateFooterTitle(footer, stories, raddecs) {
     let footerTitle = DEFAULT_TITLE;
     let additionalFooterClasses = ' ';
+    let isVirginFooter = (footer.innerHTML === '');
+    let isNewTitle = false;
 
     if(Array.isArray(stories) && stories.length) {
       footerTitle = determineStoryTitle(stories[0]);
@@ -133,8 +135,25 @@ let cuttlefish = (function() {
       additionalFooterClasses += 'monospace';
     }
 
-    footer.textContent = footerTitle;
-    footer.setAttribute('class', FOOTER_CLASS + additionalFooterClasses);
+    if(!isVirginFooter) {
+      let currentFooterTitle = footer.childNodes[1].textContent;
+      isNewTitle = (footerTitle !== currentFooterTitle);
+    }
+
+    if(isVirginFooter || isNewTitle) {
+      let element = {};
+      let titleClass = 'ml-4 text-truncate' + additionalFooterClasses;
+      let titleSpan = createElement('span', titleClass, footerTitle);
+      if((stories.length > 0) && stories[0].hasOwnProperty("@graph") &&
+         stories[0]["@graph"][0]) {
+        element = stories[0]["@graph"][0];
+      }
+
+      footer.innerHTML = '';
+      renderSameAs(element, footer);
+      footer.appendChild(titleSpan);
+      footer.setAttribute('class', FOOTER_CLASS);
+    }
   }
 
   // Remove all children of the given node
