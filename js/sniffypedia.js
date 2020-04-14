@@ -95,7 +95,25 @@ let sniffypedia = (function() {
     "fe08": "Organization/Microsoft/",
     "fdf0": "Organization/Google/",
     "fdee": "Organization/Huawei_Technologies_Co_Ltd/",
-    "fde2": "Organization/Google/"
+    "fde2": "Organization/Google/",
+    "fddb": "Organization/Samsung/",
+    "fdd2": "Organization/Bose_Corporation/",
+    "fdd1": "Organization/Huawei_Technologies_Co_Ltd/",
+    "fdd0": "Organization/Huawei_Technologies_Co_Ltd/",
+    "fdab": "Organization/Xiaomi/",
+    "fdaa": "Organization/Xiaomi/",
+    "fd9c": "Organization/Huawei_Technologies_Co_Ltd/",
+    "fd9b": "Organization/Huawei_Technologies_Co_Ltd/",
+    "fd9a": "Organization/Huawei_Technologies_Co_Ltd/",
+    "fd96": "Organization/Google/",
+    "fd8c": "Organization/Google/",
+    "fd87": "Organization/Google/",
+    "fd84": "Product/Tile_Tile/",
+    "fd82": "Organization/Sony_Corporation/",
+    "fd7e": "Organization/Samsung/",
+    "fd7c": "Organization/Toshiba_Corporation/",
+    "fd72": "Organization/Logitech_International_SA/",
+    "fd6f": "Service/Contact_Tracing/"
   };
 
 
