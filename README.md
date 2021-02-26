@@ -7,7 +7,7 @@ This repository is a placeholder for Pareto Anywhere, which is the collection of
 Getting started
 ---------------
 
-Visit [getpareto.com](https://getpareto.com) for an introduction and [getpareto.com/start](https://getpareto.com/start/) to get started.
+Visit [reelyactive.com/pareto/anywhere](https://www.reelyactive.com/pareto/anywhere/) for an introduction and [Hello Pareto Anywhere!](https://reelyactive.github.io/diy/hello-pareto-anywhere/) to get started.
 
 
 Pareto Anywhere Web App
