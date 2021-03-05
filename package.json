@@ -1,0 +1,47 @@
+{
+  "name": "pareto-anywhere",
+  "homepage": "https://www.reelyactive.com/pareto/anywhere/",
+  "author": {
+    "name": "reelyActive",
+    "email": "info@reelyactive.com"
+  },
+  "description": "Enable computers to understand physical spaces and the real-time dynamics of the people and assets within.  We believe in an open Internet of Things.",
+  "keywords": [
+    "Pareto Anywhere",
+    "reelyActive",
+    "IoT",
+    "RTLS",
+    "M2M"
+  ],
+  "version": "1.0.0",
+  "engines": {
+    "node": ">=6.0.0"
+  },
+  "bin": "./bin/pareto-anywhere",
+  "main": "./lib/paretoanywhere.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/reelyactive/pareto-anywhere.git"
+  },
+  "dependencies": {
+    "barnacles": "^1.1.1",
+    "barnacles-socketio": "^0.1.0",
+    "barnowl": "^1.1.1",
+    "barnowl-minew": "^0.1.3",
+    "barnowl-reel": "^0.1.10",
+    "chickadee": "^1.0.1",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "raddec-relay-udp": "^1.0.1"
+  },
+  "devDependencies": {},
+  "bugs": {
+    "url": "https://github.com/reelyactive/pareto-anywhere/issues"
+  },
+  "contributors": [
+    {
+      "name": "Jeffrey Dungen"
+    }
+  ],
+  "license": "MIT"
+}
