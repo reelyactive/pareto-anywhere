@@ -1,11 +1,27 @@
 Pareto Anywhere
 ===============
 
-This repository is a placeholder for Pareto Anywhere, which is the collection of various open source software modules by [reelyActive](https://www.reelyactive.com) which are hosted in their own individual repositories ([learn more](https://reelyactive.github.io/diy/oss-packages/)).  The _experimental_ web app version of Pareto Anywhere is maintained in the gh-pages branch of this repository.
+[Pareto Anywhere](https://www.reelyactive.com/pareto/anywhere/) is the collection of various open source software modules by [reelyActive](https://www.reelyactive.com) which are hosted in their own individual repositories ([learn more](https://reelyactive.github.io/diy/oss-packages/)).  The _experimental_ web app version of Pareto Anywhere is maintained in the gh-pages branch of this repository.
+
+Note that Pareto Anywhere is in active development, evolving the [hlc-server](https://github.com/reelyactive/hlc-server/) code base which it is intended to supersede.  It is therefore normal for documentation to refer to hlc-server as a pseudonym of Pareto Anywhere.
 
 
-Getting started
----------------
+Quick start
+-----------
+
+Install Pareto Anywhere globally as follows:
+
+    npm install -g pareto-anywhere
+
+Then run from the command line as follows:
+
+    pareto-anywhere
+
+Browse to [localhost:3001](http://localhost:3001) to see Pareto Anywhere running.
+
+
+Learn more
+----------
 
 Visit [reelyactive.com/pareto/anywhere](https://www.reelyactive.com/pareto/anywhere/) for an introduction and [Hello Pareto Anywhere!](https://reelyactive.github.io/diy/hello-pareto-anywhere/) to get started.
 
