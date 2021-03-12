@@ -19,6 +19,9 @@
   },
   "bin": "./bin/pareto-anywhere",
   "main": "./lib/paretoanywhere.js",
+  "scripts": {
+    "start": "node bin/pareto-anywhere"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/reelyactive/pareto-anywhere.git"
