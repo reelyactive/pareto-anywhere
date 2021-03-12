@@ -26,6 +26,14 @@ Learn more
 Visit [reelyactive.com/pareto/anywhere](https://www.reelyactive.com/pareto/anywhere/) for an introduction and [Hello Pareto Anywhere!](https://reelyactive.github.io/diy/hello-pareto-anywhere/) to get started.
 
 
+Developer Notes
+---------------
+
+Pareto Anywhere includes [Pareto Apps](https://github.com/reelyactive/pareto-anywhere-apps) as a git submodule (in the web/apps folder).  To update to the latest Pareto Apps run:
+
+   git submodule update --remote
+
+
 Pareto Anywhere Web App
 -----------------------
 
