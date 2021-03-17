@@ -31,14 +31,14 @@ Developer Notes
 
 Pareto Anywhere includes [Pareto Apps](https://github.com/reelyactive/pareto-anywhere-apps) as a git submodule (in the web/apps folder).  To update to the latest Pareto Apps run:
 
-   git submodule update --remote
+    git submodule update --remote
 
 If developing Pareto Apps from within this repository, changes can be pushed to the Pareto Apps origin by the usual means, from the web/apps folder:
 
-   cd web/apps
-   git add [...]
-   git commit -m "Description of update"
-   git push origin master
+    cd web/apps
+    git add [...]
+    git commit -m "Description of update"
+    git push origin master
 
 
 Pareto Anywhere Web App
