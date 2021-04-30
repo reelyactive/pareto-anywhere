@@ -35,13 +35,14 @@ What is Pareto Anywhere?
 
 __Pareto Anywhere__ is the collection of various open source software modules by [reelyActive](https://www.reelyactive.com) which are hosted in their own individual repositories, specifically:
 
-| Software module                                       | Role |
-|:------------------------------------------------------|:-----|
-| [barnowl](https://github.com/reelyactive/barnowl)     | Technology-agnostic middleware for RFID, RTLS and M2M |
-| [barnacles](https://github.com/reelyactive/barnacles) | Efficient data aggregator/distributor for RFID, RTLS and M2M |
-| [barterer](https://github.com/reelyactive/barterer)   | Real-time location & sensor data API |
-| [chickadee](https://github.com/reelyactive/chickadee) | Contextual associations store and API |
-| [advlib](https://github.com/reelyactive/advlib)       | Library for wireless advertising packet decoding |
+| Software module                                           | Role |
+|:----------------------------------------------------------|:-----|
+| [barnowl](https://github.com/reelyactive/barnowl)         | Technology-agnostic middleware for RFID, RTLS and M2M |
+| [barnacles](https://github.com/reelyactive/barnacles)     | Efficient data aggregator/distributor for RFID, RTLS and M2M |
+| [barterer](https://github.com/reelyactive/barterer)       | Real-time location & sensor data API |
+| [chickadee](https://github.com/reelyactive/chickadee)     | Contextual associations store and API |
+| [advlib](https://github.com/reelyactive/advlib)           | Library for wireless advertising packet decoding |
+| [sniffypedia](https://github.com/reelyactive/sniffypedia) | Index for implicit URI assocation |
 
 The _experimental_ web app version of Pareto Anywhere which runs entirely in-browser is maintained in the gh-pages branch of this repository (see below).
 
