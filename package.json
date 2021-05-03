@@ -34,6 +34,7 @@
     "barnacles": "^1.3.0",
     "barnacles-socketio": "^1.0.0",
     "barnowl": "^1.1.1",
+    "barnowl-aruba": "^0.2.0",
     "barnowl-minew": "^0.1.3",
     "barnowl-reel": "^0.1.10",
     "barterer": "^1.1.3",
