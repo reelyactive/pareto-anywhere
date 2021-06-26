@@ -13,7 +13,7 @@
     "RTLS",
     "M2M"
   ],
-  "version": "1.2.1",
+  "version": "1.3.0",
   "engines": {
     "node": ">=6.0.0"
   },
@@ -37,8 +37,8 @@
     "barnowl-aruba": "^0.2.0",
     "barnowl-minew": "^0.1.3",
     "barnowl-reel": "^0.1.10",
-    "barterer": "^1.1.3",
-    "chickadee": "^1.2.0",
+    "barterer": "^1.2.1",
+    "chickadee": "^1.3.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "raddec-relay-udp": "^1.0.1",
