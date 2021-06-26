@@ -83,6 +83,20 @@ Project History
 __Pareto Anywhere__ is in active development, evolving the [hlc-server](https://github.com/reelyactive/hlc-server/) code base (first created in 2014) which it is intended to supersede.  It is therefore normal for documentation to refer to hlc-server as a pseudonym of Pareto Anywhere.
 
 
+Contributing
+------------
+
+Discover [how to contribute](CONTRIBUTING.md) to this open source project which upholds a standard [code of conduct](CODE_OF_CONDUCT.md).
+
+
+Security
+--------
+
+Consult our [security policy](SECURITY.md) for best practices using this open source software and to report vulnerabilities.
+
+[![Known Vulnerabilities](https://snyk.io/test/github/reelyactive/pareto-anywhere/badge.svg)](https://snyk.io/test/github/reelyactive/pareto-anywhere)
+
+
 License
 -------
 
