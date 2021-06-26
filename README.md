@@ -1,13 +1,15 @@
 Pareto Anywhere
 ===============
 
-[Pareto Anywhere](https://www.reelyactive.com/pareto/anywhere/) transforms ambient data into a real-time stream of _who/what_ is _where/how_.  Configured as a lightweight [Node.js package](https://www.npmjs.com/package/pareto-anywhere), __Pareto Anywhere__ installs and runs quickly and easily on a Raspberry Pi, personal computer or server.  The bundled web apps and APIs offer a friendly introduction to the potential of [ambient data](https://www.reelyactive.com/ambient-data/) for real-time location and contextual applications and provide an intuitive launch point for developers.
+[Pareto Anywhere](https://www.reelyactive.com/pareto/anywhere/) transforms ambient data into a real-time stream of _who/what_ is _where/how_.  Configured as a lightweight [Node.js package](https://www.npmjs.com/package/pareto-anywhere), this __pareto-anywhere__ package installs and runs quickly and easily on anything from a Raspberry Pi to a personal computer or server.  The bundled web apps and APIs offer a friendly introduction to the potential of [ambient data](https://www.reelyactive.com/ambient-data/) for real-time location and contextual applications.  Finally, the underlying code provides an intuitive launch point for developers.
+
+![Pareto Anywhere logo](https://reelyactive.github.io/pareto-anywhere/images/pareto-anywhere-logo.png)
 
 
 Quick start
 -----------
 
-Install __Pareto Anywhere__ globally as follows:
+Install the __pareto-anywhere__ package globally as follows:
 
     npm install -g pareto-anywhere
 
@@ -18,21 +20,12 @@ Then run from the command line as follows:
 Browse to [localhost:3001](http://localhost:3001) to see __Pareto Anywhere__ running and browse the web apps and APIs.
 
 
-Where's the ambient data?
--------------------------
-
-__Pareto Anywhere__ listens for data streams from the following sources:
-
-- UDP [raddec](https://github.com/reelyactive/raddec) packets on port 50001 (ex: [from an Owl-in-One](https://reelyactive.github.io/diy/oio-config/))
-- UDP [reel](https://www.reelyactive.com/technology/reel/) packets on port 50000
-- HTTP POST to the /minew route (ex: [from a Minew G1](https://reelyactive.github.io/diy/minew-g1-config/))
-- WebSocket connection on the /aruba route (ex: [from an Aruba AP](https://github.com/reelyactive/barnowl-aruba))
-
-__Pareto Anywhere__ is [infrastructure-agnostic](https://www.reelyactive.com/pareto/anywhere/infrastructure/) and supports simultaneous data streams from a heterogeneous mix of sources.
-
-
 What is Pareto Anywhere?
 ------------------------
+
+__Pareto Anywhere__ is middleware that makes _any_ physical space location-aware for _any_ application by contextualising the real-time wireless ambient data stream collected from _any_ infrastructure.  This __pareto-anywhere__ package is a convenient, lightweight and novice-friendly configuration of __Pareto Anywhere__ which itself is highly modular and scalable.
+
+![pareto-anywhere components](https://reelyactive.github.io/pareto-anywhere/images/pareto-anywhere-components.png)
 
 __Pareto Anywhere__ is the collection of various open source software modules by [reelyActive](https://www.reelyactive.com) which are hosted in their own individual repositories, specifically:
 
@@ -48,10 +41,23 @@ __Pareto Anywhere__ is the collection of various open source software modules by
 The _experimental_ web app version of Pareto Anywhere which runs entirely in-browser is maintained in the gh-pages branch of this repository (see below).
 
 
+Where's the ambient data?
+-------------------------
+
+This __pareto-anywhere__ package listens for data streams from the following sources:
+
+- UDP [raddec](https://github.com/reelyactive/raddec) packets on port 50001 (ex: [from an Owl-in-One](https://reelyactive.github.io/diy/oio-config/))
+- UDP [reel](https://www.reelyactive.com/technology/reel/) packets on port 50000
+- HTTP POST to the /minew route (ex: [from a Minew G1](https://reelyactive.github.io/diy/minew-g1-config/))
+- WebSocket connection on the /aruba route (ex: [from an Aruba AP](https://github.com/reelyactive/barnowl-aruba))
+
+__Pareto Anywhere__ is [infrastructure-agnostic](https://www.reelyactive.com/pareto/anywhere/infrastructure/) and supports simultaneous data streams from a heterogeneous mix of sources.
+
+
 Developer Notes
 ---------------
 
-Pareto Anywhere includes [Pareto Apps](https://github.com/reelyactive/pareto-anywhere-apps) as a git submodule (in the web/apps folder).  To update to the latest Pareto Apps run:
+The pareto-anywhere codebase includes [Pareto Apps](https://github.com/reelyactive/pareto-anywhere-apps) as a git submodule (in the web/apps folder).  To update to the latest Pareto Apps run:
 
     git submodule update --remote
 
