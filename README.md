@@ -19,24 +19,6 @@ Then run from the command line as follows:
 
 Browse to [localhost:3001](http://localhost:3001) to see __Pareto Anywhere__ running and browse the web apps and APIs.
 
-Install with Docker
------------
-
-Build the docker image from the __pareto-anywhere__ folder:
-
-    docker build -t pareto-anywhere:core .
-
-Start the container of __pareto-anywhere__:
-
-    docker run -itd \
-    -p 3001:3001/tcp \
-    -p 50000:5000/udp \
-    -p 50001:50001/udp \
-    --restart unless-stopped \
-    --name pareto-anywhere \
-    pareto-anywhere:core
-
-Browse to [localhost:3001](http://localhost:3001) to see __Pareto Anywhere__ running and browse the APIs.
 
 What is Pareto Anywhere?
 ------------------------
@@ -70,6 +52,26 @@ This __pareto-anywhere__ package listens for data streams from the following sou
 - WebSocket connection on the /aruba route (ex: [from an Aruba AP](https://github.com/reelyactive/barnowl-aruba))
 
 __Pareto Anywhere__ is [infrastructure-agnostic](https://www.reelyactive.com/pareto/anywhere/infrastructure/) and supports simultaneous data streams from a heterogeneous mix of sources.
+
+
+Build and run with Docker
+-------------------------
+
+For users who prefer deployment using containers, first build the Docker image from the root folder of this repository:
+
+    docker build -t pareto-anywhere:core .
+
+Then start the container:
+
+    docker run -itd \
+    -p 3001:3001/tcp \
+    -p 50000:5000/udp \
+    -p 50001:50001/udp \
+    --restart unless-stopped \
+    --name pareto-anywhere \
+    pareto-anywhere:core
+
+Browse to [localhost:3001](http://localhost:3001) to see __Pareto Anywhere__ running and browse the APIs.
 
 
 Developer Notes
