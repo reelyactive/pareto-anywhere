@@ -1,0 +1,14 @@
+[Unit]
+Description=Pareto Anywhere by reelyActive
+After=network.target
+
+[Service]
+WorkingDirectory=/home/reelyactive/pareto-anywhere
+ExecStart=/usr/local/node/bin/npm start
+Restart=on-failure
+User=reelyactive
+Environment=PORT=3001
+Environment="ELASTICSEARCH_NODE=http://localhost:9200"
+
+[Install]
+WantedBy=multi-user.target
