@@ -1,6 +1,6 @@
 FROM alpine:3.13 AS base-build
 COPY . /root/
-RUN apk add nodejs-current npm git \
+RUN apk add nodejs-current npm \
     && cd \
     && npm i --production
 
