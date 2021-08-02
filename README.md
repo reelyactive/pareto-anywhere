@@ -19,24 +19,6 @@ Then run from the command line as follows:
 
 Browse to [localhost:3001](http://localhost:3001) to see __Pareto Anywhere__ running and browse the web apps and APIs.
 
-Install with Docker
------------
-
-Build the docker image from the __pareto-anywhere__ folder:
-
-    docker build -t pareto-anywhere:core .
-
-Start the container of __pareto-anywhere__:
-
-    docker run -d \
-    -p 3001:3001/tcp \
-    -p 50000:5000/udp \
-    -p 50001:50001/udp \
-    --restart unless-stopped \
-    --name pareto-anywhere \
-    pareto-anywhere:core
-
-Browse to [localhost:3001](http://localhost:3001) to see __Pareto Anywhere__ running and browse the APIs.
 
 What is Pareto Anywhere?
 ------------------------
@@ -71,6 +53,50 @@ This __pareto-anywhere__ package listens for data streams from the following sou
 
 __Pareto Anywhere__ is [infrastructure-agnostic](https://www.reelyactive.com/pareto/anywhere/infrastructure/) and supports simultaneous data streams from a heterogeneous mix of sources.
 
+
+Collect and analyse the data with the Elastic Stack
+---------------------------------------------------
+
+This __pareto-anywhere__ package writes its real-time stream of data to an Elasticsearch database, if installed and running, so that it may in turn be analysed in Kibana.
+
+If an Elasticsearch database is running locally at [http://localhost:9200](http://localhost:9200/), data storage should be automatic, with the data available for analysis at [http://localhost:5601](http://localhost:5601/) if Kibana is also running locally.
+
+To instead have __pareto-anywhere__ store data in a _remote_ Elasticsearch database, first set the environment variable ELASTICSEARCH_NODE to the corresponding URL, including the corresponding username and password, for example:
+
+    https://username:password@server.com:9243
+
+Elasticsearch and Kibana are _not_ required to enjoy the real-time functionality of Pareto Anywhere.  Instead, they add extensive, user-friendly data analysis functionality as described in our [Kibana tutorials](https://reelyactive.github.io/diy/kibana/).
+
+
+Build and run with Docker
+-------------------------
+
+For users who prefer deployment using containers, first build the Docker image from the root folder of this repository:
+
+    docker build -t pareto-anywhere:core .
+
+Then start the container:
+
+    docker run -d \
+    -p 3001:3001/tcp \
+    -p 50000:5000/udp \
+    -p 50001:50001/udp \
+    --restart unless-stopped \
+    --name pareto-anywhere \
+    pareto-anywhere:core
+
+Browse to [localhost:3001](http://localhost:3001) to see __Pareto Anywhere__ running and browse the APIs.
+
+Run pareto-anywhere and kibana with Docker-Compose
+-------------------------
+
+For users who prefer deployment using containers, Deploy elasticsearch, kibana and pareto-anywhere from the root folder of this repository:
+
+    docker-compose up -d
+
+Browse to [localhost:3001](http://localhost:3001) to see __Pareto Anywhere__ running and browse the APIs.
+Browse to [localhost:5601](http://localhost:5601) to see __Kibana__ dashboard running.
+Browse to [localhost:9200](http://localhost:9200) to see __Elasticsearch__ running and browse the APIs.
 
 Developer Notes
 ---------------
