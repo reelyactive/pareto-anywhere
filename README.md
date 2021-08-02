@@ -28,7 +28,7 @@ Build the docker image from the __pareto-anywhere__ folder:
 
 Start the container of __pareto-anywhere__:
 
-    docker run -itd \
+    docker run -d \
     -p 3001:3001/tcp \
     -p 50000:5000/udp \
     -p 50001:50001/udp \
