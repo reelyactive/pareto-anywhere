@@ -77,6 +77,7 @@ For users who prefer deployment using containers, first build the Docker image f
 
 Then start the container:
 
+
     docker run -d \
     -p 3001:3001/tcp \
     -p 50000:5000/udp \
@@ -87,16 +88,18 @@ Then start the container:
 
 Browse to [localhost:3001](http://localhost:3001) to see __Pareto Anywhere__ running and browse the APIs.
 
-Run pareto-anywhere and kibana with Docker-Compose
--------------------------
 
-For users who prefer deployment using containers, Deploy elasticsearch, kibana and pareto-anywhere from the root folder of this repository:
+Run Pareto Anywhere, Elastisearch and Kibana with Docker-Compose
+----------------------------------------------------------------
+
+For users who prefer deployment using containers, Deploy Elasticsearch, Kibana and Pareto Anywhere from the root folder of this repository:
 
     docker-compose up -d
 
 Browse to [localhost:3001](http://localhost:3001) to see __Pareto Anywhere__ running and browse the APIs.
 Browse to [localhost:5601](http://localhost:5601) to see __Kibana__ dashboard running.
 Browse to [localhost:9200](http://localhost:9200) to see __Elasticsearch__ running and browse the APIs.
+
 
 Developer Notes
 ---------------
