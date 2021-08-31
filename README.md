@@ -48,6 +48,7 @@ This __pareto-anywhere__ package listens for data streams from the following sou
 
 - UDP [raddec](https://github.com/reelyactive/raddec) packets on port 50001 (ex: [from an Owl-in-One](https://reelyactive.github.io/diy/oio-config/))
 - UDP [reel](https://www.reelyactive.com/technology/reel/) packets on port 50000
+- UDP [Huawei](https://github.com/reelyactive/barnowl-huawei/) packets on port 50010
 - HTTP POST to the /minew route (ex: [from a Minew G1](https://reelyactive.github.io/diy/minew-g1-config/))
 - WebSocket connection on the /aruba route (ex: [from an Aruba AP](https://github.com/reelyactive/barnowl-aruba))
 
