@@ -20,6 +20,22 @@ Then run from the command line as follows:
 Browse to [localhost:3001](http://localhost:3001) to see __Pareto Anywhere__ running and browse the web apps and APIs.
 
 
+Dev install
+-----------
+
+_Alternatively_, clone the repo and submodules as follows:
+
+    git clone --recurse-submodules https://github.com/reelyactive/pareto-anywhere.git
+
+Then, from the pareto-anywhere folder, install the dependencies and run:
+
+    cd pareto-anywhere
+    npm install
+    npm start
+
+Browse to [localhost:3001](http://localhost:3001) to see __Pareto Anywhere__ running and browse the web apps and APIs.
+
+
 What is Pareto Anywhere?
 ------------------------
 
