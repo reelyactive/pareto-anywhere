@@ -1,0 +1,13 @@
+[Unit]
+Description=Pareto Anywhere by reelyActive
+After=network.target
+
+[Service]
+WorkingDirectory=/home/pi/reelyActive/pareto-anywhere
+ExecStart=/usr/local/node/bin/npm start
+Restart=on-failure
+User=pi
+Environment=PORT=3001
+
+[Install]
+WantedBy=multi-user.target
