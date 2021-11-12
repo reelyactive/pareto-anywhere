@@ -29,8 +29,8 @@
   "dependencies": {
     "advlib": "^1.1.0",
     "advlib-ble": "^1.1.0",
-    "advlib-ble-manufacturers": "^1.0.4",
-    "advlib-ble-services": "^1.0.1",
+    "advlib-ble-manufacturers": "^1.2.0",
+    "advlib-ble-services": "^1.0.2",
     "advlib-interoperable": "^1.0.0",
     "barnacles": "^1.3.2",
     "barnacles-elasticsearch": "^1.0.0",
@@ -45,9 +45,9 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "raddec": "^0.2.8",
-    "raddec-relay-udp": "^1.0.1",
-    "sniffypedia": "^1.0.0",
-    "socket.io": "^4.0.1"
+    "raddec-relay-udp": "^1.1.0",
+    "sniffypedia": "^1.1.3",
+    "socket.io": "^4.3.2"
   },
   "devDependencies": {},
   "bugs": {
