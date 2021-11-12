@@ -1,7 +1,9 @@
 Pareto Anywhere
 ===============
 
-[Pareto Anywhere](https://www.reelyactive.com/pareto/anywhere/) transforms ambient data into a real-time stream of _who/what_ is _where/how_.  Configured as a lightweight [Node.js package](https://www.npmjs.com/package/pareto-anywhere), this __pareto-anywhere__ package installs and runs quickly and easily on anything from a Raspberry Pi to a personal computer or server.  The bundled web apps and APIs offer a friendly introduction to the potential of [ambient data](https://www.reelyactive.com/ambient-data/) for real-time location and contextual applications.  Finally, the underlying code provides an intuitive launch point for developers.
+[Pareto Anywhere](https://www.reelyactive.com/pareto/anywhere/) enables context-aware physical spaces.  __Pareto Anywhere__ is continuously-evolving open source middleware that transforms [ambient data](https://www.reelyactive.com/ambient-data/) into [hyperlocal context](https://www.reelyactive.com/context/): a real-time stream of _who/what_ is _where/how_.
+
+Configured as a lightweight [Node.js package](https://www.npmjs.com/package/pareto-anywhere), this __pareto-anywhere__ package installs quickly, and easily runs edge, local or cloud, on anything from a Raspberry Pi to a personal computer or server.  The bundled web apps, APIs and Elastic Stack integration offer a friendly and comprehensive introduction to context-aware physical spaces.  And, thanks to a modular, open architecture, __Pareto Anywhere__ can easily be customised for scale and/or functionality.
 
 ![Pareto Anywhere logo](https://reelyactive.github.io/pareto-anywhere/images/pareto-anywhere-logo.png)
 
@@ -36,10 +38,17 @@ Then, from the pareto-anywhere folder, install the dependencies and run:
 Browse to [localhost:3001](http://localhost:3001) to see __Pareto Anywhere__ running and browse the web apps and APIs.
 
 
+Installation guides
+-------------------
+
+_Alternatively_, install __Pareto Anywhere__ by following a step-by-step tutorial on our [reelyActive Developers](https://reelyactive.github.io/) site:
+- [Run Pareto Anywhere on a Raspberry Pi](https://reelyactive.github.io/diy/pareto-anywhere-pi/)
+
+
 What is Pareto Anywhere?
 ------------------------
 
-__Pareto Anywhere__ is middleware that makes _any_ physical space location-aware for _any_ application by contextualising the real-time wireless ambient data stream collected from _any_ infrastructure.  This __pareto-anywhere__ package is a convenient, lightweight and novice-friendly configuration of __Pareto Anywhere__ which itself is highly modular and scalable.
+__Pareto Anywhere__ is middleware that makes _any_ physical space context-aware for _any_ application by processing the real-time wireless ambient data stream collected from _any_ infrastructure.  This __pareto-anywhere__ package is a convenient, lightweight and novice-friendly configuration of __Pareto Anywhere__ which itself is highly modular and scalable.
 
 ![pareto-anywhere components](https://reelyactive.github.io/pareto-anywhere/images/pareto-anywhere-components.png)
 
@@ -67,6 +76,8 @@ This __pareto-anywhere__ package listens for data streams from the following sou
 - UDP [Huawei](https://github.com/reelyactive/barnowl-huawei/) packets on port 50010
 - HTTP POST to the /minew route (ex: [from a Minew G1](https://reelyactive.github.io/diy/minew-g1-config/))
 - WebSocket connection on the /aruba route (ex: [from an Aruba AP](https://github.com/reelyactive/barnowl-aruba))
+
+If a local Bluetooth radio is available, [barnowl-hci](https://github.com/reelyactive/barnowl-hci/#pareto-anywhere-integration) can be installed and run with the command `npm run forwarder` to forward the data to Pareto Anywhere.
 
 __Pareto Anywhere__ is [infrastructure-agnostic](https://www.reelyactive.com/pareto/anywhere/infrastructure/) and supports simultaneous data streams from a heterogeneous mix of sources.
 
