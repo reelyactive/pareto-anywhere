@@ -5,15 +5,16 @@
     "name": "reelyActive",
     "email": "info@reelyactive.com"
   },
-  "description": "Enable computers to understand physical spaces and the real-time dynamics of the people and assets within.  We believe in an open Internet of Things.",
+  "description": "Middleware enabling context-aware physical spaces.  We believe in an open Internet of Things.",
   "keywords": [
     "Pareto Anywhere",
     "reelyActive",
+    "context-aware physical spaces",
     "IoT",
     "RTLS",
     "M2M"
   ],
-  "version": "1.5.0",
+  "version": "1.5.1",
   "engines": {
     "node": ">=10.0.0"
   },
