@@ -45,6 +45,7 @@
     "chickadee": "^1.4.0",
     "cors": "^2.8.5",
     "express": "^4.17.2",
+    "json-silo": "^1.1.0",
     "raddec": "^0.2.8",
     "raddec-relay-udp": "^1.1.0",
     "sniffypedia": "^1.1.3",
