@@ -5,7 +5,7 @@
     "name": "reelyActive",
     "email": "info@reelyactive.com"
   },
-  "description": "Middleware enabling context-aware physical spaces.  We believe in an open Internet of Things.",
+  "description": "Open source middleware suite for context-aware physical spaces.  We believe in an open Internet of Things.",
   "keywords": [
     "Pareto Anywhere",
     "reelyActive",
@@ -14,7 +14,7 @@
     "RTLS",
     "M2M"
   ],
-  "version": "1.6.0",
+  "version": "1.7.0",
   "engines": {
     "node": ">=10.0.0"
   },
