@@ -74,7 +74,7 @@ This __pareto-anywhere__ package listens for data streams from the following sou
 - UDP [raddec](https://github.com/reelyactive/raddec) packets on port 50001 (ex: [from an Owl-in-One](https://reelyactive.github.io/diy/oio-config/))
 - UDP [reel](https://www.reelyactive.com/technology/reel/) packets on port 50000
 - UDP [Huawei](https://github.com/reelyactive/barnowl-huawei/) packets on port 50010
-- HTTP POST to the /minew route (ex: [from a Minew G1](https://reelyactive.github.io/diy/minew-g1-config/))
+- HTTP POST to the /minew route (ex: [from a Minew G1](https://reelyactive.github.io/diy/minew-g1-config/)) _(G1 firmware v4.x required since Pareto Anywhere v1.7)_
 - WebSocket connection on the /aruba route (ex: [from an Aruba AP](https://github.com/reelyactive/barnowl-aruba))
 
 If a local Bluetooth radio is available, [barnowl-hci](https://github.com/reelyactive/barnowl-hci/#pareto-anywhere-integration) can be installed and run with the command `npm run forwarder` to forward the data to Pareto Anywhere.
