@@ -1,17 +1,25 @@
 Pareto Anywhere
 ===============
 
-[Pareto Anywhere](https://www.reelyactive.com/pareto/anywhere/) enables context-aware physical spaces.  __Pareto Anywhere__ is continuously-evolving open source middleware that transforms [ambient data](https://www.reelyactive.com/ambient-data/) into [hyperlocal context](https://www.reelyactive.com/context/): a real-time stream of _who/what_ is _where/how_.
+[Pareto Anywhere](https://www.reelyactive.com/pareto/anywhere/) enables [context-aware physical spaces](https://www.reelyactive.com/context-aware-physical-spaces/).  __Pareto Anywhere__ is continuously-evolving open source middleware that transforms [ambient data](https://www.reelyactive.com/ambient-data/) into [hyperlocal context](https://www.reelyactive.com/context/): a real-time stream of _who/what_ is _where/how_.
 
 Configured as a lightweight [Node.js package](https://www.npmjs.com/package/pareto-anywhere), this __pareto-anywhere__ package installs quickly, and easily runs edge, local or cloud, on anything from a Raspberry Pi to a personal computer or server.  The bundled web apps, APIs and Elastic Stack integration offer a friendly and comprehensive introduction to context-aware physical spaces.  And, thanks to a modular, open architecture, __Pareto Anywhere__ can easily be customised for scale and/or functionality.
 
 ![Pareto Anywhere logo](https://reelyactive.github.io/pareto-anywhere/images/pareto-anywhere-logo.png)
 
 
+Installation guides
+-------------------
+
+Install __Pareto Anywhere__ by following a step-by-step tutorial on our [reelyActive Developers](https://reelyactive.github.io/) site:
+- [Run Pareto Anywhere on a personal computer](https://reelyactive.github.io/diy/pareto-anywhere-pc/)
+- [Run Pareto Anywhere on a Raspberry Pi](https://reelyactive.github.io/diy/pareto-anywhere-pi/)
+
+
 Quick start
 -----------
 
-Install the __pareto-anywhere__ package globally as follows:
+_Alternatively_, install the __pareto-anywhere__ package globally as follows:
 
     npm install -g pareto-anywhere
 
@@ -36,13 +44,6 @@ Then, from the pareto-anywhere folder, install the dependencies and run:
     npm start
 
 Browse to [localhost:3001](http://localhost:3001) to see __Pareto Anywhere__ running and browse the web apps and APIs.
-
-
-Installation guides
--------------------
-
-_Alternatively_, install __Pareto Anywhere__ by following a step-by-step tutorial on our [reelyActive Developers](https://reelyactive.github.io/) site:
-- [Run Pareto Anywhere on a Raspberry Pi](https://reelyactive.github.io/diy/pareto-anywhere-pi/)
 
 
 What is Pareto Anywhere?
