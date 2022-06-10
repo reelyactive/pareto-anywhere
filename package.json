@@ -36,7 +36,7 @@
     "barnacles": "^1.4.1",
     "barnacles-elasticsearch": "^1.1.0",
     "barnacles-socketio": "^1.0.0",
-    "barnowl": "^1.1.1",
+    "barnowl": "^1.2.0",
     "barnowl-aruba": "^0.2.0",
     "barnowl-huawei": "^1.0.1",
     "barnowl-minew": "^1.0.0",
@@ -47,7 +47,6 @@
     "express": "^4.17.2",
     "json-silo": "^1.1.1",
     "raddec": "^0.2.8",
-    "raddec-relay-udp": "^1.1.0",
     "sniffypedia": "^1.1.4",
     "socket.io": "^4.5.0"
   },
