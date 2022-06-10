@@ -39,6 +39,7 @@
     "barnowl": "^1.2.0",
     "barnowl-aruba": "^0.2.0",
     "barnowl-huawei": "^1.0.1",
+    "barnowl-impinj": "^0.3.0",
     "barnowl-minew": "^1.0.0",
     "barnowl-reel": "^0.1.10",
     "barterer": "^1.2.6",
@@ -46,7 +47,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.2",
     "json-silo": "^1.1.1",
-    "raddec": "^0.2.8",
+    "raddec": "^0.3.1",
     "sniffypedia": "^1.1.4",
     "socket.io": "^4.5.0"
   },
