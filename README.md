@@ -88,6 +88,8 @@ Collect and analyse the data with the Elastic Stack
 ---------------------------------------------------
 
 This __pareto-anywhere__ package writes its real-time stream of data to an Elasticsearch database, if installed and running, so that it may in turn be analysed in Kibana.
+- __pareto-anywhere__ v1.8 and above expect an Elasticsearch 8.x instance, offering nominal backwards-compatiblility with 7.x
+- __pareto-anywhere__ v1.7 and below require an Elasticsearch 7.x instance
 
 If an Elasticsearch database is running locally at [http://localhost:9200](http://localhost:9200/), data storage should be automatic, with the data available for analysis at [http://localhost:5601](http://localhost:5601/) if Kibana is also running locally.
 
