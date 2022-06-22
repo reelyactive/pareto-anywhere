@@ -4,7 +4,7 @@ After=network.target
 
 [Service]
 WorkingDirectory=/home/pi/reelyActive/pareto-anywhere
-ExecStart=/usr/local/node/bin/npm start
+ExecStart=/usr/bin/npm start
 Restart=on-failure
 User=pi
 Environment=PORT=3001
