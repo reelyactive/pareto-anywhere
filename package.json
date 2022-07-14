@@ -47,7 +47,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.2",
     "json-silo": "^1.1.2",
-    "raddec": "^0.3.1",
+    "raddec": "^0.3.2",
     "sniffypedia": "^1.1.4",
     "socket.io": "^4.5.0"
   },
