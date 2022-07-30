@@ -30,7 +30,7 @@
   "dependencies": {
     "advlib": "^1.1.3",
     "advlib-ble": "^1.2.0",
-    "advlib-ble-manufacturers": "^1.3.2",
+    "advlib-ble-manufacturers": "^1.3.3",
     "advlib-ble-services": "^1.3.2",
     "advlib-interoperable": "^1.2.0",
     "barnacles": "^1.5.2",
