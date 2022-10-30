@@ -14,7 +14,7 @@
     "RTLS",
     "M2M"
   ],
-  "version": "1.8.4",
+  "version": "1.9.0",
   "engines": {
     "node": ">=12.0.0"
   },
@@ -44,10 +44,11 @@
     "barnowl-reel": "^0.1.10",
     "barterer": "^1.2.9",
     "chickadee": "^1.5.4",
+    "chimps": "^1.0.0",
     "cors": "^2.8.5",
-    "express": "^4.17.2",
+    "express": "^4.18.2",
     "json-silo": "^1.1.2",
-    "raddec": "^0.4.1",
+    "raddec": "^0.4.2",
     "sniffypedia": "^1.1.5",
     "socket.io": "^4.5.0"
   },

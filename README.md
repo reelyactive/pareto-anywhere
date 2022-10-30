@@ -61,6 +61,7 @@ __Pareto Anywhere__ is the collection of various open source software modules by
 | [barnacles](https://github.com/reelyactive/barnacles)     | Efficient data aggregator/distributor for RFID, RTLS and M2M |
 | [barterer](https://github.com/reelyactive/barterer)       | Real-time location & sensor data API |
 | [chickadee](https://github.com/reelyactive/chickadee)     | Contextual associations store and API |
+| [chimps](https://github.com/reelyactive/chimps)           | Spatial dynamics processor |
 | [advlib](https://github.com/reelyactive/advlib)           | Library for wireless advertising packet decoding |
 | [sniffypedia](https://github.com/reelyactive/sniffypedia) | Index for implicit URI assocation |
 
@@ -77,7 +78,7 @@ This __pareto-anywhere__ package listens for data streams from the following sou
 - UDP [Huawei](https://github.com/reelyactive/barnowl-huawei/) packets on port 50010
 - HTTP POST to the /minew route (ex: [from a Minew G1](https://reelyactive.github.io/diy/minew-g1-config/)) _(G1 firmware v4.x required since Pareto Anywhere v1.7)_
 - HTTP POST to the /impinj route
-- WebSocket connection on the /aruba route (ex: [from an Aruba AP](https://github.com/reelyactive/barnowl-aruba))
+- WebSocket connection on the /aruba route (ex: [from an Aruba AP](https://reelyactive.github.io/diy/aruba-instant-config/))
 
 If a local Bluetooth radio is available, [barnowl-hci](https://github.com/reelyactive/barnowl-hci/#pareto-anywhere-integration) can be installed and run with the command `npm run forwarder` to forward the data to Pareto Anywhere.
 
