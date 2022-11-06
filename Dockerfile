@@ -13,6 +13,8 @@ RUN apk add nodejs-current dumb-init --no-cache\
 WORKDIR /home/
 USER reelyactive
 COPY --chown=reelyactive --from=base-build   /root/ .
+RUN mkdir -p data/associations data/images data/stories data/features && \
+    touch data/associations/LOCK data/images/LOCK data/stories/LOCK data/features/LOCK
 EXPOSE 3001/tcp 50000/udp 50001/udp
 
 CMD ["dumb-init","npm","run", "start"]
