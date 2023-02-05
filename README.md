@@ -178,9 +178,11 @@ Pareto Anywhere variants
 Project History
 ---------------
 
-__Pareto Anywhere__ supersedes [hlc-server](https://github.com/reelyactive/hlc-server/) (first created in 2014).
+In 2019, __Pareto Anywhere__ was created to supersede [hlc-server](https://github.com/reelyactive/hlc-server/), our open source _Hyperlocal Context Server_, which was itself created in 2014.
 
 __pareto-anywhere__ v1.5.0 adopts [chickadee](https://github.com/reelyactive/chickadee) v1.4.0 which migrates to [ESMapDB](https://github.com/reelyactive/esmapdb) from [NeDB](https://github.com/louischatriot/nedb). If upgrading from a previous version, any stored associations will need to be recreated.
+
+Learn more about the __Pareto by reelyActive__ collection at [www.reelyactive.com/pareto](https://www.reelyactive.com/pareto/)
 
 
 Contributing
