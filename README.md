@@ -48,8 +48,8 @@ These open source software modules are hosted each in their own individual repos
 
 | Software module                                           | Role |
 |:----------------------------------------------------------|:-----|
-| [barnowl](https://github.com/reelyactive/barnowl)         | Technology-agnostic middleware for RFID, RTLS and M2M |
-| [barnacles](https://github.com/reelyactive/barnacles)     | Efficient data aggregator/distributor for RFID, RTLS and M2M |
+| [barnowl](https://github.com/reelyactive/barnowl)         | Interface for gateways, APs and readers |
+| [barnacles](https://github.com/reelyactive/barnacles)     | Efficient data aggregator/distributor |
 | [barterer](https://github.com/reelyactive/barterer)       | Real-time location & sensor data API |
 | [chickadee](https://github.com/reelyactive/chickadee)     | Contextual associations store and API |
 | [chimps](https://github.com/reelyactive/chimps)           | Spatial dynamics processor |
@@ -68,44 +68,50 @@ __pareto-anywhere__ listens for [ambient data](https://www.reelyactive.com/ambie
 | Software module                                               | Listens for |
 |:--------------------------------------------------------------|:------------|
 | [barnowl](https://github.com/reelyactive/barnowl)             | UDP raddec packets on port 50001 |
-| [barnowl-aruba](https://github.com/reelyactive/barnowl-aruba) | WebSocket on /aruba |
-| [barnowl-minew](https://github.com/reelyactive/barnowl-minew) | HTTP POST on /minew |
+| [barnowl-aruba](https://github.com/reelyactive/barnowl-aruba) | WebSocket on __/aruba__ |
+| [barnowl-minew](https://github.com/reelyactive/barnowl-minew) | HTTP POST on __/minew__ |
 | [barnowl-reel](https://github.com/reelyactive/barnowl-reel)   | UDP reel packets on port 50000 |
 | [barnowl-huawei](https://github.com/reelyactive/barnowl-huawei) | UDP Huawei packets on port 50010 |
-| [barnowl-impinj](https://github.com/reelyactive/barnowl-impinj) | HTTP POST on /impinj |
+| [barnowl-impinj](https://github.com/reelyactive/barnowl-impinj) | HTTP POST on __/impinj__ |
 | [barnowl-rfcontrols](https://github.com/reelyactive/barnowl-rfcontrols) | STOMP over WebSocket |
 
-Additional sources can often be added by running `npm run forwarder` of the corresponding barnowl-x module, such as [barnowl-hci](https://github.com/reelyactive/barnowl-hci/#pareto-anywhere-integration).
+Additional sources can often be added simply by running `npm run forwarder` of the corresponding barnowl-x module, such as [barnowl-hci](https://github.com/reelyactive/barnowl-hci/#pareto-anywhere-integration).
 
 
 Output: Hyperlocal Context
 --------------------------
 
-__pareto-anywhere__ outputs [hyperlocal context](https://www.reelyactive.com/context/) which may be queried via the /context API, or streamed as __raddec__, __dynamb__ and __spatem__ JSON data.  These JSON data structures are explained in the [reelyActive Developers Cheatsheet](https://reelyactive.github.io/diy/cheatsheet/).
+__pareto-anywhere__ outputs [hyperlocal context](https://www.reelyactive.com/context/) which may be queried via the __/context__ API, or streamed as __raddec__, __dynamb__ and __spatem__ JSON data.  These JSON data structures are explained in the [reelyActive Developers Cheatsheet](https://reelyactive.github.io/diy/cheatsheet/).
 
-These APIs are served by the following open source software modules:
+The __pareto-anywhere__ APIs are served by the following open source software modules:
 
-| Software module                                       | API      |
-|:------------------------------------------------------|:---------|
-| [barterer](https://github.com/reelyactive/barterer)   | /devices |
-| [chickadee](https://github.com/reelyactive/chickadee) | /context & /associations & /features |
-| [json-silo](https://github.com/reelyactive/json-silo) | /stories |
+| Software module                                       | API          |
+|:------------------------------------------------------|:-------------|
+| [barterer](https://github.com/reelyactive/barterer)   | __/devices__ |
+| [chickadee](https://github.com/reelyactive/chickadee) | __/context__ & __/associations__ & __/features__ |
+| [json-silo](https://github.com/reelyactive/json-silo) | __/stories__ |
 
 
-Collect and analyse the data with the Elastic Stack
----------------------------------------------------
+Native integrations
+-------------------
 
-This __pareto-anywhere__ package writes its real-time stream of data to an Elasticsearch database, if installed and running, so that it may in turn be analysed in Kibana.
+__Pareto Anywhere__ integrates with just about any data store, stream processor or application either via existing APIs or the addition of a connector module.  Additionally, the following integrations are _natively_ supported by  __pareto-anywhere__.
+
+### Elastic Stack
+
+__pareto-anywhere__ will automatically write to a local Elasticsearch database, if installed and running, so that the __raddec__ and __dynamb__ data may in turn be [analysed in Kibana](https://reelyactive.github.io/diy/kibana/).
 - __pareto-anywhere__ v1.8 and above expect an Elasticsearch 8.x instance, offering nominal backwards-compatiblility with 7.x
 - __pareto-anywhere__ v1.7 and below require an Elasticsearch 7.x instance
 
-If an Elasticsearch database is running locally at [http://localhost:9200](http://localhost:9200/), data storage should be automatic, with the data available for analysis at [http://localhost:5601](http://localhost:5601/) if Kibana is also running locally.
+The local Elasticsearch instance is expected at [http://localhost:9200](http://localhost:9200/) and, if a Kibana instance is also running, the data will be available for analysis at [http://localhost:5601](http://localhost:5601/).
 
 To instead have __pareto-anywhere__ store data in a _remote_ Elasticsearch database, first set the environment variable ELASTICSEARCH_NODE to the corresponding URL, including the corresponding username and password, for example:
 
     https://username:password@server.com:9243
 
-Elasticsearch and Kibana are _not_ required to enjoy the real-time functionality of Pareto Anywhere.  Instead, they add extensive, user-friendly data analysis functionality as described in our [Kibana tutorials](https://reelyactive.github.io/diy/kibana/).
+### Node-RED
+
+The [@reelyactive/node-red-pareto-anywhere](https://flows.nodered.org/node/@reelyactive/node-red-pareto-anywhere) Flow includes a __pareto-anywhere-socketio__ Node that will automatically connect to __pareto-anywhere__'s Socket.IO API running at [localhost:3001](http://localhost:3001), and will stream the __raddec__ and __dynamb__ JSON data to application logic in real-time.
 
 
 Build and run with Docker
@@ -158,21 +164,23 @@ If developing Pareto Apps from within this repository, changes can be pushed to 
     git push origin pareto-anywhere-develop
 
 
-Pareto Anywhere Web App
------------------------
+![Pareto Anywhere logo](https://reelyactive.github.io/pareto-anywhere/images/pareto-anywhere-logo.png)
 
-The _experimental_ Web Bluetooth Scanning feature, introduced to the Chrome browser in late 2019, enables an _experimental_ web app version of Pareto Anywhere hosted [here](https://reelyactive.github.io/pareto-anywhere/), with code in the [gh-pages branch](https://github.com/reelyactive/pareto-anywhere/tree/gh-pages).
+
+Pareto Anywhere variants
+------------------------
+
+[Pareto Anywhere for Azure](https://github.com/reelyactive/pareto-anywhere-azure) is adapted to run efficiently in the cloud as a stateless Azure Function.  Learn more [here](https://www.reelyactive.com/pareto/anywhere/integrations/azure/).
+
+[Pareto Anywhere for the Web](https://github.com/reelyactive/pareto-anywhere/tree/gh-pages) is adapted to run in-browser, leveraging the _experimental_ Web Bluetooth Scanning feature, introduced to the Chrome browser in late 2019.  Try it [here](https://reelyactive.github.io/pareto-anywhere/).
 
 
 Project History
 ---------------
 
-__Pareto Anywhere__ is in active development, evolving the [hlc-server](https://github.com/reelyactive/hlc-server/) code base (first created in 2014) which it is intended to supersede.  It is therefore normal for documentation to refer to hlc-server as a pseudonym of Pareto Anywhere.
+__Pareto Anywhere__ supersedes [hlc-server](https://github.com/reelyactive/hlc-server/) (first created in 2014).
 
 __pareto-anywhere__ v1.5.0 adopts [chickadee](https://github.com/reelyactive/chickadee) v1.4.0 which migrates to [ESMapDB](https://github.com/reelyactive/esmapdb) from [NeDB](https://github.com/louischatriot/nedb). If upgrading from a previous version, any stored associations will need to be recreated.
-
-
-![Pareto Anywhere logo](https://reelyactive.github.io/pareto-anywhere/images/pareto-anywhere-logo.png)
 
 
 Contributing
