@@ -5,9 +5,11 @@ __Pareto Anywhere__ is the open source middleware that enables context-aware phy
 
 ![Overview of Pareto Anywhere](https://reelyactive.github.io/pareto-anywhere/images/overview.png)
 
-__Pareto Anywhere__ provides a single standard stream of real-time data, in the form of developer-friendly JSON, regardless of the underlying devices & technologies.
+__Pareto Anywhere__ provides a single standard stream of real-time data, in the form of developer-friendly JSON, regardless of the underlying radio-identifiable devices & technologies.
 
 __pareto-anywhere__ is a lightweight [Node.js package](https://www.npmjs.com/package/pareto-anywhere) that can run on resource-constrained edge devices as well as on powerful cloud servers and anything in between (i.e. _Anywhere_).  The bundled web apps, APIs and integrations offer a friendly and comprehensive introduction to [context-aware physical spaces](https://www.reelyactive.com/context-aware-physical-spaces/).  And, thanks to a modular, open architecture, __pareto-anywhere__ can easily be customised for scale and/or functionality.
+
+Learn more at [www.reelyactive.com/pareto/anywhere/](https://www.reelyactive.com/pareto/anywhere/)
 
 
 Getting Started
@@ -35,14 +37,14 @@ _Alternatively_, install the __pareto-anywhere__ package globally with `npm inst
 Either way, browse to [localhost:3001](http://localhost:3001) to see __Pareto Anywhere__ running, and to explore the web apps and APIs.
 
 
-What is Pareto Anywhere?
+What is pareto-anywhere?
 ------------------------
 
-__Pareto Anywhere__ is middleware that makes _any_ physical space context-aware for _any_ application by processing the real-time wireless ambient data stream collected from _any_ infrastructure.  This __pareto-anywhere__ package is a convenient, lightweight and novice-friendly configuration of __Pareto Anywhere__ which itself is highly modular and scalable.
+__pareto-anywhere__ is a convenient collection of various open source software modules by [reelyActive](https://www.reelyactive.com) which, together, enable context-aware physical spaces.
 
 ![pareto-anywhere components](https://reelyactive.github.io/pareto-anywhere/images/pareto-anywhere-components.png)
 
-__Pareto Anywhere__ is the collection of various open source software modules by [reelyActive](https://www.reelyactive.com) which are hosted in their own individual repositories, specifically:
+These open source software modules are hosted each in their own individual repository as follows:
 
 | Software module                                           | Role |
 |:----------------------------------------------------------|:-----|
@@ -53,26 +55,41 @@ __Pareto Anywhere__ is the collection of various open source software modules by
 | [chimps](https://github.com/reelyactive/chimps)           | Spatial dynamics processor |
 | [advlib](https://github.com/reelyactive/advlib)           | Library for wireless advertising packet decoding |
 | [sniffypedia](https://github.com/reelyactive/sniffypedia) | Index for implicit URI assocation |
+| [json-silo](https://github.com/reelyactive/json-silo)     | Digital twins store |
 
-The _experimental_ web app version of Pareto Anywhere which runs entirely in-browser is maintained in the gh-pages branch of this repository (see below).
+__pareto-anywhere__ is designed to serve as a friendly launch point for developers and end-users alike.  The [lib/paretoanywhere.js](blob/master/lib/paretoanywhere.js) file can easily be edited to facilitate custom applications, by adding or removing modules as necessary.
 
 
-Where's the ambient data?
--------------------------
+Input: Ambient Data
+-------------------
 
-This __pareto-anywhere__ package listens for data streams from the following sources:
+__pareto-anywhere__ listens for [ambient data](https://www.reelyactive.com/ambient-data/) from multiple sources, using the following open source software modules:
 
-- UDP [raddec](https://github.com/reelyactive/raddec) packets on port 50001 (ex: [from an Owl-in-One](https://reelyactive.github.io/diy/oio-config/))
-- UDP [reel](https://www.reelyactive.com/technology/reel/) packets on port 50000
-- UDP [Huawei](https://github.com/reelyactive/barnowl-huawei/) packets on port 50010
-- HTTP POST to the /minew route (ex: [from a Minew G1](https://reelyactive.github.io/diy/minew-g1-config/)) _(G1 firmware v4.x required since Pareto Anywhere v1.7)_
-- HTTP POST to the /impinj route
-- WebSocket connection on the /aruba route (ex: [from an Aruba AP](https://reelyactive.github.io/diy/aruba-instant-config/))
-- STOMP over WebSockets from a [RF Controls](https://github.com/reelyactive/barnowl-rfcontrols/) RFC OS instance running on the same machine (with default credentials)
+| Software module                                               | Listens for |
+|:--------------------------------------------------------------|:------------|
+| [barnowl](https://github.com/reelyactive/barnowl)             | UDP raddec packets on port 50001 |
+| [barnowl-aruba](https://github.com/reelyactive/barnowl-aruba) | WebSocket on /aruba |
+| [barnowl-minew](https://github.com/reelyactive/barnowl-minew) | HTTP POST on /minew |
+| [barnowl-reel](https://github.com/reelyactive/barnowl-reel)   | UDP reel packets on port 50000 |
+| [barnowl-huawei](https://github.com/reelyactive/barnowl-huawei) | UDP Huawei packets on port 50010 |
+| [barnowl-impinj](https://github.com/reelyactive/barnowl-impinj) | HTTP POST on /impinj |
+| [barnowl-rfcontrols](https://github.com/reelyactive/barnowl-rfcontrols) | STOMP over WebSocket |
 
-If a local Bluetooth radio is available, [barnowl-hci](https://github.com/reelyactive/barnowl-hci/#pareto-anywhere-integration) can be installed and run with the command `npm run forwarder` to forward the data to Pareto Anywhere.
+Additional sources can often be added by running `npm run forwarder` of the corresponding barnowl-x module, such as [barnowl-hci](https://github.com/reelyactive/barnowl-hci/#pareto-anywhere-integration).
 
-__Pareto Anywhere__ is [infrastructure-agnostic](https://www.reelyactive.com/pareto/anywhere/infrastructure/) and supports simultaneous data streams from a heterogeneous mix of sources.
+
+Output: Hyperlocal Context
+--------------------------
+
+__pareto-anywhere__ outputs [hyperlocal context](https://www.reelyactive.com/context/) which may be queried via the /context API, or streamed as __raddec__, __dynamb__ and __spatem__ JSON data.  These JSON data structures are explained in the [reelyActive Developers Cheatsheet](https://reelyactive.github.io/diy/cheatsheet/).
+
+These APIs are served by the following open source software modules:
+
+| Software module                                       | API      |
+|:------------------------------------------------------|:---------|
+| [barterer](https://github.com/reelyactive/barterer)   | /devices |
+| [chickadee](https://github.com/reelyactive/chickadee) | /context & /associations & /features |
+| [json-silo](https://github.com/reelyactive/json-silo) | /stories |
 
 
 Collect and analyse the data with the Elastic Stack
