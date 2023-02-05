@@ -1,49 +1,38 @@
 Pareto Anywhere
 ===============
 
-[Pareto Anywhere](https://www.reelyactive.com/pareto/anywhere/) enables [context-aware physical spaces](https://www.reelyactive.com/context-aware-physical-spaces/).  __Pareto Anywhere__ is continuously-evolving open source middleware that transforms [ambient data](https://www.reelyactive.com/ambient-data/) into [hyperlocal context](https://www.reelyactive.com/context/): a real-time stream of _who/what_ is _where/how_.
+__Pareto Anywhere__ is the open source middleware that enables context-aware physical spaces—_anywhere._
 
-Configured as a lightweight [Node.js package](https://www.npmjs.com/package/pareto-anywhere), this __pareto-anywhere__ package installs quickly, and easily runs edge, local or cloud, on anything from a Raspberry Pi to a personal computer or server.  The bundled web apps, APIs and Elastic Stack integration offer a friendly and comprehensive introduction to context-aware physical spaces.  And, thanks to a modular, open architecture, __Pareto Anywhere__ can easily be customised for scale and/or functionality.
+![Overview of Pareto Anywhere](https://reelyactive.github.io/pareto-anywhere/images/overview.png)
 
-![Pareto Anywhere logo](https://reelyactive.github.io/pareto-anywhere/images/pareto-anywhere-logo.png)
+__Pareto Anywhere__ provides a single standard stream of real-time data, in the form of developer-friendly JSON, regardless of the underlying devices & technologies.
+
+__pareto-anywhere__ is a lightweight [Node.js package](https://www.npmjs.com/package/pareto-anywhere) that can run on resource-constrained edge devices as well as on powerful cloud servers and anything in between (i.e. _Anywhere_).  The bundled web apps, APIs and integrations offer a friendly and comprehensive introduction to [context-aware physical spaces](https://www.reelyactive.com/context-aware-physical-spaces/).  And, thanks to a modular, open architecture, __pareto-anywhere__ can easily be customised for scale and/or functionality.
 
 
-Installation guides
--------------------
+Getting Started
+---------------
 
-Install __Pareto Anywhere__ by following a step-by-step tutorial on our [reelyActive Developers](https://reelyactive.github.io/) site:
+Follow our step-by-step tutorials to get started with __Pareto Anywhere__ on your platform of choice:
 - [Run Pareto Anywhere on a personal computer](https://reelyactive.github.io/diy/pareto-anywhere-pc/)
 - [Run Pareto Anywhere on a Raspberry Pi](https://reelyactive.github.io/diy/pareto-anywhere-pi/)
+
+Learn "owl" about the __raddec__, __dynamb__ and __spatem__ JSON data output:
+- [reelyActive Developer's Cheatsheet](https://reelyactive.github.io/diy/cheatsheet/)
 
 
 Quick start
 -----------
 
-_Alternatively_, install the __pareto-anywhere__ package globally as follows:
+Clone this repository and its submodules with the command `git clone --recurse-submodules https://github.com/reelyactive/pareto-anywhere.git`, install package dependencies with `npm install`, and then from the root folder run at any time:
 
-    npm install -g pareto-anywhere
+    npm start
 
-Then run from the command line as follows:
+_Alternatively_, install the __pareto-anywhere__ package globally with `npm install -g pareto-anywhere`, and then run at any time:
 
     pareto-anywhere
 
-Browse to [localhost:3001](http://localhost:3001) to see __Pareto Anywhere__ running and browse the web apps and APIs.
-
-
-Dev install
------------
-
-_Alternatively_, clone the repo and submodules as follows:
-
-    git clone --recurse-submodules https://github.com/reelyactive/pareto-anywhere.git
-
-Then, from the pareto-anywhere folder, install the dependencies and run:
-
-    cd pareto-anywhere
-    npm install
-    npm start
-
-Browse to [localhost:3001](http://localhost:3001) to see __Pareto Anywhere__ running and browse the web apps and APIs.
+Either way, browse to [localhost:3001](http://localhost:3001) to see __Pareto Anywhere__ running, and to explore the web apps and APIs.
 
 
 What is Pareto Anywhere?
@@ -164,6 +153,9 @@ Project History
 __Pareto Anywhere__ is in active development, evolving the [hlc-server](https://github.com/reelyactive/hlc-server/) code base (first created in 2014) which it is intended to supersede.  It is therefore normal for documentation to refer to hlc-server as a pseudonym of Pareto Anywhere.
 
 __pareto-anywhere__ v1.5.0 adopts [chickadee](https://github.com/reelyactive/chickadee) v1.4.0 which migrates to [ESMapDB](https://github.com/reelyactive/esmapdb) from [NeDB](https://github.com/louischatriot/nedb). If upgrading from a previous version, any stored associations will need to be recreated.
+
+
+![Pareto Anywhere logo](https://reelyactive.github.io/pareto-anywhere/images/pareto-anywhere-logo.png)
 
 
 Contributing
