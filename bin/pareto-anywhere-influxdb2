@@ -1,0 +1,20 @@
+#!/usr/bin/env node
+
+const ParetoAnywhere = require('../lib/paretoanywhere.js');
+
+// ----- Exit gracefully if the optional dependency is not found -----
+let BarnaclesInfluxDB2;
+try {
+  BarnaclesInfluxDB2 = require('barnacles-influxdb2');
+}
+catch(err) {
+  console.log('This script requires the barnacles-influxdb2 package.  Try installing with:');
+  console.log('\r\n    "npm install barnacles-influxdb2"\r\n');
+  return console.log('and then run this script again.');
+}
+// -------------------------------------------------------------------
+
+let pa = new ParetoAnywhere();
+
+// Add the InfluxDB2 interface
+pa.barnacles.addInterface(BarnaclesInfluxDB2, {});

@@ -98,9 +98,23 @@ Native integrations
 
 __Pareto Anywhere__ integrates with just about any data store, stream processor or application either via existing APIs or the addition of a connector module.  Additionally, the following integrations are _natively_ supported by  __pareto-anywhere__.
 
+### InfluxDB v2
+
+From the root folder of this repository, start Pareto Anywhere with the command:
+
+   npm run influxdb2
+
+If prompted, install [barnacles-influxdb2](https://github.com/reelyactive/barnacles-influxdb2/) with the command `npm install barnacles-influxdb2`.  __pareto-anywhere__ will automatically write __dynamb__ data to a local InfluxDB v2 database, if installed and running.
+
+The local InfluxDB v2 instance is expected at [http://localhost:8086](http://localhost:8086/) with org "reelyActive" and bucket "pareto-anywhere".  Set INFLUXDB_TOKEN as an environment variable.
+
 ### Elastic Stack
 
-__pareto-anywhere__ will automatically write to a local Elasticsearch database, if installed and running, so that the __raddec__ and __dynamb__ data may in turn be [analysed in Kibana](https://reelyactive.github.io/diy/kibana/).
+From the root folder of this repository, start Pareto Anywhere with the command:
+
+   npm run elasticsearch
+
+If prompted, install [barnacles-elasticsearch](https://github.com/reelyactive/barnacles-elasticsearch/) with the command `npm install barnacles-elasticsearch`.  __pareto-anywhere__ will automatically write to a local Elasticsearch database, if installed and running, so that the __raddec__ and __dynamb__ data may in turn be [analysed in Kibana](https://reelyactive.github.io/diy/kibana/).
 - __pareto-anywhere__ v1.8 and above expect an Elasticsearch 8.x instance, offering nominal backwards-compatiblility with 7.x
 - __pareto-anywhere__ v1.7 and below require an Elasticsearch 7.x instance
 
@@ -182,6 +196,8 @@ Project History
 In 2019, __Pareto Anywhere__ was created to supersede [hlc-server](https://github.com/reelyactive/hlc-server/), our open source _Hyperlocal Context Server_, which was itself created in 2014.
 
 __pareto-anywhere__ v1.5.0 adopts [chickadee](https://github.com/reelyactive/chickadee) v1.4.0 which migrates to [ESMapDB](https://github.com/reelyactive/esmapdb) from [NeDB](https://github.com/louischatriot/nedb). If upgrading from a previous version, any stored associations will need to be recreated.
+
+__pareto-anywhere__ v1.13.0 removes explicit database dependencies (i.e. Elasticsearch), instead allowing the database to be specified at runtime (ex: `npm run elasticsearch` or `npm run influxdb2`).
 
 Learn more about the __Pareto by reelyActive__ collection at [www.reelyactive.com/pareto](https://www.reelyactive.com/pareto/)
 

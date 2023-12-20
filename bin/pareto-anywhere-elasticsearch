@@ -1,0 +1,23 @@
+#!/usr/bin/env node
+
+const ParetoAnywhere = require('../lib/paretoanywhere.js');
+
+// ----- Exit gracefully if the optional dependency is not found -----
+let BarnaclesElasticsearch;
+try {
+  BarnaclesElasticsearch = require('barnacles-elasticsearch');
+}
+catch(err) {
+  console.log('This script requires the barnacles-elasticsearch package.  Try installing with:');
+  console.log('\r\n    "npm install barnacles-elasticsearch"\r\n');
+  return console.log('and then run this script again.');
+}
+// -------------------------------------------------------------------
+
+const ELASTICSEARCH_NODE = process.env.ELASTICSEARCH_NODE ||
+                           'http://localhost:9200';
+
+let pa = new ParetoAnywhere();
+
+// Add the Elasticsearch interface
+pa.barnacles.addInterface(BarnaclesElasticsearch, { node: ELASTICSEARCH_NODE });
