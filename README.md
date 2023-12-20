@@ -102,7 +102,7 @@ __Pareto Anywhere__ integrates with just about any data store, stream processor 
 
 From the root folder of this repository, start Pareto Anywhere with the command:
 
-   npm run influxdb2
+    npm run influxdb2
 
 If prompted, install [barnacles-influxdb2](https://github.com/reelyactive/barnacles-influxdb2/) with the command `npm install barnacles-influxdb2`.  __pareto-anywhere__ will automatically write __dynamb__ data to a local InfluxDB v2 database, if installed and running.
 
@@ -112,7 +112,7 @@ The local InfluxDB v2 instance is expected at [http://localhost:8086](http://loc
 
 From the root folder of this repository, start Pareto Anywhere with the command:
 
-   npm run elasticsearch
+    npm run elasticsearch
 
 If prompted, install [barnacles-elasticsearch](https://github.com/reelyactive/barnacles-elasticsearch/) with the command `npm install barnacles-elasticsearch`.  __pareto-anywhere__ will automatically write to a local Elasticsearch database, if installed and running, so that the __raddec__ and __dynamb__ data may in turn be [analysed in Kibana](https://reelyactive.github.io/diy/kibana/).
 - __pareto-anywhere__ v1.8 and above expect an Elasticsearch 8.x instance, offering nominal backwards-compatiblility with 7.x
