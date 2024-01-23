@@ -93,6 +93,25 @@ The __pareto-anywhere__ APIs are served by the following open source software mo
 | [json-silo](https://github.com/reelyactive/json-silo) | __/stories__ |
 
 
+Config Files
+------------
+
+The __/config__ folder accepts the following run-time configuration files:
+
+### enocean.json
+
+EnOcean Alliance devices require a mapping between their device identifier and their EnOcean Equipment Profile (EEP) in order for their payload to be decoded by [advlib-esp](https://github.com/reelyactive/advlib-esp) and its sub-libraries.  The __/config/enocean.json__ file has the following format:
+
+    {
+      "05174fc4/7": { "eepType": "A5-04-03" },
+      "0591ee96/7": { "eepType": "D5-00-01" },
+      "04141559/7": { "eepType": "D2-14-41" },
+      "002eea1f/7": { "eepType": "F6-02-02" }
+    }
+
+Note that the 32-bit device identifier is specified in _lowercase_ hexadecimal and suffixed with "/7" which represents the [EURID-32 idType](https://reelyactive.github.io/diy/cheatsheet/#idtype), while the eepType is specified in _UPPERCASE_ hexadecimal.
+
+
 Native integrations
 -------------------
 
