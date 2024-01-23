@@ -37,6 +37,16 @@ _Alternatively_, install the __pareto-anywhere__ package globally with `npm inst
 Either way, browse to [localhost:3001](http://localhost:3001) to see __Pareto Anywhere__ running, and to explore the web apps and APIs.
 
 
+Updating
+--------
+
+An existing installation can be updated by running the following commands from the root of the cloned repository:
+
+    git fetch
+    git pull origin master --recurse-submodules
+    npm install
+
+
 What is pareto-anywhere?
 ------------------------
 
