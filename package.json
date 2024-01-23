@@ -39,7 +39,7 @@
     "advlib-eep-msc": "^1.0.0",
     "advlib-eep-rps": "^1.0.1",
     "advlib-eep-vld": "^1.2.0",
-    "advlib-esp": "^1.2.0",
+    "advlib-esp": "^1.3.0",
     "barnacles": "^1.5.8",
     "barnacles-socketio": "^1.0.0",
     "barnowl": "^1.3.2",
