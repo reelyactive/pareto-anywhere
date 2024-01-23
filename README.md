@@ -1,7 +1,7 @@
 Pareto Anywhere
 ===============
 
-__Pareto Anywhere__ is the open source middleware that enables context-aware physical spaces—_anywhere._
+__Pareto Anywhere__ is the open source IoT middleware that makes sense of who/what is where/how in an application/technology/vendor-agnostic way.
 
 ![Overview of Pareto Anywhere](https://reelyactive.github.io/pareto-anywhere/images/overview.png)
 
