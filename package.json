@@ -14,7 +14,7 @@
     "RTLS",
     "M2M"
   ],
-  "version": "1.14.0",
+  "version": "1.14.1",
   "engines": {
     "node": ">=12.0.0"
   },
@@ -43,7 +43,7 @@
     "barnacles": "^1.5.8",
     "barnacles-socketio": "^1.0.0",
     "barnowl": "^1.3.2",
-    "barnowl-aruba": "^1.2.2",
+    "barnowl-aruba": "^1.3.0",
     "barnowl-csl": "^1.0.0",
     "barnowl-huawei": "^1.0.2",
     "barnowl-impinj": "^1.0.0",
