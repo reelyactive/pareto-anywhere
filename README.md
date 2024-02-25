@@ -85,6 +85,7 @@ __pareto-anywhere__ listens for [ambient data](https://www.reelyactive.com/ambie
 | [barnowl-impinj](https://github.com/reelyactive/barnowl-impinj) | HTTP POST on __/impinj__ |
 | [barnowl-rfcontrols](https://github.com/reelyactive/barnowl-rfcontrols) | STOMP over WebSocket |
 | [barnowl-csl](https://github.com/reelyactive/barnowl-csl)     | HTTP POST on __/csl__ |
+| [barnowl-axis](https://github.com/reelyactive/barnowl-axis)   | MQTT on localhost |
 
 Additional sources can often be added simply by running `npm run forwarder` of the corresponding barnowl-x module, such as [barnowl-hci](https://github.com/reelyactive/barnowl-hci/#pareto-anywhere-integration).
 
