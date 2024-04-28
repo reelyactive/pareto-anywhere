@@ -107,7 +107,13 @@ The __pareto-anywhere__ APIs are served by the following open source software mo
 Config Files
 ------------
 
-The __/config__ folder accepts the following run-time configuration files:
+The __/config__ folder, or a distinct folder specified by the PARETO_ANYWHERE_CONFIG_PATH environment variable, accepts the following run-time configuration files:
+
+### certificate.pem & key.pem
+
+On startup, __pareto-anywhere__ attempts to initiate a HTTPS server using these files, if present.  If not, a HTTP server is instantiated instead.
+
+Note that ambient data sources which relay data to __pareto-anywhere__ should observe the corresponding protocol (http:// vs. https:// and ws:// vs. wss://) in their target configuration.
 
 ### enocean.json
 
