@@ -1,0 +1,22 @@
+#!/usr/bin/env node
+
+const ParetoAnywhere = require('../lib/paretoanywhere.js');
+
+const BARNACLES_LOGFILE_OPTIONS = {};
+
+// ----- Exit gracefully if the dependency is not found -----
+let BarnaclesLogfile;
+try {
+  BarnaclesLogfile = require('barnacles-logfile');
+}
+catch(err) {
+  console.log('This script requires the barnacles-logfile package.  Try installing with:');
+  console.log('\r\n    "npm install barnacles-logfile"\r\n');
+  return console.log('and then run this script again.');
+}
+// -------------------------------------------------------------------
+
+let pa = new ParetoAnywhere();
+
+// Add the Logfile interface
+pa.barnacles.addInterface(BarnaclesLogfile, BARNACLES_LOGFILE_OPTIONS);

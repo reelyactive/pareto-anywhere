@@ -23,18 +23,38 @@ Learn "owl" about the __raddec__, __dynamb__ and __spatem__ JSON data output:
 - [reelyActive Developer's Cheatsheet](https://reelyactive.github.io/diy/cheatsheet/)
 
 
-Quick start
------------
+Quick(est) start
+----------------
 
-Clone this repository and its submodules with the command `git clone --recurse-submodules https://github.com/reelyactive/pareto-anywhere.git`, install package dependencies with `npm install`, and then from the root folder run at any time:
+Install (or update) the __pareto-anywhere__ package globally with the command:
 
-    npm start
+    npm install -g pareto-anywhere
 
-_Alternatively_, install the __pareto-anywhere__ package globally with `npm install -g pareto-anywhere`, and then run at any time:
+Run at any time with the command:
 
     pareto-anywhere
 
-Either way, browse to [localhost:3001](http://localhost:3001) to see __Pareto Anywhere__ running, and to explore the web apps and APIs.
+Browse to [localhost:3001](http://localhost:3001) to see __Pareto Anywhere__ running, and to explore the web apps and APIs.
+
+This installation affords _limited_ configuration through environment variables.  For _full_ configuration capability, instead follow the (Recommended) Quick start below.
+
+
+(Recommended) Quick start
+-------------------------
+
+Clone this repository and its submodules, and install dependencies with the following commands:
+
+    git clone --recurse-submodules https://github.com/reelyactive/pareto-anywhere.git
+    cd pareto-anywhere
+    npm install
+
+Then from the __pareto-anywhere__ folder, run at any time with the command:
+
+    npm start
+
+Browse to [localhost:3001](http://localhost:3001) to see __Pareto Anywhere__ running, and to explore the web apps and APIs.
+
+This installation affords _full_ configuration through custom startup scripts and environment variables.  Consult our [Create a Pareto Anywhere startup script](https://reelyactive.github.io/diy/pareto-anywhere-startup-script/) tutorial to learn more, and our [Run Pareto Anywhere as a Windows service](https://reelyactive.github.io/diy/pareto-anywhere-windows-service/) tutorial for running in production on Windows machines.
 
 
 Updating
@@ -67,7 +87,7 @@ These open source software modules are hosted each in their own individual repos
 | [sniffypedia](https://github.com/reelyactive/sniffypedia) | Index for implicit URI assocation |
 | [json-silo](https://github.com/reelyactive/json-silo)     | Digital twins store |
 
-__pareto-anywhere__ is designed to serve as a friendly launch point for developers and end-users alike.  The [lib/paretoanywhere.js](blob/master/lib/paretoanywhere.js) file can easily be edited to facilitate custom applications, by adding or removing modules as necessary.
+__pareto-anywhere__ is designed to serve as a friendly launch point for developers and end-users alike.  [Create a Pareto Anywhere startup script](https://reelyactive.github.io/diy/pareto-anywhere-startup-script/) to add and customise modules, or, if necessary, edit the [lib/paretoanywhere.js](blob/master/lib/paretoanywhere.js) file directly, to remove and customise modules.
 
 
 Input: Ambient Data
@@ -87,7 +107,7 @@ __pareto-anywhere__ listens for [ambient data](https://www.reelyactive.com/ambie
 | [barnowl-csl](https://github.com/reelyactive/barnowl-csl)     | HTTP POST on __/csl__ |
 | [barnowl-axis](https://github.com/reelyactive/barnowl-axis)   | MQTT on localhost |
 
-Additional sources can often be added simply by running `npm run forwarder` of the corresponding barnowl-x module, such as [barnowl-hci](https://github.com/reelyactive/barnowl-hci/#pareto-anywhere-integration).
+[Create a Pareto Anywhere startup script](https://reelyactive.github.io/diy/pareto-anywhere-startup-script/) to add and customise input modules, or forward __raddec__ data as UDP packets simply by running the `npm run forwarder` script of the corresponding barnowl-x module, such as [barnowl-hci](https://github.com/reelyactive/barnowl-hci/#pareto-anywhere-integration).  
 
 
 Output: Hyperlocal Context
@@ -102,6 +122,14 @@ The __pareto-anywhere__ APIs are served by the following open source software mo
 | [barterer](https://github.com/reelyactive/barterer)   | __/devices__ |
 | [chickadee](https://github.com/reelyactive/chickadee) | __/context__ & __/associations__ & __/features__ |
 | [json-silo](https://github.com/reelyactive/json-silo) | __/stories__ |
+
+### Output logfiles
+
+To capture __raddec__ and __dynamb__ data into .csv files, from the root folder of this repository, start Pareto Anywhere with the command:
+
+    npm run logfile
+
+Files named raddec-yymmdd-hhmmss.csv and dynamb-yymmdd-hhmmss.csv will appear in the root folder when data is processed, rotating periodically, and which can be opened in a spreadsheet for analysis. 
 
 
 Config Files
@@ -162,7 +190,7 @@ To instead have __pareto-anywhere__ store data in a _remote_ Elasticsearch datab
 
 ### Node-RED
 
-The [@reelyactive/node-red-pareto-anywhere](https://flows.nodered.org/node/@reelyactive/node-red-pareto-anywhere) Flow includes a __pareto-anywhere-socketio__ Node that will automatically connect to __pareto-anywhere__'s Socket.IO API running at [localhost:3001](http://localhost:3001), and will stream the __raddec__ and __dynamb__ JSON data to application logic in real-time.
+The [@reelyactive/node-red-pareto-anywhere](https://flows.nodered.org/node/@reelyactive/node-red-pareto-anywhere) Flow includes a __pareto-anywhere-socketio__ Node that will automatically connect to __pareto-anywhere__'s Socket.IO API running at [localhost:3001](http://localhost:3001), and will stream the __raddec__, __dynamb__ and __spatem__ JSON data to application logic in real-time.
 
 
 Build and run with Docker
