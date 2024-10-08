@@ -42,6 +42,7 @@
     "advlib-esp": "^1.3.0",
     "advlib-interoperable": "^1.4.0",
     "barnacles": "^1.7.2",
+    "barnacles-logfile": "^1.3.0",
     "barnacles-socketio": "^1.0.0",
     "barnowl": "^1.3.3",
     "barnowl-aruba": "^1.6.0",
