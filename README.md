@@ -123,6 +123,14 @@ The __pareto-anywhere__ APIs are served by the following open source software mo
 | [chickadee](https://github.com/reelyactive/chickadee) | __/context__ & __/associations__ & __/features__ |
 | [json-silo](https://github.com/reelyactive/json-silo) | __/stories__ |
 
+### Output logfiles
+
+To capture __raddec__ and __dynamb__ data into .csv files, from the root folder of this repository, start Pareto Anywhere with the command:
+
+    npm run logfile
+
+Files named raddec-yymmdd-hhmmss.csv and dynamb-yymmdd-hhmmss.csv will appear in the root folder when data is processed, rotating periodically, and which can be opened in a spreadsheet for analysis. 
+
 
 Config Files
 ------------
