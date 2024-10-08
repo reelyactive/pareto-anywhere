@@ -87,7 +87,7 @@ These open source software modules are hosted each in their own individual repos
 | [sniffypedia](https://github.com/reelyactive/sniffypedia) | Index for implicit URI assocation |
 | [json-silo](https://github.com/reelyactive/json-silo)     | Digital twins store |
 
-__pareto-anywhere__ is designed to serve as a friendly launch point for developers and end-users alike.  The [lib/paretoanywhere.js](blob/master/lib/paretoanywhere.js) file can easily be edited to facilitate custom applications, by adding or removing modules as necessary.
+__pareto-anywhere__ is designed to serve as a friendly launch point for developers and end-users alike.  [Create a Pareto Anywhere startup script](https://reelyactive.github.io/diy/pareto-anywhere-startup-script/) to add and customise modules, or, if necessary, edit the [lib/paretoanywhere.js](blob/master/lib/paretoanywhere.js) file directly, to remove and customise modules.
 
 
 Input: Ambient Data
@@ -107,7 +107,7 @@ __pareto-anywhere__ listens for [ambient data](https://www.reelyactive.com/ambie
 | [barnowl-csl](https://github.com/reelyactive/barnowl-csl)     | HTTP POST on __/csl__ |
 | [barnowl-axis](https://github.com/reelyactive/barnowl-axis)   | MQTT on localhost |
 
-Additional sources can often be added simply by running `npm run forwarder` of the corresponding barnowl-x module, such as [barnowl-hci](https://github.com/reelyactive/barnowl-hci/#pareto-anywhere-integration).
+[Create a Pareto Anywhere startup script](https://reelyactive.github.io/diy/pareto-anywhere-startup-script/) to add and customise input modules, or forward __raddec__ data as UDP packets simply by running the `npm run forwarder` script of the corresponding barnowl-x module, such as [barnowl-hci](https://github.com/reelyactive/barnowl-hci/#pareto-anywhere-integration).  
 
 
 Output: Hyperlocal Context
