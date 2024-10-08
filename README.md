@@ -54,7 +54,7 @@ Then from the __pareto-anywhere__ folder, run at any time with the command:
 
 Browse to [localhost:3001](http://localhost:3001) to see __Pareto Anywhere__ running, and to explore the web apps and APIs.
 
-This installation affords _full_ configuration through custom startup scripts and environment variables.  Consult our [Create a Pareto Anywhere startup script](https://reelyactive.github.io/diy/pareto-anywhere-startup-script/) tutorial to learn more.
+This installation affords _full_ configuration through custom startup scripts and environment variables.  Consult our [Create a Pareto Anywhere startup script](https://reelyactive.github.io/diy/pareto-anywhere-startup-script/) tutorial to learn more, and our [Run Pareto Anywhere as a Windows service](https://reelyactive.github.io/diy/pareto-anywhere-windows-service/) tutorial for running in production on Windows machines.
 
 
 Updating
