@@ -58,11 +58,11 @@
     "chickadee": "^1.8.1",
     "chimps": "^1.1.2",
     "cors": "^2.8.5",
-    "express": "^4.19.2",
+    "express": "^4.21.1",
     "json-silo": "^1.1.5",
     "raddec": "^0.6.0",
     "sniffypedia": "^1.1.9",
-    "socket.io": "^4.7.5"
+    "socket.io": "^4.8.0"
   },
   "bugs": {
     "url": "https://github.com/reelyactive/pareto-anywhere/issues"
