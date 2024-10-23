@@ -14,7 +14,7 @@
     "RTLS",
     "M2M"
   ],
-  "version": "1.18.0",
+  "version": "1.18.1",
   "engines": {
     "node": ">=12.0.0"
   },
@@ -34,7 +34,7 @@
     "advlib": "^1.3.5",
     "advlib-ble": "^1.4.0",
     "advlib-ble-gatt": "^1.0.1",
-    "advlib-ble-manufacturers": "^1.8.1",
+    "advlib-ble-manufacturers": "^1.8.2",
     "advlib-ble-services": "^1.6.0",
     "advlib-eep-4bs": "^1.3.0",
     "advlib-eep-msc": "^1.1.1",
@@ -42,7 +42,7 @@
     "advlib-eep-vld": "^1.2.0",
     "advlib-esp": "^1.3.0",
     "advlib-interoperable": "^1.4.0",
-    "barnacles": "^1.7.2",
+    "barnacles": "^1.7.3",
     "barnacles-logfile": "^1.3.0",
     "barnacles-socketio": "^1.0.0",
     "barnowl": "^1.3.3",
