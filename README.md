@@ -1,7 +1,7 @@
 Pareto Anywhere
 ===============
 
-__Pareto Anywhere__ is the open source IoT middleware that makes sense of who/what is where/how in an application/technology/vendor-agnostic way.
+__Pareto Anywhere__ is the open source IoT middleware that makes the data from just about anything readily usable an application/technology/vendor-agnostic way.
 
 ![Overview of Pareto Anywhere](https://reelyactive.github.io/pareto-anywhere/images/overview.png)
 
@@ -70,7 +70,7 @@ An existing installation can be updated by running the following commands from t
 What is pareto-anywhere?
 ------------------------
 
-__pareto-anywhere__ is a convenient collection of various open source software modules by [reelyActive](https://www.reelyactive.com) which, together, enable context-aware physical spaces.
+__pareto-anywhere__ is a convenient collection of complementary open source software modules by [reelyActive](https://www.reelyactive.com) which, together, collect ambient IoT data from common sources and process it into a standard JSON format that you can readily put to good use via APIs, web apps and familiar integrations.
 
 ![pareto-anywhere components](https://reelyactive.github.io/pareto-anywhere/images/pareto-anywhere-components.png)
 
