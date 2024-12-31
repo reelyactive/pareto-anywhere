@@ -113,7 +113,7 @@ __pareto-anywhere__ listens for [ambient data](https://www.reelyactive.com/ambie
 Output: Hyperlocal Context
 --------------------------
 
-__pareto-anywhere__ outputs [hyperlocal context](https://www.reelyactive.com/context/) which may be queried via the __/context__ API, or streamed as __raddec__, __dynamb__ and __spatem__ JSON data.  These JSON data structures are explained in the [reelyActive Developers Cheatsheet](https://reelyactive.github.io/diy/cheatsheet/).
+__pareto-anywhere__ outputs [hyperlocal context](https://www.reelyactive.com/context/) which may be queried via the __/context__ API, or streamed as __raddec__, __dynamb__ and __spatem__ JSON data by subscribing via MQTT and/or Socket.IO.  These JSON data structures are explained in the [reelyActive Developers Cheatsheet](https://reelyactive.github.io/diy/cheatsheet/).
 
 The __pareto-anywhere__ APIs are served by the following open source software modules:
 
@@ -122,6 +122,15 @@ The __pareto-anywhere__ APIs are served by the following open source software mo
 | [barterer](https://github.com/reelyactive/barterer)   | __/devices__ |
 | [chickadee](https://github.com/reelyactive/chickadee) | __/context__ & __/associations__ & __/features__ |
 | [json-silo](https://github.com/reelyactive/json-silo) | __/stories__ |
+
+Data is published, by default, to a MQTT broker on localhost by the [barnacles-mqtt](https://github.com/reelyactive/barnacles-mqtt) module which observes the following topic structure:
+
+- `paretoanywhere/devices/[deviceId]/[deviceIdType]/raddec`
+- `paretoanywhere/devices/[deviceId]/[deviceIdType]/dynamb`
+- `paretoanywhere/devices/[deviceId]/[deviceIdType]/spatem`
+
+The MQTT single-level wildcard (+) can be used to subscribe to all event types for a given device, and the multi-level wildcard (#) can be used to subscribe to all events for all devices, for example: `paretoanywhere/#`
+
 
 ### Output logfiles
 
