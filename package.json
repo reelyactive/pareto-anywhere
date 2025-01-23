@@ -5,16 +5,17 @@
     "name": "reelyActive",
     "email": "info@reelyactive.com"
   },
-  "description": "Open source IoT middleware suite for context-aware physical spaces.  We believe in an open Internet of Things.",
+  "description": "Open source IoT middleware suite that makes the data from just about anything usable.  We believe in an open Internet of Things.",
   "keywords": [
     "Pareto Anywhere",
     "reelyActive",
+    "middleware",
     "context-aware physical spaces",
     "IoT",
     "RTLS",
     "M2M"
   ],
-  "version": "1.19.1",
+  "version": "1.19.2",
   "engines": {
     "node": ">=18.0.0"
   },
@@ -24,7 +25,8 @@
     "start": "node bin/pareto-anywhere",
     "logfile": "node bin/pareto-anywhere-logfile",
     "elasticsearch": "node bin/pareto-anywhere-elasticsearch",
-    "influxdb2": "node bin/pareto-anywhere-influxdb2"
+    "influxdb2": "node bin/pareto-anywhere-influxdb2",
+    "sparkplug": "node bin/pareto-anywhere-sparkplug"
   },
   "repository": {
     "type": "git",
@@ -34,7 +36,7 @@
     "advlib": "^1.3.6",
     "advlib-ble": "^1.4.0",
     "advlib-ble-gatt": "^1.0.1",
-    "advlib-ble-manufacturers": "^1.9.1",
+    "advlib-ble-manufacturers": "^1.9.2",
     "advlib-ble-services": "^1.6.0",
     "advlib-eep-4bs": "^1.3.0",
     "advlib-eep-msc": "^1.1.1",
