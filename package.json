@@ -15,7 +15,7 @@
     "RTLS",
     "M2M"
   ],
-  "version": "1.19.4",
+  "version": "1.19.5",
   "engines": {
     "node": ">=18.0.0"
   },
@@ -35,7 +35,7 @@
   "dependencies": {
     "advlib": "^1.3.7",
     "advlib-ble": "^1.4.1",
-    "advlib-ble-gatt": "^1.1.0",
+    "advlib-ble-gatt": "^1.1.1",
     "advlib-ble-manufacturers": "^1.9.4",
     "advlib-ble-services": "^1.6.0",
     "advlib-eep-4bs": "^1.3.0",
@@ -58,7 +58,7 @@
     "barnowl-reel": "^0.2.1",
     "barnowl-rfcontrols": "^1.0.0",
     "barterer": "^1.5.4",
-    "chickadee": "^1.8.4",
+    "chickadee": "^1.9.0",
     "chimps": "^1.1.3",
     "cors": "^2.8.5",
     "express": "^4.21.2",
