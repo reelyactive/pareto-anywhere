@@ -1,0 +1,21 @@
+#!/usr/bin/env node
+
+const ParetoAnywhere = require('../lib/paretoanywhere.js');
+
+// ----- Exit gracefully if the optional dependency is not found -----
+let BarnaclesInfluxDB2;
+try {
+  BarnaclesInfluxDB2 = require('barnacles-influxdb2');
+}
+catch(err) {
+  console.log('This script requires the barnacles-influxdb2 package.  Try installing with:');
+  console.log('\r\n    "npm install barnacles-influxdb2"\r\n');
+  return console.log('and then run this script again.');
+}
+// -------------------------------------------------------------------
+
+// Enable acceptStaleRaddecs as Briefcase Kit may run offline without NTP
+let pa = new ParetoAnywhere({ barnacles: { acceptStaleRaddecs: true } });
+
+// Add the InfluxDB2 interface
+pa.barnacles.addInterface(BarnaclesInfluxDB2, {});
