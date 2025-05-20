@@ -86,6 +86,7 @@ These open source software modules are hosted each in their own individual repos
 | [advlib](https://github.com/reelyactive/advlib)           | Library for wireless advertising packet decoding |
 | [sniffypedia](https://github.com/reelyactive/sniffypedia) | Index for implicit URI assocation |
 | [json-silo](https://github.com/reelyactive/json-silo)     | Digital twins store |
+| [record-silo](https://github.com/reelyactive/record-silo) | Digital records store |
 
 __pareto-anywhere__ is designed to serve as a friendly launch point for developers and end-users alike.  [Create a Pareto Anywhere startup script](https://reelyactive.github.io/diy/pareto-anywhere-startup-script/) to add and customise modules, or, if necessary, edit the [lib/paretoanywhere.js](blob/master/lib/paretoanywhere.js) file directly, to remove and customise modules.
 
@@ -117,11 +118,12 @@ __pareto-anywhere__ outputs [hyperlocal context](https://www.reelyactive.com/con
 
 The __pareto-anywhere__ APIs are served by the following open source software modules:
 
-| Software module                                       | API          |
-|:------------------------------------------------------|:-------------|
-| [barterer](https://github.com/reelyactive/barterer)   | __/devices__ |
-| [chickadee](https://github.com/reelyactive/chickadee) | __/context__ & __/associations__ & __/features__ |
-| [json-silo](https://github.com/reelyactive/json-silo) | __/stories__ |
+| Software module                                           | API          |
+|:----------------------------------------------------------|:-------------|
+| [barterer](https://github.com/reelyactive/barterer)       | __/devices__ |
+| [chickadee](https://github.com/reelyactive/chickadee)     | __/context__ & __/associations__ & __/features__ |
+| [json-silo](https://github.com/reelyactive/json-silo)     | __/stories__ |
+| [record-silo](https://github.com/reelyactive/record-silo) | __/records__ |
 
 Data is published, by default, to a MQTT broker on localhost by the [barnacles-mqtt](https://github.com/reelyactive/barnacles-mqtt) module which observes the following topic structure:
 
