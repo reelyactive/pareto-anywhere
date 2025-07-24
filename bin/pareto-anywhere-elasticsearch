@@ -19,5 +19,7 @@ const ELASTICSEARCH_NODE = process.env.ELASTICSEARCH_NODE ||
 
 let pa = new ParetoAnywhere();
 
-// Add the Elasticsearch interface
-pa.barnacles.addInterface(BarnaclesElasticsearch, { node: ELASTICSEARCH_NODE });
+// Add the Elasticsearch interface to both barnacles and chimps
+let barnaclesElasticsearch = pa.barnacles.addInterface(BarnaclesElasticsearch,
+                                                 { node: ELASTICSEARCH_NODE });
+pa.chimps.addInterface(barnaclesElasticsearch);
