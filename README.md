@@ -173,6 +173,16 @@ Native integrations
 
 __Pareto Anywhere__ integrates with just about any data store, stream processor or application either via existing APIs or the addition of a connector module.  Additionally, the following integrations are _natively_ supported by  __pareto-anywhere__.
 
+### PostgreSQL
+
+From the root folder of this repository, start Pareto Anywhere with the command:
+
+    npm run postgres
+
+If prompted, install [barnacles-postgres](https://github.com/reelyactive/barnacles-postgres/) with the command `npm install barnacles-postgres`.  __pareto-anywhere__ will automatically write __raddec__, __dynamb__ and __spatem__ data to a local PostgreSQL database, if installed and running.
+
+The local PostgreSQL instance is expected at [http://localhost:5432](http://localhost:5432/) with user "reelyactive" and database "pareto_anywhere".  See [barnacles-postgres](https://github.com/reelyactive/barnacles-postgres/) for options and environment variables supporting alternative configurations.
+
 ### InfluxDB v2
 
 From the root folder of this repository, start Pareto Anywhere with the command:

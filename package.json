@@ -27,7 +27,8 @@
     "elasticsearch": "node bin/pareto-anywhere-elasticsearch",
     "influxdb2": "node bin/pareto-anywhere-influxdb2",
     "sparkplug": "node bin/pareto-anywhere-sparkplug",
-    "briefcasekit": "node bin/pareto-anywhere-briefcasekit"
+    "briefcasekit": "node bin/pareto-anywhere-briefcasekit",
+    "postgres": "node bin/pareto-anywhere-postgres"
   },
   "repository": {
     "type": "git",
