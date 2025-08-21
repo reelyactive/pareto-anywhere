@@ -295,6 +295,15 @@ __pareto-anywhere__ v1.13.0 removes explicit database dependencies (i.e. Elastic
 Learn more about the __Pareto by reelyActive__ collection at [www.reelyactive.com/pareto](https://www.reelyactive.com/pareto/)
 
 
+Discussions
+-----------
+
+Browse to :speech_balloon: [pareto-anywhere/discussions](https://github.com/reelyactive/pareto-anywhere/discussions/) to: 
+- __follow announcements__ about new versions, updates and tutorials
+- __provide feedback__ to guide the continuous evolution of Pareto Anywhere
+- __share clever ideas__ with the open source community about how you're using Pareto Anywhere
+
+
 Contributing
 ------------
 
