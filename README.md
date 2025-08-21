@@ -298,7 +298,7 @@ Learn more about the __Pareto by reelyActive__ collection at [www.reelyactive.co
 Discussions
 -----------
 
-Browse to :speech_balloon: [pareto-anywhere/discussions](https://github.com/reelyactive/pareto-anywhere/discussions/) to: 
+Browse to :speech_balloon:[/discussions](https://github.com/reelyactive/pareto-anywhere/discussions/) to: 
 - __follow announcements__ about new versions, updates and tutorials
 - __provide feedback__ to guide the continuous evolution of Pareto Anywhere
 - __share clever ideas__ with the open source community about how you're using Pareto Anywhere
