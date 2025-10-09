@@ -15,7 +15,7 @@
     "RTLS",
     "M2M"
   ],
-  "version": "1.22.2",
+  "version": "1.23.0",
   "engines": {
     "node": ">=18.0.0"
   },
@@ -60,6 +60,7 @@
     "barnowl-minew": "^1.2.1",
     "barnowl-reel": "^0.2.1",
     "barnowl-rfcontrols": "^1.0.1",
+    "barnowl-zebra": "^1.0.1",
     "barterer": "^1.5.6",
     "chickadee": "^1.11.1",
     "chimps": "^1.1.4",

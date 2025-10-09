@@ -16,11 +16,14 @@ Getting Started
 ---------------
 
 Follow our step-by-step tutorials to get started with __Pareto Anywhere__ on your platform of choice:
-- [Run Pareto Anywhere on a personal computer](https://reelyactive.github.io/diy/pareto-anywhere-pc/)
+- [Run Pareto Anywhere on a PC (or server)](https://reelyactive.github.io/diy/pareto-anywhere-pc/)
 - [Run Pareto Anywhere on a Raspberry Pi](https://reelyactive.github.io/diy/pareto-anywhere-pi/)
 
 Learn "owl" about the __raddec__, __dynamb__ and __spatem__ JSON data output:
 - [reelyActive Developer's Cheatsheet](https://reelyactive.github.io/diy/cheatsheet/)
+
+Build out an open source IoT stack using a PostgreSQL database and Grafana dashboards:
+- [Grafana with PostgreSQL](https://reelyactive.github.io/diy/grafana-postgresql-prep/)
 
 
 Quick(est) start
@@ -106,6 +109,7 @@ __pareto-anywhere__ listens for [ambient data](https://www.reelyactive.com/ambie
 | [barnowl-impinj](https://github.com/reelyactive/barnowl-impinj) | HTTP POST on __/impinj__ |
 | [barnowl-rfcontrols](https://github.com/reelyactive/barnowl-rfcontrols) | STOMP over WebSocket |
 | [barnowl-csl](https://github.com/reelyactive/barnowl-csl)     | HTTP POST on __/csl__ |
+| [barnowl-zebra](https://github.com/reelyactive/barnowl-zebra) | MQTT on localhost |
 | [barnowl-axis](https://github.com/reelyactive/barnowl-axis)   | MQTT on localhost |
 
 [Create a Pareto Anywhere startup script](https://reelyactive.github.io/diy/pareto-anywhere-startup-script/) to add and customise input modules, or forward __raddec__ data as UDP packets simply by running the `npm run forwarder` script of the corresponding barnowl-x module, such as [barnowl-hci](https://github.com/reelyactive/barnowl-hci/#pareto-anywhere-integration).  
@@ -182,6 +186,8 @@ From the root folder of this repository, start Pareto Anywhere with the command:
 If prompted, install [barnacles-postgres](https://github.com/reelyactive/barnacles-postgres/) with the command `npm install barnacles-postgres`.  __pareto-anywhere__ will automatically write __raddec__, __dynamb__ and __spatem__ data to a local PostgreSQL database, if installed and running.
 
 The local PostgreSQL instance is expected at [http://localhost:5432](http://localhost:5432/) with user "reelyactive" and database "pareto_anywhere".  See [barnacles-postgres](https://github.com/reelyactive/barnacles-postgres/) for options and environment variables supporting alternative configurations.
+
+Consult our [Install PostgreSQL and PostGIS](https://reelyactive.github.io/diy/postgresql-postgis-prep/) tutorial for step by step instructions.
 
 ### InfluxDB v2
 
