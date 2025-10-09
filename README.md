@@ -106,6 +106,7 @@ __pareto-anywhere__ listens for [ambient data](https://www.reelyactive.com/ambie
 | [barnowl-impinj](https://github.com/reelyactive/barnowl-impinj) | HTTP POST on __/impinj__ |
 | [barnowl-rfcontrols](https://github.com/reelyactive/barnowl-rfcontrols) | STOMP over WebSocket |
 | [barnowl-csl](https://github.com/reelyactive/barnowl-csl)     | HTTP POST on __/csl__ |
+| [barnowl-zebra](https://github.com/reelyactive/barnowl-zebra) | MQTT on localhost |
 | [barnowl-axis](https://github.com/reelyactive/barnowl-axis)   | MQTT on localhost |
 
 [Create a Pareto Anywhere startup script](https://reelyactive.github.io/diy/pareto-anywhere-startup-script/) to add and customise input modules, or forward __raddec__ data as UDP packets simply by running the `npm run forwarder` script of the corresponding barnowl-x module, such as [barnowl-hci](https://github.com/reelyactive/barnowl-hci/#pareto-anywhere-integration).  
