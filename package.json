@@ -15,7 +15,7 @@
     "RTLS",
     "M2M"
   ],
-  "version": "1.23.0",
+  "version": "1.23.1",
   "engines": {
     "node": ">=18.0.0"
   },
@@ -38,7 +38,7 @@
     "advlib": "^1.3.9",
     "advlib-ble": "^1.4.2",
     "advlib-ble-gatt": "^1.1.2",
-    "advlib-ble-manufacturers": "^1.11.0",
+    "advlib-ble-manufacturers": "^1.13.1",
     "advlib-ble-services": "^1.7.0",
     "advlib-eep-4bs": "^1.3.0",
     "advlib-eep-msc": "^1.1.1",
@@ -69,7 +69,7 @@
     "json-silo": "^1.2.1",
     "raddec": "^0.6.1",
     "record-silo": "^0.2.2",
-    "sniffypedia": "^1.1.10",
+    "sniffypedia": "^1.1.11",
     "socket.io": "^4.8.1"
   },
   "bugs": {
