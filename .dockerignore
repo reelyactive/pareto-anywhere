@@ -1,0 +1,17 @@
+# Ignore the version control and build files 
+.dockerignore
+.git
+.gitignore
+.gitmodules
+.npmrc
+Dockerfile
+docker-compose.yml
+
+# Ignore the local node_modules (they'll be installed during the build)
+node_modules
+
+# Ignore any local contents of the config and data folders
+/config/**
+!/config/
+/data/**
+!/data/
