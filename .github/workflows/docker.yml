@@ -9,10 +9,10 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
-      - name: Determine package.json version as DOCKER_IMAGE_TAG environment variable
-        run: echo "DOCKER_IMAGE_TAG=$(jq -r '.version' package.json)" >> $GITHUB_ENV
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Determine package.json version as DOCKER_IMAGE_TAG environment variable
+        run: echo "DOCKER_IMAGE_TAG=$(jq -r '.version' package.json)" >> $GITHUB_ENV
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
         with:
