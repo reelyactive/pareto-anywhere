@@ -70,6 +70,14 @@ An existing installation can be updated by running the following commands from t
     npm install
 
 
+Docker quick start
+------------------
+
+A containerised __Pareto Anywhere__ is available on Docker Hub: [hub.docker.com/r/reelyactive/pareto-anywhere](https://hub.docker.com/r/reelyactive/pareto-anywhere)
+
+Both linux/amd64 and linux/arm64 are supported.
+
+
 What is pareto-anywhere?
 ------------------------
 
