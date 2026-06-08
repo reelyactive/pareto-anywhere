@@ -15,7 +15,7 @@
     "RTLS",
     "M2M"
   ],
-  "version": "1.24.4",
+  "version": "1.24.5",
   "engines": {
     "node": ">=18.0.0"
   },
