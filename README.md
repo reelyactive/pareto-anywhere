@@ -1,7 +1,7 @@
 Pareto Anywhere
 ===============
 
-__Pareto Anywhere__ is the open source IoT middleware that makes the data from just about anything readily usable an application/technology/vendor-agnostic way.
+__Pareto Anywhere__ is the open source IoT/RTLS middleware to identify, sense and locate "things" using common data standards.
 
 ![Overview of Pareto Anywhere](https://reelyactive.github.io/pareto-anywhere/images/overview.png)
 
@@ -110,6 +110,7 @@ __pareto-anywhere__ listens for [ambient data](https://www.reelyactive.com/ambie
 | Software module                                               | Listens for |
 |:--------------------------------------------------------------|:------------|
 | [barnowl](https://github.com/reelyactive/barnowl)             | UDP raddec packets on port 50001 |
+| [barnowl-mqtt](https://github.com/reelyactive/barnowl-mqtt)   | MQTT on localhost |
 | [barnowl-aruba](https://github.com/reelyactive/barnowl-aruba) | WebSocket on __/aruba__ |
 | [barnowl-minew](https://github.com/reelyactive/barnowl-minew) | HTTP POST on __/minew__ |
 | [barnowl-reel](https://github.com/reelyactive/barnowl-reel)   | UDP reel packets on port 50000 |
