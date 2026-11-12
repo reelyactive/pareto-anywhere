@@ -15,7 +15,7 @@
     "RTLS",
     "M2M"
   ],
-  "version": "1.25.0",
+  "version": "1.25.1",
   "engines": {
     "node": ">=20.0.0"
   },
@@ -58,12 +58,12 @@
     "barnowl-huawei": "^1.0.2",
     "barnowl-impinj": "^1.0.1",
     "barnowl-minew": "^1.2.1",
-    "barnowl-mqtt": "^1.0.1",
+    "barnowl-mqtt": "^1.0.2",
     "barnowl-reel": "^0.2.2",
     "barnowl-rfcontrols": "^1.1.0",
     "barnowl-zebra": "^1.0.1",
     "barterer": "^1.6.1",
-    "chickadee": "^1.12.1",
+    "chickadee": "^1.13.0",
     "chimps": "^1.1.4",
     "cors": "^2.8.6",
     "express": "^5.3.0",
